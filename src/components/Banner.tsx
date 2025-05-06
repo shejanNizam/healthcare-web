@@ -1,22 +1,72 @@
-export default function Banner() {
-  return (
-    <div>
-      <h3>Banner</h3>
-    </div>
-  );
-}
-
+// import Image from "next/image";
+// import bannerRightImage from "../assets/banner/banner_right_side.png";
 // import SearchBar from "./SearchBar";
 
 // export default function Banner() {
 //   return (
-//     <section className="bg-blue-500 text-white py-16 px-4 sm:px-6 lg:px-8">
-//       <div className="max-w-7xl mx-auto text-center">
-//         <h2 className="text-4xl font-semibold mb-8">
-//           Find a Job That Aligns With Your Interests and Skills
-//         </h2>
-//         <SearchBar />
+//     <div className="bg-gradient-to-r from-primary to-white h-[700px]">
+//       <div className="bg-primary-light py-16 flex items-center justify-around px-40 w-full">
+//         <div className="w-[60%] flex flex-col gap-8 ">
+//           <h1 className="text-7xl text-white font-semibold">
+//             Find a job that aligns with your interests and skills
+//           </h1>
+//           <p className=" w-[80%] text-white ">
+//             Our platform connects qualified nurses with reputable employers,
+//             making it easy to search and apply for nursing jobs. Explore
+//             opportunities that match your skills and career goals in a
+//             professional, efficient way.
+//           </p>
+//           <div className="">
+//             <SearchBar />
+//           </div>
+//         </div>
+//         <div className="w-[40%]">
+//           <Image
+//             width={1000}
+//             height={1000}
+//             src={bannerRightImage}
+//             alt="banner_right_image"
+//             className="w-[80%] h-fit"
+//           />
+//         </div>
 //       </div>
-//     </section>
+//     </div>
 //   );
 // }
+
+import Image from "next/image";
+import bannerRightImage from "../assets/banner/banner_right_side.png";
+import SearchBar from "./SearchBar";
+
+export default function Banner() {
+  return (
+    <div className="bg-gradient-to-r from-primary to-primary/10 h-auto">
+      <div className="bg-primary-light  flex flex-col md:flex-row items-center justify-around px-4 md:px-24 xl:px-40 w-full">
+        <div className="w-full md:w-[50%] flex flex-col gap-4 md:gap-8 my-4">
+          <h1 className="text-3xl md:text-4xl xl:text-5xl text-white font-semibold">
+            Find a job that aligns with your interests and skills
+          </h1>
+          <p className="w-full md:w-[90%] text-white text-sm ">
+            Our platform connects qualified nurses with reputable employers,
+            making it easy to search and apply for nursing jobs. Explore
+            opportunities that match your skills and career goals in a
+            professional, efficient way.
+          </p>
+          <div className="w-full mb-8">
+            <SearchBar />
+          </div>
+        </div>
+        <div className="w-full md:w-[40%] mt-8 md:mt-2 flex justify-center">
+          <Image
+            width={1000}
+            height={1000}
+            src={bannerRightImage}
+            alt="banner_right_image"
+            className="w-full max-w-[500px] h-auto"
+            priority
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
