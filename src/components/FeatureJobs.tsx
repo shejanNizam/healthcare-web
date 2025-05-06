@@ -1,108 +1,115 @@
-// export default function FeatureJobs() {
-//   return (
-//     <div>
-//       <h3>FeatureJobs</h3>
-//     </div>
-//   );
-// }
+"use client";
 
-// components/FeatureJobs.tsx
-import { Button, Card, Carousel } from "antd";
+import { Carousel } from "antd";
+import { CarouselRef } from "antd/es/carousel";
 import Link from "next/link";
+import { useRef } from "react";
+import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
+import {
+  FaBriefcaseMedical,
+  FaChalkboardTeacher,
+  FaClipboardList,
+  FaHospitalUser,
+  FaLanguage,
+  FaStethoscope,
+  FaTools,
+  FaUsers,
+} from "react-icons/fa"; // Example of other icons for categories
+import FeatureJobsTwo from "./FeatureJobsTwo";
 
+// Updated categories array with both icon and name
 const categories = [
-  "Nursing",
-  "Allied",
-  "Advance practice",
-  "Leadership",
-  "Language interpreters",
-  "Physicians",
-  "Technicians",
-  "Administrative",
-];
-
-const featuredJobs = [
-  {
-    id: 1,
-    title: "Registered Nurse",
-    location: "New York, NY",
-    type: "Full-time",
-    description: "We are looking for a skilled nurse to join our team...",
-  },
-  {
-    id: 2,
-    title: "Medical Interpreter",
-    location: "Remote",
-    type: "Part-time",
-    description: "Spanish/English medical interpreter needed...",
-  },
-  {
-    id: 3,
-    title: "Healthcare Administrator",
-    location: "Chicago, IL",
-    type: "Full-time",
-    description: "Manage operations for our healthcare facility...",
-  },
+  { name: "Nursing", icon: <FaStethoscope /> },
+  { name: "Allied", icon: <FaBriefcaseMedical /> },
+  { name: "Advance practice", icon: <FaChalkboardTeacher /> },
+  { name: "Leadership", icon: <FaUsers /> },
+  { name: "Language interpreters", icon: <FaLanguage /> },
+  { name: "Physicians", icon: <FaHospitalUser /> },
+  { name: "Technicians", icon: <FaTools /> },
+  { name: "Administrative", icon: <FaClipboardList /> },
 ];
 
 export default function FeatureJobs() {
+  const sliderRef = useRef<CarouselRef | null>(null);
+
+  const responsiveSettings = [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+      },
+    },
+  ];
+
   return (
     <div className="container mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold mb-8 text-center">Featured Jobs</h2>
+      <h2 className="text-3xl text-primary font-bold text-center">
+        Featured Jobs
+      </h2>
+      <p className="text-md text-center mb-4">
+        Choose jobs from the top employers and apply for the same.
+      </p>
 
-      <div className="mb-12">
-        <h3 className="text-xl font-semibold mb-4">Browse Categories</h3>
-        <Carousel
-          dots={{ className: "custom-dots" }}
-          slidesToShow={5}
-          responsive={[
-            { breakpoint: 1024, settings: { slidesToShow: 4 } },
-            { breakpoint: 768, settings: { slidesToShow: 3 } },
-            { breakpoint: 480, settings: { slidesToShow: 2 } },
-          ]}
+      <div className="relative max-w-7xl mx-auto">
+        <button
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
+          onClick={() => sliderRef.current?.prev()}
         >
-          {categories.map((category, index) => (
-            <div key={index} className="px-2">
-              <Link href={`/all-jobs?category=${category}`}>
-                <div className="bg-white p-4 rounded-lg shadow-md text-center hover:bg-primary-light hover:text-white cursor-pointer transition-colors">
-                  {category}
-                </div>
-              </Link>
-            </div>
-          ))}
-        </Carousel>
-      </div>
+          <BiSolidLeftArrow className="text-4xl" />
+        </button>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredJobs.map((job) => (
-          <Card
-            key={job.id}
-            className="shadow-md hover:shadow-lg transition-shadow"
+        <div className="mb-12">
+          <Carousel
+            dots={false}
+            slidesToShow={5}
+            slidesToScroll={5}
+            ref={sliderRef}
+            className="overflow-hidden px-8 md:px-12"
+            responsive={responsiveSettings}
           >
-            <h3 className="text-xl font-semibold">{job.title}</h3>
-            <p className="text-gray-600 mb-2">
-              {job.location} • {job.type}
-            </p>
-            <p className="mb-4">{job.description.substring(0, 100)}...</p>
-            <div className="flex space-x-2">
-              <Link href={`/jobs/${job.id}`}>
-                <Button type="primary" ghost>
-                  View Details
-                </Button>
-              </Link>
-              <Link href={`/apply-jobs?jobId=${job.id}`}>
-                <Button type="primary">Apply Now</Button>
-              </Link>
-            </div>
-          </Card>
-        ))}
+            {categories.map((category, index) => (
+              <div key={index} className="p-4">
+                <Link href={`/all-jobs?category=${category.name}`}>
+                  <div className="bg-white border border-gray-200 p-4 rounded-lg shadow-lg text-center cursor-pointer">
+                    <div className="flex flex-col items-center justify-center w-32 mx-auto h-32 text-primary gap-2">
+                      <div className="text-4xl">{category.icon}</div>
+                      <div className="text-xl font-bold">{category.name}</div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </Carousel>
+        </div>
+
+        {/* Right Navigation Button */}
+        <button
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
+          onClick={() => sliderRef.current?.next()}
+        >
+          <BiSolidRightArrow className="text-4xl" />
+        </button>
       </div>
 
-      <div className="text-center mt-8">
-        <Link href="/all-jobs">
-          <Button size="large">View All Jobs</Button>
-        </Link>
-      </div>
+      {/* second card */}
+      <>
+        <FeatureJobsTwo />
+      </>
     </div>
   );
 }
