@@ -66,6 +66,7 @@ export default function FeatureJobs() {
       </p>
 
       <div className="relative max-w-7xl mx-auto">
+        {/* Right Navigation Button */}
         <button
           className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
           onClick={() => sliderRef.current?.prev()}
