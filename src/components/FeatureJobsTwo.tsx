@@ -57,23 +57,27 @@ const featuredJobs = [
 export default function FeatureJobsTwo() {
   return (
     <div className="mx-auto ">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full mx-auto ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full mx-auto ">
         {featuredJobs.map((job) => (
           <Card
             key={job.id}
-            className="shadow-lg hover:shadow-xl transition-shadow relative w-full mx-auto "
+            className="bg-red-500 shadow-lg hover:shadow-xl transition-shadow relative w-full mx-auto "
           >
             <button className="cursor-pointer absolute top-2 right-2 p-2 bg-gray-200 rounded-full shadow-md hover:bg-gray-100">
               <BiBookmark className="text-xl text-gray-600" />
             </button>
 
-            <h3 className="text-xl font-semibold flex items-center gap-2 mb-2">
-              {job.logo} {job.jobTitle}
+            <h3 className="text-xl font-semibold ">
+              {job.jobTitle}
+              <p className="text-gray-600 text-sm">Salary: {job.salaryRange}</p>
             </h3>
-            <p className="text-gray-600 mb-2">
-              {job.hospitalName} • {job.location}
-            </p>
-            <p className="text-gray-600 mb-2">Salary: {job.salaryRange}</p>
+            <div className="flex items-center gap-2 mt-2">
+              <p className=" flex gap-2 items-center text-2xl">{job.logo}</p>
+              <div>
+                <p className="font-semibold text-xl">{job.hospitalName}</p>
+                <p className="text-sm text-gray-400">{job.location}</p>
+              </div>
+            </div>
 
             <div className="flex justify-between">
               <p className="text-gray-500">
@@ -97,7 +101,9 @@ export default function FeatureJobsTwo() {
 
       <div className="text-center mt-8">
         <Link href="/all-jobs">
-          <Button size="large">View All Jobs</Button>
+          <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-1 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out">
+            View All
+          </button>
         </Link>
       </div>
     </div>

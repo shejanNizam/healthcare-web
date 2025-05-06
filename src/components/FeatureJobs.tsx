@@ -77,8 +77,8 @@ export default function FeatureJobs() {
         <div className="mb-12">
           <Carousel
             dots={false}
-            slidesToShow={5}
-            slidesToScroll={5}
+            slidesToShow={4}
+            slidesToScroll={4}
             ref={sliderRef}
             className="overflow-hidden px-8 md:px-12"
             responsive={responsiveSettings}
