@@ -2,7 +2,6 @@
 import AppliedProcess from "@/components/AppliedProcess";
 import Banner from "@/components/Banner";
 import FeatureJobs from "@/components/FeatureJobs";
-import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -13,7 +12,6 @@ export default function Home() {
         <FeatureJobs />
         <AppliedProcess />
       </main>
-      <Footer />
     </div>
   );
 }

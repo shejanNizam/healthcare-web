@@ -56,13 +56,13 @@ export default function Banner() {
             <SearchBar />
           </div>
         </div>
-        <div className="w-full md:w-[40%] mt-8 md:mt-2 flex justify-center">
+        <div className="  w-full md:w-[40%] mt-8 md:mt-2 flex justify-center">
           <Image
             width={1000}
             height={1000}
             src={bannerRightImage}
             alt="banner_right_image"
-            className="w-full max-w-[500px] h-auto"
+            className="w-full max-w-[500px] h-auto hidden md:block"
             priority
           />
         </div>

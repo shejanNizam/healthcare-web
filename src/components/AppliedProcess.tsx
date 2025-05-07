@@ -1,11 +1,3 @@
-// export default function AppliedProcess() {
-//   return (
-//     <div className="text-center">
-//       <h3>AppliedProcess</h3>
-//     </div>
-//   );
-// }
-
 import Image from "next/image";
 import applied_process_image from "../assets/applied-process/applied_process_image.png";
 
