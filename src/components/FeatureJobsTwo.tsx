@@ -1,11 +1,12 @@
 import { Button, Card } from "antd";
 import Link from "next/link";
-import { BiBookmark } from "react-icons/bi"; // Bookmark icon
+import { useState } from "react";
 import {
   FaBriefcaseMedical,
   FaClinicMedical,
   FaHospital,
 } from "react-icons/fa"; // Example hospital icons
+import { FiBookmark } from "react-icons/fi";
 
 const featuredJobs = [
   {
@@ -55,6 +56,12 @@ const featuredJobs = [
 ];
 
 export default function FeatureJobsTwo() {
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  const toggleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
+  };
+
   return (
     <div className="mx-auto ">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full mx-auto ">
@@ -63,8 +70,16 @@ export default function FeatureJobsTwo() {
             key={job.id}
             className="bg-red-500 shadow-lg hover:shadow-xl transition-shadow relative w-full mx-auto "
           >
-            <button className="cursor-pointer absolute top-2 right-2 p-2 bg-gray-200 rounded-full shadow-md hover:bg-gray-100">
-              <BiBookmark className="text-xl text-gray-600" />
+            <button
+              onClick={toggleBookmark}
+              className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors z-10 cursor-pointer"
+              aria-label="Bookmark job"
+            >
+              <FiBookmark
+                className={`w-5 h-5 ${
+                  isBookmarked ? "text-primary fill-primary" : "text-gray-400"
+                }`}
+              />
             </button>
 
             <h3 className="text-xl font-semibold ">
