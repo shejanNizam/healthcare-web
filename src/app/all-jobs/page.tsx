@@ -1,28 +1,18 @@
-// export default function AllJobs() {
-//   return (
-//     <div>
-//       <h3>AllJobs</h3>
-//     </div>
-//   );
-// }
-
 "use client";
 
+import JobCard from "@/components/JobCard";
 import {
-  ClockCircleOutlined,
+  CloseOutlined,
   DownOutlined,
   FilterOutlined,
+  MenuOutlined,
   UpOutlined,
 } from "@ant-design/icons";
-import { Button, Card, Space, Tag, Typography } from "antd";
-import React, { useEffect, useState } from "react";
+import { Button } from "antd";
+import { useEffect, useState } from "react";
 
-const { Text, Paragraph } = Typography;
-// const { Option } = Select;
-
-// Define TypeScript interfaces
 interface Job {
-  id: number;
+  id: string;
   title: string;
   hospital: string;
   description: string;
@@ -37,10 +27,9 @@ interface Filters {
   jobType: string | null;
 }
 
-// Sample job data
 const jobsData: Job[] = [
   {
-    id: 1,
+    id: "1",
     title: "Registered nurse- progressive care",
     hospital: "AB Hospital",
     description:
@@ -51,7 +40,7 @@ const jobsData: Job[] = [
     category: "Nursing",
   },
   {
-    id: 2,
+    id: "2",
     title: "Registered nurse- progressive care",
     hospital: "AB Hospital",
     description:
@@ -62,7 +51,7 @@ const jobsData: Job[] = [
     category: "Nursing",
   },
   {
-    id: 3,
+    id: "3",
     title: "Registered nurse- progressive care",
     hospital: "AB Hospital",
     description:
@@ -73,7 +62,7 @@ const jobsData: Job[] = [
     category: "Nursing",
   },
   {
-    id: 4,
+    id: "4",
     title: "Physician assistant",
     hospital: "AB Hospital",
     description:
@@ -85,7 +74,6 @@ const jobsData: Job[] = [
   },
 ];
 
-// Define filter categories
 const filterCategories = {
   Profession: [
     "Nursing",
@@ -108,20 +96,30 @@ const filterCategories = {
   ],
 };
 
-const AllJobs: React.FC = () => {
+const AllJobs = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>({
     profession: null,
     jobType: null,
   });
   const [availableJobs, setAvailableJobs] = useState<Job[]>(jobsData);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Toggle dropdown visibility
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const toggleDropdown = (dropdown: string) => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
 
-  // Apply filter when option selected
   const applyFilter = (category: string, value: string) => {
     const newFilters = { ...filters };
 
@@ -133,9 +131,9 @@ const AllJobs: React.FC = () => {
 
     setFilters(newFilters);
     setOpenDropdown(null);
+    if (isMobile) setShowMobileFilters(false);
   };
 
-  // Clear all filters
   const clearAllFilters = () => {
     setFilters({
       profession: null,
@@ -143,7 +141,6 @@ const AllJobs: React.FC = () => {
     });
   };
 
-  // Filter jobs based on selected filters
   useEffect(() => {
     let filteredJobs = jobsData;
 
@@ -161,145 +158,133 @@ const AllJobs: React.FC = () => {
   }, [filters]);
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      {/* Left sidebar - Filters */}
-      <div className="w-1/4 bg-white p-4 shadow-md">
-        {/* Filter dropdowns */}
-        {Object.keys(filterCategories).map((category) => (
-          <div key={category} className="mb-4">
+    <>
+      {/* <div className=" text-center ">
+        <SearchBar />
+      </div> */}
+      <div className="flex flex-col md:flex-row min-h-screen relative">
+        {/* Mobile header with filter toggle */}
+        <div className="md:hidden sticky top-0 z-20 bg-white shadow-sm">
+          <div className="flex items-center justify-between p-4">
+            <div className="font-bold text-xl text-primary">
+              Available jobs:{" "}
+              <span className="text-primary text-2xl font-bold">
+                {availableJobs.length}
+              </span>
+            </div>
             <Button
-              onClick={() => toggleDropdown(category)}
-              className="w-full flex justify-between items-center"
-              style={{ textAlign: "left", height: "auto", padding: "8px 12px" }}
-            >
-              <span>{category}</span>
-              {openDropdown === category ? <UpOutlined /> : <DownOutlined />}
-            </Button>
-
-            {openDropdown === category && (
-              <div className="mt-1 border border-gray-200 bg-white">
-                {filterCategories[
-                  category as keyof typeof filterCategories
-                ].map((option) => (
-                  <div
-                    key={option}
-                    onClick={() => applyFilter(category, option)}
-                    className={`p-2 cursor-pointer hover:bg-blue-50 ${
-                      (category === "Profession" &&
-                        filters.profession === option) ||
-                      (category === "Job type" && filters.jobType === option)
-                        ? "bg-blue-100"
-                        : ""
-                    }`}
-                  >
-                    {option}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Right content - Jobs listing */}
-      <div className="w-3/4 p-6">
-        {/* Header with filter info and clear button */}
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center">
-            <FilterOutlined className="mr-2 text-gray-500" />
-            <Text className="mr-2 text-gray-600">Filters</Text>
-            {(filters.profession || filters.jobType) && (
-              <Button
-                type="link"
-                onClick={clearAllFilters}
-                className="text-red-500 p-0"
-                style={{ height: "auto" }}
-              >
-                Clear all
-              </Button>
-            )}
-          </div>
-          <div className="font-medium">
-            Available jobs :{" "}
-            <span className="text-blue-600">{availableJobs.length}</span>
+              type="text"
+              icon={showMobileFilters ? <CloseOutlined /> : <MenuOutlined />}
+              onClick={() => setShowMobileFilters(!showMobileFilters)}
+              className="text-gray-600"
+            />
           </div>
         </div>
 
-        {/* Job cards */}
-        {availableJobs.map((job) => (
-          <Card
-            key={job.id}
-            className="mb-4 shadow-sm"
-            styles={{ body: { padding: "16px" } }}
-          >
-            <div className="flex items-start">
-              <div className="flex-shrink-0 mr-4">
-                <div className="bg-blue-100 p-2 rounded-md">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect
-                      x="2"
-                      y="2"
-                      width="20"
-                      height="8"
-                      rx="2"
-                      ry="2"
-                    ></rect>
-                    <rect
-                      x="2"
-                      y="14"
-                      width="20"
-                      height="8"
-                      rx="2"
-                      ry="2"
-                    ></rect>
-                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                  </svg>
-                </div>
-              </div>
-
-              <div className="flex-grow">
-                <Text strong className="text-primary">
-                  {job.hospital}
-                </Text>
-                <div className="mt-1">
-                  <Text className="text-primary">{job.title}</Text>
-                </div>
-                <Paragraph className="text-primary mt-2">
-                  {job.description}
-                </Paragraph>
-
-                <div className="flex items-center justify-between text-sm mt-4">
-                  <Space size="large">
-                    <div>
-                      <Text type="secondary">Monthly : </Text>
-                      <Text>{job.salary}</Text>
-                    </div>
-
-                    <div className="flex items-center">
-                      <ClockCircleOutlined className="mr-1 text-gray-500" />
-                      <Text type="secondary">Deadline: </Text>
-                      <Text className="ml-1">{job.deadline}</Text>
-                    </div>
-                  </Space>
-
-                  <Tag color="blue">{job.type}</Tag>
-                </div>
-              </div>
+        {/* Filters sidebar - Hidden on mobile unless toggled */}
+        <div
+          className={`fixed bg-white md:bg-white/0 md:static w-[70%] md:w-72 lg:w-80 px-4 py-10 h-full z-30 transition-all duration-300 ease-in-out ${
+            showMobileFilters ? "left-0" : "-left-[70%]"
+          } md:left-0`}
+        >
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center text-primary text-lg font-semibold gap-1">
+              <FilterOutlined size={20} />
+              <p className="">Filters</p>
             </div>
-          </Card>
-        ))}
+            {(filters.profession || filters.jobType) && (
+              <button
+                onClick={clearAllFilters}
+                className="text-red-500 hover:text-red-700 text-sm font-semibold cursor-pointer"
+              >
+                Clear all
+              </button>
+            )}
+          </div>
+
+          {/* Filter sections */}
+          {Object.keys(filterCategories).map((category) => (
+            <div key={category} className="mb-6">
+              <Button
+                onClick={() => toggleDropdown(category)}
+                className="w-full flex justify-between items-center px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg"
+              >
+                <span className="font-medium">{category}</span>
+                {openDropdown === category ? <UpOutlined /> : <DownOutlined />}
+              </Button>
+
+              {openDropdown === category && (
+                <div className="mt-2 border border-gray-200 bg-white rounded-lg shadow-sm">
+                  {filterCategories[
+                    category as keyof typeof filterCategories
+                  ].map((option) => (
+                    <div
+                      key={option}
+                      onClick={() => applyFilter(category, option)}
+                      className={`px-4 py-3 cursor-pointer hover:bg-blue-50 transition-colors ${
+                        (category === "Profession" &&
+                          filters.profession === option) ||
+                        (category === "Job type" && filters.jobType === option)
+                          ? "bg-blue-50 text-blue-600 font-medium"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      {option}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Main content area */}
+        <div className="flex-1 p-4 md:p-6 lg:p-8">
+          {/* Desktop header */}
+          <div className="hidden md:flex items-center justify-between mb-6">
+            <div className="font-bold text-xl text-primary">
+              Available jobs:{" "}
+              <span className="text-primary text-2xl font-bold">
+                {availableJobs.length}
+              </span>
+            </div>
+            {/* {(filters.profession || filters.jobType) && (
+            <Button
+              type="link"
+              onClick={clearAllFilters}
+              className="text-blue-500 hover:text-blue-700"
+              icon={<FilterOutlined />}
+            >
+              Clear filters
+            </Button>
+          )} */}
+          </div>
+          {/* Job cards grid */}
+          <div className="grid grid-cols-1 gap-4 sm:gap-6">
+            {availableJobs?.length === 0 ? (
+              <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+                <div className="text-gray-500 mb-4">
+                  No jobs match your filters
+                </div>
+                <Button type="primary" onClick={clearAllFilters}>
+                  Clear filters
+                </Button>
+              </div>
+            ) : (
+              availableJobs.map((job) => <JobCard key={job.id} job={job} />)
+            )}
+          </div>
+        </div>
+
+        {/* Overlay for mobile filters */}
+        <div
+          className={`fixed inset-0 bg-black/70 bg-opacity-20 z-20 transition-opacity duration-300 ${
+            showMobileFilters ? "opacity-100" : "opacity-0 pointer-events-none"
+          } md:hidden`}
+          onClick={() => setShowMobileFilters(false)}
+        />
       </div>
-    </div>
+    </>
   );
 };
 

@@ -8,19 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-primary: #1077bc;
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 
-  /* Container settings */
-  --container-center: true;
-  --container-padding: 2rem;
-
-  /* --color-secondary: #00321f;
-  --color-hash: #19561d;
-  --color-button: #ff5722; */
-
-  /* Font families (example) */
   --font-sans: "Inter", sans-serif;
   --font-mono: "Roboto Mono", monospace;
 }

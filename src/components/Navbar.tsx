@@ -13,7 +13,7 @@ import SearchBar from "./SearchBar";
 
 export default function Navbar() {
   return (
-    <nav className=" py-4 bg-gradient-to-r from-primary to-primary/10">
+    <nav className=" py-4 bg-gradient-to-r from-primary to-primary/10 z-50 shadow-md sticky top-0">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold text-white">
           Clement
