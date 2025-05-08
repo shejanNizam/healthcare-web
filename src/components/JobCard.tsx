@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaHospital } from "react-icons/fa";
 import { FiBookmark } from "react-icons/fi";
@@ -13,24 +14,36 @@ interface Job {
 }
 
 export default function JobCard({ job }: { job: Job }) {
+  const router = useRouter();
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  const toggleBookmark = () => {
+  const toggleBookmark = (e: React.MouseEvent) => {
+    // Stop event propagation to prevent card click
+    e.stopPropagation();
     setIsBookmarked(!isBookmarked);
+  };
+
+  const handleCardDetails = () => {
+    // Handle card click to show job details
+    router.push(`/all-jobs/${job.id}`);
+    // console.log(`Job ID: ${job.id}`);
   };
 
   return (
     <>
-      <div className="relative w-full p-4 md:p-6 lg:px-12 lg:py-8 bg-[#E7F1F8] rounded-lg shadow-md border border-gray-200">
+      <div
+        onClick={handleCardDetails}
+        className="relative w-full p-4 md:p-6 lg:px-12 lg:py-8 bg-[#E7F1F8] rounded-lg shadow-md border border-gray-200 cursor-pointer"
+      >
         {/* Bookmark Button */}
         <button
           onClick={toggleBookmark}
-          className="absolute top-2 md:top-4 right-2 md:right-4 p-1 md:p-2 rounded-full bg-gray-300 hover:bg-gray-200 transition-colors"
+          className="absolute top-2 md:top-4 right-2 md:right-4 p-1 md:p-2 rounded-full bg-gray-300 hover:bg-gray-200 transition-colors z-10 cursor-pointer"
           aria-label="Bookmark job"
         >
           <FiBookmark
             className={`w-4 h-4 md:w-5 md:h-5 ${
-              isBookmarked ? "text-blue-500 fill-blue-500" : "text-gray-400"
+              isBookmarked ? "text-primary fill-primary" : "text-gray-400"
             }`}
           />
         </button>

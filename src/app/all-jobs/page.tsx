@@ -1,5 +1,6 @@
 "use client";
 
+import CustomErrorPage from "@/components/CustomErrorPage";
 import JobCard from "@/components/JobCard";
 import {
   CloseOutlined,
@@ -248,24 +249,12 @@ const AllJobs = () => {
                 {availableJobs.length}
               </span>
             </div>
-            {/* {(filters.profession || filters.jobType) && (
-            <Button
-              type="link"
-              onClick={clearAllFilters}
-              className="text-blue-500 hover:text-blue-700"
-              icon={<FilterOutlined />}
-            >
-              Clear filters
-            </Button>
-          )} */}
           </div>
           {/* Job cards grid */}
           <div className="grid grid-cols-1 gap-4 sm:gap-6">
             {availableJobs?.length === 0 ? (
               <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-                <div className="text-gray-500 mb-4">
-                  No jobs match your filters
-                </div>
+                <CustomErrorPage />
                 <Button type="primary" onClick={clearAllFilters}>
                   Clear filters
                 </Button>
