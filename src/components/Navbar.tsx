@@ -3,12 +3,14 @@
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Button, Drawer } from "antd";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,12 +26,16 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About Us" },
+    { href: "/about", label: "About" },
     { href: "/job-seekers", label: "Job Seekers" },
     { href: "/all-jobs", label: "All Jobs" },
     { href: "/blogs", label: "Blogs" },
-    { href: "/saved-jobs", label: "Saved Jobs (4)" },
+    { href: "/saved-jobs", label: "Saved Jobs(6)" },
   ];
+
+  const isActive = (href: string) => {
+    return pathname === href || (href !== "/" && pathname?.startsWith(href));
+  };
 
   return (
     <nav
@@ -43,20 +49,24 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-6 text-white">
+        <div className="hidden md:flex md:space-x-4 text-white">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="hover:text-primary transition-colors duration-200"
+              className={`hover:text-primary transition-colors duration-200 relative ${
+                isActive(link.href)
+                  ? "text-primary after:bg-primary after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-full after:h-[2px]"
+                  : ""
+              }`}
             >
               {link.label}
             </Link>
           ))}
         </div>
 
-        <div className="flex items-center space-x-4">
-          <div className="hidden md:block">
+        <div className="flex space-x-4">
+          <div className="hidden lg:block">
             <SearchBar />
           </div>
           <Link href="/contact">
@@ -113,7 +123,9 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-white py-2 px-3 rounded transition-colors duration-200"
+                className={`text-white py-2 px-3 rounded transition-colors duration-200 ${
+                  isActive(link.href) ? "bg-primary/20 font-medium" : ""
+                }`}
                 onClick={toggleMenu}
               >
                 {link.label}

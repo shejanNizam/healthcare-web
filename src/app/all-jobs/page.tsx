@@ -222,11 +222,11 @@ const AllJobs = () => {
                     <div
                       key={option}
                       onClick={() => applyFilter(category, option)}
-                      className={`px-4 py-3 cursor-pointer hover:bg-blue-50 transition-colors ${
+                      className={`px-4 py-3 cursor-pointer hover:bg-primary/10 transition-colors ${
                         (category === "Profession" &&
                           filters.profession === option) ||
                         (category === "Job type" && filters.jobType === option)
-                          ? "bg-blue-50 text-blue-600 font-medium"
+                          ? "bg-blue-50 text-primary font-medium"
                           : "text-gray-700"
                       }`}
                     >
@@ -251,7 +251,7 @@ const AllJobs = () => {
             </div>
           </div>
           {/* Job cards grid */}
-          <div className="grid grid-cols-1 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
             {availableJobs?.length === 0 ? (
               <div className="bg-white rounded-lg shadow-sm p-8 text-center">
                 <CustomErrorPage />
