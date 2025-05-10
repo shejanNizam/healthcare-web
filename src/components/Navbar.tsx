@@ -1,60 +1,135 @@
-// export default function Navbar() {
-//   return (
-//     <div>
-//       <h3>Navbar</h3>
-//     </div>
-//   );
-// }
+"use client";
 
-// components/Navbar.tsx
-import { Button } from "antd";
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
+import { Button, Drawer } from "antd";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 
 export default function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About Us" },
+    { href: "/job-seekers", label: "Job Seekers" },
+    { href: "/all-jobs", label: "All Jobs" },
+    { href: "/blogs", label: "Blogs" },
+    { href: "/saved-jobs", label: "Saved Jobs (4)" },
+  ];
+
   return (
-    <nav className=" py-4 bg-gradient-to-r from-primary to-primary/10 z-50 shadow-md sticky top-0">
+    <nav
+      className={`py-4 bg-white bg-gradient-to-r from-primary to-primary/10 z-50 shadow-md sticky top-0 transition-all duration-300 ${
+        isScrolled ? "py-3" : "py-4"
+      }`}
+    >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold text-white">
           Clement
         </Link>
 
+        {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-6 text-white">
-          <Link href="/" className="hover:text-primary">
-            Home
-          </Link>
-          <Link href="/about" className="hover:text-primary">
-            About Us
-          </Link>
-          <Link href="/" className="hover:text-primary">
-            {/* work on hover  */}
-            Job Seekers
-          </Link>
-          <Link href="/all-jobs" className="hover:text-primary">
-            All Jobs
-          </Link>
-          <Link href="/blogs" className="hover:text-primary">
-            Blogs
-          </Link>
-          <Link href="/saved-jobs" className="hover:text-primary">
-            Saved Jobs
-          </Link>
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="hover:text-primary transition-colors duration-200"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
+
         <div className="flex items-center space-x-4">
-          <div className=" ">
+          <div className="hidden md:block">
             <SearchBar />
           </div>
-          <Link
-            href="/contact"
-            // className="hidden md:block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark"
-          >
-            <Button value="large" type="primary">
-              {" "}
-              Contact{" "}
+          <Link href="/contact">
+            <Button size="large" type="primary" className="hidden md:block">
+              Contact
             </Button>
           </Link>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-primary focus:outline-none"
+            onClick={toggleMenu}
+          >
+            {isMenuOpen ? (
+              <CloseOutlined className="text-2xl" />
+            ) : (
+              <MenuOutlined className="text-2xl" />
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Drawer */}
+      <Drawer
+        placement="left"
+        closable={false}
+        onClose={toggleMenu}
+        open={isMenuOpen}
+        styles={{
+          body: {
+            padding: 0,
+            backgroundColor: "#ffffff",
+          },
+        }}
+        width="60%"
+      >
+        <div className="flex flex-col h-full">
+          <div className="p-4 ">
+            <Link
+              href="/"
+              className="text-2xl font-bold text-white"
+              onClick={toggleMenu}
+            >
+              Clement
+            </Link>
+          </div>
+
+          <div className="flex-1 flex flex-col p-4 space-y-4">
+            <div className="mb-4">
+              <SearchBar />
+            </div>
+
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-white py-2 px-3 rounded transition-colors duration-200"
+                onClick={toggleMenu}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="p-4 border-t border-white/20">
+            <Link href="/contact" onClick={toggleMenu}>
+              <Button type="primary" size="large" className="w-full">
+                Contact
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </Drawer>
     </nav>
   );
 }
