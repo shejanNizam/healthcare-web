@@ -27,7 +27,6 @@ export default function Navbar() {
     { name: "Schools", alt: "School jobs" },
     { name: "Language Interpreters", alt: "Language Interpreter jobs" },
     { name: "Revenue Cycle", alt: "Revenue Cycle jobs" },
-    { name: "International", alt: "International jobs" },
   ];
 
   useEffect(() => {
@@ -80,7 +79,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex md:space-x-4 text-white">
+        <div className="hidden md:flex md:space-x-4 text-white text-md font-semibold">
           {navLinks.map((link) =>
             link.hasDropdown ? (
               <div key={link.href} className="relative group">
@@ -97,23 +96,29 @@ export default function Navbar() {
                 </div>
 
                 {/* Desktop dropdown (hover) */}
-                <div className="absolute hidden group-hover:block pt-2 left-0 z-10">
-                  <div className="bg-white rounded-md shadow-lg w-48">
+                <div className="absolute hidden group-hover:block pt-2 left-0 z-10 w-full min-w-[250px]">
+                  <div className="bg-white rounded-md shadow-lg w-full">
                     {jobCategories.map((category) => (
                       <div
                         key={category.name}
-                        className=" px-4 py-2 hover:bg-gray-100 hover:rounded-md cursor-pointer"
+                        className="px-4 py-2 hover:bg-gray-100 hover:rounded-md cursor-pointer"
                         onClick={() => handleCategoryClick(category.name)}
                       >
                         <span className="text-primary">{category.name}</span>
                       </div>
                     ))}
+                    <Link
+                      className="block px-4 py-2 text-primary hover:bg-gray-100 hover:rounded-md cursor-pointer"
+                      href="/international"
+                    >
+                      International
+                    </Link>
                   </div>
                 </div>
 
                 {/* Mobile dropdown (click) - shown only on mobile */}
                 {isMobile && openDropdown === link.label && (
-                  <div className="bg-white rounded-md shadow-lg">
+                  <div className="absolute bg-white rounded-md shadow-lg w-full min-w-[200px] left-0 z-10">
                     {jobCategories.map((category) => (
                       <div
                         key={category.name}
@@ -123,6 +128,13 @@ export default function Navbar() {
                         <span className="text-primary">{category.name}</span>
                       </div>
                     ))}
+                    <Link
+                      className="block px-4 py-2 text-primary hover:bg-gray-100 cursor-pointer"
+                      href="/international"
+                      onClick={() => setOpenDropdown(null)}
+                    >
+                      International
+                    </Link>
                   </div>
                 )}
               </div>
@@ -168,11 +180,17 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       <Drawer
         placement="left"
-        closable={false}
+        closable={true}
         onClose={toggleMenu}
         open={isMenuOpen}
-        styles={{ body: { padding: 0, backgroundColor: "#ffffff" } }}
-        width="50%"
+        styles={{
+          body: {
+            padding: 0,
+            backgroundColor: "#ffffff",
+            color: "var(--primary)",
+          },
+        }}
+        width="60%"
       >
         <div className="flex flex-col h-full">
           <div className="p-4">
@@ -195,7 +213,7 @@ export default function Navbar() {
                 {link.hasDropdown ? (
                   <div>
                     <div
-                      className={`text-primary cursor-pointer py-2 px-3 rounded transition-colors duration-200 block ${
+                      className={`text-primary text-semibold cursor-pointer py-2 px-3 rounded transition-colors duration-200 block ${
                         isActive(link.href)
                           ? "text-primary after:bg-primary after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-full after:h-[2px]"
                           : ""
@@ -214,7 +232,7 @@ export default function Navbar() {
                       </div>
                     </div>
                     {openDropdown === link.label && (
-                      <div className="bg-primary/20 rounded-md shadow-lg">
+                      <div className="bg-primary/20 rounded-md shadow-lg w-full">
                         {jobCategories.map((category) => (
                           <div
                             key={category.name}
@@ -226,6 +244,13 @@ export default function Navbar() {
                             </span>
                           </div>
                         ))}
+                        <Link
+                          className="block px-4 py-2 text-primary hover:bg-gray-100 cursor-pointer"
+                          href="/international"
+                          onClick={toggleMenu}
+                        >
+                          International
+                        </Link>
                       </div>
                     )}
                   </div>
