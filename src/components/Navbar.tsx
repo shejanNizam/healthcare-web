@@ -1,112 +1,77 @@
 "use client";
 
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
-import { Button, Drawer, Popover } from "antd";
+import { Button, Drawer } from "antd";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { TiArrowSortedDown } from "react-icons/ti";
 import SearchBar from "./SearchBar";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const router = useRouter();
 
   // Job categories
   const jobCategories = [
-    {
-      name: "Nursing",
-      alt: "Nursing jobs",
-    },
-    {
-      name: "IT",
-      alt: "IT jobs",
-    },
-    {
-      name: "Engineering",
-      alt: "Engineering jobs",
-    },
-    {
-      name: "Finance",
-      alt: "Finance jobs",
-    },
-    {
-      name: "Healthcare",
-      alt: "Healthcare jobs",
-    },
-    {
-      name: "Education",
-      alt: "Education jobs",
-    },
+    { name: "Nursing", alt: "Nursing jobs" },
+    { name: "Allied", alt: "Allied health jobs" },
+    { name: "Physician", alt: "Physician jobs" },
+    { name: "Advance practice", alt: "Advance practice jobs" },
+    { name: "Dentistry", alt: "Dentistry jobs" },
+    { name: "Leadership", alt: "Leadership jobs" },
+    { name: "Schools", alt: "School jobs" },
+    { name: "Language Interpreters", alt: "Language Interpreter jobs" },
+    { name: "Revenue Cycle", alt: "Revenue Cycle jobs" },
+    { name: "International", alt: "International jobs" },
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    const checkIfMobile = () => setIsMobile(window.innerWidth < 768);
+
+    checkIfMobile();
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", checkIfMobile);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", checkIfMobile);
+    };
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleCategoryClick = (category: string) => {
     router.push(`/all-jobs?category=${category}`);
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
-    }
+    setIsMenuOpen(false);
+    setOpenDropdown(null);
+  };
+
+  const toggleDropdown = (label: string) => {
+    setOpenDropdown(openDropdown === label ? null : label);
   };
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "#", label: "Job Seekers", hasDropdown: true }, // Changed href to "#" to make it non-clickable
+    { href: "#", label: "Job Seekers", hasDropdown: true },
     { href: "/all-jobs", label: "All Jobs" },
     { href: "/blogs", label: "Blogs" },
     { href: "/saved-jobs", label: "Saved Jobs(6)" },
   ];
 
-  const isActive = (href: string) => {
-    return pathname === href || (href !== "/" && pathname?.startsWith(href));
-  };
-
-  // Dropdown content for job categories
-  const categoriesDropdown = (
-    <div className="p-2 w-auto">
-      {jobCategories.map((category) => (
-        <div
-          key={category.name}
-          className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors duration-200"
-          onClick={() => handleCategoryClick(category.name)}
-        >
-          <span className="font-medium text-primary">{category.name}</span>
-        </div>
-      ))}
-    </div>
-  );
-
-  // Categories for mobile menu
-  const mobileCategories = (
-    <div className="ml-6 space-y-2">
-      {jobCategories.map((category) => (
-        <div
-          key={category.name}
-          className="flex items-center space-x-3 py-2 cursor-pointer"
-          onClick={() => handleCategoryClick(category.name)}
-        >
-          <span className="text-primary">{category.name}</span>
-        </div>
-      ))}
-    </div>
-  );
+  const isActive = (href: string) =>
+    pathname === href || (href !== "/" && pathname?.startsWith(href));
 
   return (
     <nav
       className={`py-4 bg-white bg-gradient-to-r from-primary to-primary/10 z-50 shadow-md sticky top-0 transition-all duration-300 ${
-        isScrolled ? "py-3" : "py-4"
+        isScrolled ? "py-4" : "py-6"
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
@@ -118,37 +83,49 @@ export default function Navbar() {
         <div className="hidden md:flex md:space-x-4 text-white">
           {navLinks.map((link) =>
             link.hasDropdown ? (
-              <Popover
-                key={link.href}
-                content={categoriesDropdown}
-                placement="bottom"
-                trigger={["hover", "click"]} // Added click trigger for better mobile-like behavior on desktop
-                overlayClassName="category-dropdown"
-              >
-                <div // Changed from Link to div since we don't want it to be clickable
+              <div key={link.href} className="relative group">
+                <div
                   className={`hover:text-primary transition-colors duration-200 relative flex items-center cursor-pointer ${
                     isActive(link.href)
                       ? "text-primary after:bg-primary after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-full after:h-[2px]"
                       : ""
                   }`}
+                  onClick={() => isMobile && toggleDropdown(link.label)}
                 >
                   {link.label}
-                  <svg
-                    className="w-4 h-4 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    ></path>
-                  </svg>
+                  <TiArrowSortedDown />
                 </div>
-              </Popover>
+
+                {/* Desktop dropdown (hover) */}
+                <div className="absolute hidden group-hover:block pt-2 left-0 z-10">
+                  <div className="bg-white rounded-md shadow-lg w-48">
+                    {jobCategories.map((category) => (
+                      <div
+                        key={category.name}
+                        className=" px-4 py-2 hover:bg-gray-100 hover:rounded-md cursor-pointer"
+                        onClick={() => handleCategoryClick(category.name)}
+                      >
+                        <span className="text-primary">{category.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Mobile dropdown (click) - shown only on mobile */}
+                {isMobile && openDropdown === link.label && (
+                  <div className="bg-white rounded-md shadow-lg">
+                    {jobCategories.map((category) => (
+                      <div
+                        key={category.name}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => handleCategoryClick(category.name)}
+                      >
+                        <span className="text-primary">{category.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             ) : (
               <Link
                 key={link.href}
@@ -175,9 +152,8 @@ export default function Navbar() {
             </Button>
           </Link>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-primary focus:outline-none"
+            className="md:hidden text-primary focus:outline-none cursor-pointer"
             onClick={toggleMenu}
           >
             {isMenuOpen ? (
@@ -195,13 +171,8 @@ export default function Navbar() {
         closable={false}
         onClose={toggleMenu}
         open={isMenuOpen}
-        styles={{
-          body: {
-            padding: 0,
-            backgroundColor: "#ffffff",
-          },
-        }}
-        width="80%"
+        styles={{ body: { padding: 0, backgroundColor: "#ffffff" } }}
+        width="50%"
       >
         <div className="flex flex-col h-full">
           <div className="p-4">
@@ -222,36 +193,49 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <div key={link.href}>
                 {link.hasDropdown ? (
-                  // For dropdown items in mobile, we'll make the parent non-clickable
-                  <div
-                    className={`text-primary py-2 px-3 rounded transition-colors duration-200 block ${
-                      isActive(link.href) ? "bg-primary/20 font-medium" : ""
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span>{link.label}</span>
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
+                  <div>
+                    <div
+                      className={`text-primary cursor-pointer py-2 px-3 rounded transition-colors duration-200 block ${
+                        isActive(link.href)
+                          ? "text-primary after:bg-primary after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-full after:h-[2px]"
+                          : ""
+                      }`}
+                      onClick={() => toggleDropdown(link.label)}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span>{link.label}</span>
+                        <div
+                          className={`w-4 h-4 transition-transform ${
+                            openDropdown === link.label ? "rotate-180" : ""
+                          }`}
+                        >
+                          <TiArrowSortedDown />
+                        </div>
+                      </div>
                     </div>
-                    {mobileCategories}
+                    {openDropdown === link.label && (
+                      <div className="bg-primary/20 rounded-md shadow-lg">
+                        {jobCategories.map((category) => (
+                          <div
+                            key={category.name}
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleCategoryClick(category.name)}
+                          >
+                            <span className="text-primary">
+                              {category.name}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <Link
                     href={link.href}
                     className={`text-white py-2 px-3 rounded transition-colors duration-200 block ${
-                      isActive(link.href) ? "bg-primary/20 font-medium" : ""
+                      isActive(link.href)
+                        ? "bg-primary/20 font-bold underline"
+                        : ""
                     }`}
                     onClick={toggleMenu}
                   >
