@@ -11,6 +11,7 @@ export default function Home() {
         <Banner />
         <FeatureJobs />
         <AppliedProcess />
+        {/* sht */}
       </main>
     </div>
   );
