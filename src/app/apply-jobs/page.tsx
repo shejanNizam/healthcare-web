@@ -29,12 +29,11 @@ export default function ApplyJobs() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-6">
-      <h3 className="text-lg font-semibold mb-6 text-center">
-        Personal Information
-      </h3>
-
       <Form layout="vertical" onFinish={onFinish} autoComplete="off">
         <div className="mb-8 border rounded-lg p-4">
+          <h3 className="text-xl text-primary font-bold my-2">
+            Personal Information
+          </h3>
           {/* Full Name */}
           <Form.Item
             label="Full Name"
@@ -124,8 +123,9 @@ export default function ApplyJobs() {
           </Row>
 
           {/* Expertise Section */}
-          <h3 className="text-lg font-semibold mb-6 text-center mt-8">
-            Expertise ( Optional )
+
+          <h3 className="text-xl text-primary font-bold my-2">
+            Expertise (Optional)
           </h3>
 
           {/* Profession and Discipline */}

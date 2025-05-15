@@ -46,11 +46,7 @@ export default function EducationInfo() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      <h3 className="text-lg font-semibold mb-6 text-center">
-        Educations and credentials
-      </h3>
-
+    <div className="max-w-4xl mx-auto p-6">
       <Form
         layout="vertical"
         onFinish={onFinish}
@@ -68,9 +64,19 @@ export default function EducationInfo() {
         autoComplete="off"
       >
         <div className="mb-8 border rounded-lg p-4">
+          <h3 className="text-xl text-primary font-bold my-2">
+            Educations and credentials
+          </h3>
           {/* Disciplinary Action */}
           <Form.Item
-            label="Have you ever had your professional license or certification, in any state, investigated, suspended or had disciplinary action taken against it?"
+            label={
+              <span className="font-semibold ">
+                {" "}
+                Have you ever had your professional license or certification, in
+                any state, investigated, suspended or had disciplinary action
+                taken against it?{" "}
+              </span>
+            }
             name="disciplinaryAction"
             rules={[{ required: true, message: "Please select Yes or No" }]}
           >
@@ -84,7 +90,7 @@ export default function EducationInfo() {
           <Form.List name="professionalLicenses">
             {(fields, { add, remove }) => (
               <>
-                <h3 className="text-lg font-semibold mt-8 mb-3">
+                <h3 className="text-xl text-primary font-bold mt-8 mb-4">
                   Your professional licenses (Optional)
                 </h3>
                 {fields.map(({ key, name, ...restField }) => (
@@ -135,10 +141,15 @@ export default function EducationInfo() {
                       </Form.Item>
                     </Col>
 
-                    <Col xs={24} sm={24} md={2} className="text-center mt-2">
+                    <Col xs={24} sm={24} md={2} className="text-center mt-1.5">
                       <MinusCircleOutlined
                         onClick={() => remove(name)}
-                        className="text-red-600 cursor-pointer text-lg"
+                        // className="text-red-600 cursor-pointer text-lg"
+                        style={{
+                          color: "#ef4444",
+                          fontSize: "1.25rem",
+                          cursor: "pointer",
+                        }}
                       />
                     </Col>
                   </Row>
@@ -162,10 +173,10 @@ export default function EducationInfo() {
           <Form.List name="certifications">
             {(fields, { add, remove }) => (
               <>
-                <h3 className="text-lg font-semibold mt-8 mb-3">
+                <h3 className="text-xl text-primary font-bold mt-8 mb-4">
                   Certifications (Optional)
                 </h3>
-                <p className="mb-4 text-sm text-gray-600">
+                <p className="mb-4 font-semibold">
                   Check all of the current (not expired) certifications that you
                   have or add any that are missing.
                 </p>
@@ -187,7 +198,12 @@ export default function EducationInfo() {
 
                     <MinusCircleOutlined
                       onClick={() => remove(name)}
-                      className="text-red-600 cursor-pointer text-lg"
+                      className="mr-6"
+                      style={{
+                        color: "#ef4444",
+                        fontSize: "1.25rem",
+                        cursor: "pointer",
+                      }}
                     />
                   </Space>
                 ))}
@@ -207,7 +223,7 @@ export default function EducationInfo() {
           </Form.List>
 
           {/* Your Education (Required) */}
-          <h3 className="text-lg font-semibold mt-8 mb-6">
+          <h3 className="text-xl text-primary font-bold mt-8 mb-4">
             Your Education (Required)
           </h3>
 

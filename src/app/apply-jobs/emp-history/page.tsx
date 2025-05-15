@@ -35,10 +35,6 @@ export default function EmploymentHistory() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h3 className="text-lg font-semibold mb-6 text-center">
-        Employment History (optional)
-      </h3>
-
       <Form
         layout="vertical"
         onFinish={onFinish}
@@ -51,6 +47,9 @@ export default function EmploymentHistory() {
                 <div key={key} className="mb-8 border rounded-lg p-4 ">
                   <div className="flex justify-between items-center gap-4">
                     <div className="flex-1">
+                      <h3 className="text-xl text-primary font-bold my-2">
+                        Employment History (optional)
+                      </h3>
                       {/* Company */}
                       <Form.Item
                         {...restField}
@@ -140,7 +139,12 @@ export default function EmploymentHistory() {
                     <div className=" ">
                       <MinusCircleOutlined
                         onClick={() => remove(name)}
-                        className="text-red-500 text-xl cursor-pointer"
+                        // className="text-red-500 text-xl cursor-pointer"
+                        style={{
+                          color: "#ef4444",
+                          fontSize: "1.25rem",
+                          cursor: "pointer",
+                        }}
                       />
                     </div>
                   </div>
@@ -156,6 +160,7 @@ export default function EmploymentHistory() {
                       Add Employment
                     </Button>
                   </Form.Item>
+                  {/* knn */}
                 </div>
               ))}
             </>
