@@ -8,6 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-primary: #1077bc;
+  --color-secondary: #e7f1f8;
 
   --font-sans: "Inter", sans-serif;
   --font-mono: "Roboto Mono", monospace;
