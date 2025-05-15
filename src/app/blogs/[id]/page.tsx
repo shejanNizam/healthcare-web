@@ -34,37 +34,52 @@ export default function BlogDetails() {
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <Link href="/blogs">
-          <Button type="text" className="mb-4 flex items-center">
-            ← Back to Blogs
+          <Button type="link" className="mb-4 flex items-center bg-secondary">
+            <span className="text-primary text-2xl font-semibold">
+              ← Details of Blogs
+            </span>
           </Button>
         </Link>
 
         <article className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="relative w-full h-40">
+          <div className="relative w-full h-60">
             <Image
               src={blogDetails.image}
               alt={blogDetails.title}
               fill
               style={{ objectFit: "cover" }}
-              sizes="192px"
               priority={false}
             />
           </div>
 
           <div className="p-6 sm:p-8">
             <div className="flex justify-between items-start mb-4">
-              <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+              <span className="inline-block bg-blue-100 text-primary text-xs px-2 py-1 rounded">
                 {blogDetails.category}
               </span>
-              <span className="text-sm text-gray-500">{blogDetails.date}</span>
+              <span className="text-sm text-primary font-semibold">
+                {blogDetails.date}
+              </span>
             </div>
 
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">
+            <h1 className="text-3xl font-bold text-primary mb-6">
               {blogDetails.title}
             </h1>
 
             <div
-              className="prose max-w-none mb-8"
+              className="prose max-w-none mb-2"
+              dangerouslySetInnerHTML={{ __html: blogDetails.content }}
+            />
+          </div>
+
+          {/*  */}
+          <div className="p-6 sm:p-8">
+            <h1 className="text-3xl font-bold text-primary mb-2">
+              {blogDetails.title}
+            </h1>
+
+            <div
+              className="prose max-w-none mb-2"
               dangerouslySetInnerHTML={{ __html: blogDetails.content }}
             />
 
