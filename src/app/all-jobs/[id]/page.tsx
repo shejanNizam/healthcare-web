@@ -18,7 +18,7 @@ export default function JobDetails() {
 
   // Job details based on the image
   const jobDetails = {
-    id: "1",
+    id: 2,
     title: "Registered nurse- progressive care",
     hospital: "AB Hospital",
     location: "New York, USA",
@@ -64,6 +64,7 @@ export default function JobDetails() {
 
   const handleApplyJob = () => {
     // router.push(`/apply-jobs`);
+    console.log(jobDetails.id);
     router.push(`/apply-jobs?jobId=${jobDetails.id}`);
     // console.log("Applying for job:", jobDetails.id);
   };
