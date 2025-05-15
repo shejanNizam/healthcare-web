@@ -87,15 +87,10 @@ export default function ApplyJobs() {
               label="Country"
               name="country"
               rules={[
-                { required: true, message: "Please select your country." },
+                { required: true, message: "Please enter your country." },
               ]}
             >
-              <Select placeholder="Select...">
-                <Option value="bangladesh">Bangladesh</Option>
-                <Option value="usa">USA</Option>
-                <Option value="uk">UK</Option>
-                {/* Add more countries as needed */}
-              </Select>
+              <Input placeholder="Enter your country." />
             </Form.Item>
           </Col>
         </Row>
@@ -106,13 +101,9 @@ export default function ApplyJobs() {
             <Form.Item
               label="State"
               name="state"
-              rules={[{ required: true, message: "Please select your state." }]}
+              rules={[{ required: true, message: "Please enter your state." }]}
             >
-              <Select placeholder="Select...">
-                <Option value="state1">State 1</Option>
-                <Option value="state2">State 2</Option>
-                {/* Add more states */}
-              </Select>
+              <Input placeholder="Enter your state." />
             </Form.Item>
           </Col>
 
@@ -120,13 +111,9 @@ export default function ApplyJobs() {
             <Form.Item
               label="City"
               name="city"
-              rules={[{ required: true, message: "Please select your city." }]}
+              rules={[{ required: true, message: "Please enter your city." }]}
             >
-              <Select placeholder="Select...">
-                <Option value="city1">City 1</Option>
-                <Option value="city2">City 2</Option>
-                {/* Add more cities */}
-              </Select>
+              <Input placeholder="Enter your city." />
             </Form.Item>
           </Col>
         </Row>
