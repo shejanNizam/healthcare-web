@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,10 +32,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         <AntdRegistry>
-          <Navbar />
-          {children}
+          <Suspense>
+            <Navbar />
+            {children}
 
-          <Footer />
+            <Footer />
+          </Suspense>
         </AntdRegistry>
       </body>
     </html>
