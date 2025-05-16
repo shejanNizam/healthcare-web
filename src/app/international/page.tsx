@@ -10,7 +10,7 @@ export default function International() {
       {/* Apply now part */}
 
       <div className="flex flex-col md:flex-row items-center justify-center px-4 md:px-24 xl:px-40 w-full py-8 ">
-        <div className="w-full md:w-[40%]  hidden md:block md:ml-24">
+        <div className="w-full md:w-[40%] hidden md:block md:ml-24 2xl:ml-48">
           <Image
             width={1000}
             height={1000}
@@ -31,7 +31,7 @@ export default function International() {
             today!&quot;
           </p>
           <Link href={`/apply-jobs`}>
-            <button className="mt-6 px-6 py-2 bg-primary text-white rounded cursor-pointer hover:bg-primary-dark transition-colors">
+            <button className="mt-6 px-6 py-2 bg-primary hover:bg-primary/80 text-white rounded cursor-pointer hover:bg-primary-dark transition-colors">
               Apply Now
             </button>
           </Link>
@@ -39,8 +39,8 @@ export default function International() {
       </div>
 
       {/* Why USA part */}
-      <div className="max-w-5xl mx-auto p-6">
-        <h2 className="text-center text-primary font-semibold text-lg mb-2">
+      <div className="max-w-5xl mx-auto p-6 px-4 md:px-24 xl:px-24 w-full py-8">
+        <h2 className="text-center text-2xl xl:text-3xll text-primary font-bold mb-2">
           Why USA
         </h2>
         <p className="text-center text-sm max-w-xl mx-auto mb-8">
