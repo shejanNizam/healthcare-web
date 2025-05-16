@@ -1,39 +1,3 @@
-// import Image from "next/image";
-// import bannerRightImage from "../assets/banner/banner_right_side.png";
-// import SearchBar from "./SearchBar";
-
-// export default function Banner() {
-//   return (
-//     <div className="bg-gradient-to-r from-primary to-white h-[700px]">
-//       <div className="bg-primary-light py-16 flex items-center justify-around px-40 w-full">
-//         <div className="w-[60%] flex flex-col gap-8 ">
-//           <h1 className="text-7xl text-white font-semibold">
-//             Find a job that aligns with your interests and skills
-//           </h1>
-//           <p className=" w-[80%] text-white ">
-//             Our platform connects qualified nurses with reputable employers,
-//             making it easy to search and apply for nursing jobs. Explore
-//             opportunities that match your skills and career goals in a
-//             professional, efficient way.
-//           </p>
-//           <div className="">
-//             <SearchBar />
-//           </div>
-//         </div>
-//         <div className="w-[40%]">
-//           <Image
-//             width={1000}
-//             height={1000}
-//             src={bannerRightImage}
-//             alt="banner_right_image"
-//             className="w-[80%] h-fit"
-//           />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
 import Image from "next/image";
 import bannerRightImage from "../assets/banner/banner_right_side.png";
 import SearchBar from "./SearchBar";
