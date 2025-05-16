@@ -101,18 +101,12 @@ const Footer = () => (
               </h3>
               <ul className="text-center md:text-left">
                 <li className="mb-1">
-                  <Link
-                    href="/privacy-policy"
-                    className="text-sm hover:text-primary"
-                  >
+                  <Link href="/privacy" className="text-sm hover:text-primary">
                     Privacy Policy
                   </Link>
                 </li>
                 <li className="mb-1">
-                  <Link
-                    href="/terms-condition"
-                    className="text-sm hover:text-primary"
-                  >
+                  <Link href="/terms" className="text-sm hover:text-primary">
                     Terms of Use
                   </Link>
                 </li>
