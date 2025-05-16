@@ -1,5 +1,6 @@
 "use client";
 
+import { SuccessSwal } from "@/utils/allSwal";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -42,6 +43,10 @@ export default function EducationInfo() {
 
   const onFinish = (values: FormValues) => {
     console.log("Form values:", values);
+    SuccessSwal({
+      title: "Success",
+      text: "Your education information has been saved successfully.",
+    });
     router.push(`/apply-jobs/emp-history?jobId=${jobId}`);
   };
 

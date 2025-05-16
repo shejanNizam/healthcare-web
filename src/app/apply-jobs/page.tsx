@@ -1,5 +1,6 @@
 "use client";
 
+import { SuccessSwal } from "@/utils/allSwal";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -24,6 +25,10 @@ export default function ApplyJobs() {
     secondarySpecialty?: string;
   }) => {
     console.log(_values);
+    SuccessSwal({
+      title: "Success",
+      text: "Your personal information has been saved successfully.",
+    });
     router.push(`/apply-jobs/edu-info?jobId=${jobId}`);
   };
 

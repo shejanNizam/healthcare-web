@@ -8,6 +8,7 @@
 
 "use client";
 
+import { SuccessSwal } from "@/utils/allSwal";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Col, DatePicker, Form, Input, Row, Select } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -30,7 +31,12 @@ export default function EmploymentHistory() {
       endDate?: string;
     }[];
   }) => {
+    SuccessSwal({
+      title: "Success",
+      text: "Your employment history has been saved successfully.",
+    });
     console.log("Employment history values:", values, jobId);
+    router.push(`/`);
   };
 
   return (
