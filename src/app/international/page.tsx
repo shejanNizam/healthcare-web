@@ -6,9 +6,14 @@ import Link from "next/link";
 export default function International() {
   return (
     <div className="min-h-screen">
-      <IntBanner />
-      {/* Apply now part */}
+      <IntBanner
+        title={" International "}
+        description={`International nurses, take the next step in your career! Apply
+            for healthcare jobs in the USA, access visa support, and join a
+            rewarding healthcare system. Start your application today`}
+      />
 
+      {/* Apply now part */}
       <div className="flex flex-col md:flex-row items-center justify-center px-4 md:px-24 xl:px-40 w-full py-8 ">
         <div className="w-full md:w-[40%] hidden md:block md:ml-24 2xl:ml-48">
           <Image
