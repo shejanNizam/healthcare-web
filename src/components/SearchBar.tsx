@@ -6,7 +6,6 @@
 //   );
 // }
 
-// components/SearchBar.tsx
 "use client";
 
 import { SearchOutlined } from "@ant-design/icons";

@@ -40,7 +40,7 @@ export default function EmploymentHistory() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6 border rounded">
       <Form
         layout="vertical"
         onFinish={onFinish}
@@ -49,13 +49,13 @@ export default function EmploymentHistory() {
         <Form.List name="employments">
           {(fields, { add, remove }) => (
             <>
+              <h3 className="text-xl text-primary font-bold my-2">
+                Employment History (optional)
+              </h3>
               {fields.map(({ key, name, ...restField }) => (
-                <div key={key} className="mb-8 border rounded-lg p-4 ">
+                <div key={key} className="mb-8  ">
                   <div className="flex justify-between items-center gap-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl text-primary font-bold my-2">
-                        Employment History (optional)
-                      </h3>
+                    <div className="flex-1 border rounded-lg p-4">
                       {/* Company */}
                       <Form.Item
                         {...restField}
@@ -140,7 +140,6 @@ export default function EmploymentHistory() {
                         </Col>
                       </Row>
                     </div>
-
                     {/* Add/Remove buttons */}
                     <div className=" ">
                       <MinusCircleOutlined
@@ -154,21 +153,19 @@ export default function EmploymentHistory() {
                       />
                     </div>
                   </div>
-
-                  {/* Add Employment Button */}
-                  <Form.Item>
-                    <Button
-                      type="dashed"
-                      onClick={() => add()}
-                      block
-                      icon={<PlusOutlined />}
-                    >
-                      Add Employment
-                    </Button>
-                  </Form.Item>
-                  {/* knn */}
                 </div>
               ))}
+              {/* Add Employment Button */}
+              <Form.Item>
+                <Button
+                  type="dashed"
+                  onClick={() => add()}
+                  block
+                  icon={<PlusOutlined />}
+                >
+                  Add Employment
+                </Button>
+              </Form.Item>
             </>
           )}
         </Form.List>
