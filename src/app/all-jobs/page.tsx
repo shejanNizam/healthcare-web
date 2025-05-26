@@ -26,6 +26,7 @@ interface Job {
 interface Filters {
   profession: string | null;
   jobType: string | null;
+  category: string | null;
 }
 
 const jobsData: Job[] = [
@@ -76,6 +77,17 @@ const jobsData: Job[] = [
 ];
 
 const filterCategories = {
+  Category: [
+    "Nursing",
+    "Allied",
+    "Physician",
+    "Advance practice",
+    "Dentistry",
+    "Leadership",
+    "Schools",
+    "Language Interpreters",
+    "Revenue Cycle",
+  ],
   Profession: [
     "Nursing",
     "Allied",
@@ -102,6 +114,7 @@ const AllJobs = () => {
   const [filters, setFilters] = useState<Filters>({
     profession: null,
     jobType: null,
+    category: null,
   });
   const [availableJobs, setAvailableJobs] = useState<Job[]>(jobsData);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
@@ -128,6 +141,8 @@ const AllJobs = () => {
       newFilters.profession = value;
     } else if (category === "Job type") {
       newFilters.jobType = value;
+    } else if (category === "Category") {
+      newFilters.category = value;
     }
 
     setFilters(newFilters);
@@ -139,6 +154,7 @@ const AllJobs = () => {
     setFilters({
       profession: null,
       jobType: null,
+      category: null,
     });
   };
 
@@ -155,14 +171,17 @@ const AllJobs = () => {
       filteredJobs = filteredJobs.filter((job) => job.type === filters.jobType);
     }
 
+    if (filters.category) {
+      filteredJobs = filteredJobs.filter(
+        (job) => job.category === filters.category
+      );
+    }
+
     setAvailableJobs(filteredJobs);
   }, [filters]);
 
   return (
     <>
-      {/* <div className=" text-center ">
-        <SearchBar />
-      </div> */}
       <div className="flex flex-col md:flex-row min-h-screen relative">
         {/* Mobile header with filter toggle */}
         <div className="md:hidden sticky top-0 z-20 bg-white shadow-sm">
@@ -193,7 +212,7 @@ const AllJobs = () => {
               <FilterOutlined size={20} />
               <p className="">Filters</p>
             </div>
-            {(filters.profession || filters.jobType) && (
+            {(filters.profession || filters.jobType || filters.category) && (
               <button
                 onClick={clearAllFilters}
                 className="text-red-500 hover:text-red-700 text-sm font-semibold cursor-pointer"
@@ -225,7 +244,9 @@ const AllJobs = () => {
                       className={`px-4 py-3 cursor-pointer hover:bg-primary/10 transition-colors ${
                         (category === "Profession" &&
                           filters.profession === option) ||
-                        (category === "Job type" && filters.jobType === option)
+                        (category === "Job type" &&
+                          filters.jobType === option) ||
+                        (category === "Category" && filters.category === option)
                           ? "bg-blue-50 text-primary font-medium"
                           : "text-gray-700"
                       }`}
