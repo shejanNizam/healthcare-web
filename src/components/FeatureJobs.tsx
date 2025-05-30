@@ -98,7 +98,7 @@ export default function FeatureJobs() {
             responsive={responsiveSettings}
             infinite={true}
           >
-            {data.data.map(
+            {data?.data?.map(
               (categoryItem: { _id: string; type: string; logo: string }) => {
                 // Ensure type fallback
                 const categoryType = categoryItem.type || "Unknown Category";

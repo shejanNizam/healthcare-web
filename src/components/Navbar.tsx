@@ -1,5 +1,6 @@
 "use client";
 
+import { useGetValueQuery } from "@/redux/features/value/valueApi";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Button, Drawer } from "antd";
 import Link from "next/link";
@@ -7,6 +8,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
 import SearchBar from "./SearchBar";
+
+interface JobCategory {
+  _id: string;
+  type: string;
+}
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,18 +22,9 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  // Job categories
-  const jobCategories = [
-    { name: "Nursing", alt: "Nursing jobs" },
-    { name: "Allied", alt: "Allied health jobs" },
-    { name: "Physician", alt: "Physician jobs" },
-    { name: "Advance practice", alt: "Advance practice jobs" },
-    { name: "Dentistry", alt: "Dentistry jobs" },
-    { name: "Leadership", alt: "Leadership jobs" },
-    { name: "Schools", alt: "School jobs" },
-    { name: "Language Interpreters", alt: "Language Interpreter jobs" },
-    { name: "Revenue Cycle", alt: "Revenue Cycle jobs" },
-  ];
+  const { data } = useGetValueQuery("Category");
+
+  const jobCategories: JobCategory[] = data?.data || [];
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -100,11 +97,11 @@ export default function Navbar() {
                   <div className="bg-white rounded-md shadow-lg w-full">
                     {jobCategories.map((category) => (
                       <div
-                        key={category.name}
+                        key={category._id}
                         className="px-4 py-2 hover:bg-gray-100 hover:rounded-md cursor-pointer"
-                        onClick={() => handleCategoryClick(category.name)}
+                        onClick={() => handleCategoryClick(category.type)}
                       >
-                        <span className="text-primary">{category.name}</span>
+                        <span className="text-primary">{category.type}</span>
                       </div>
                     ))}
                     <Link
@@ -121,11 +118,11 @@ export default function Navbar() {
                   <div className="absolute bg-white rounded-md shadow-lg w-full min-w-[200px] left-0 z-10">
                     {jobCategories.map((category) => (
                       <div
-                        key={category.name}
+                        key={category._id}
                         className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                        onClick={() => handleCategoryClick(category.name)}
+                        onClick={() => handleCategoryClick(category.type)}
                       >
-                        <span className="text-primary">{category.name}</span>
+                        <span className="text-primary">{category.type}</span>
                       </div>
                     ))}
                     <Link
@@ -235,12 +232,12 @@ export default function Navbar() {
                       <div className="bg-primary/20 rounded-md shadow-lg w-full">
                         {jobCategories.map((category) => (
                           <div
-                            key={category.name}
+                            key={category._id}
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleCategoryClick(category.name)}
+                            onClick={() => handleCategoryClick(category.type)}
                           >
                             <span className="text-primary">
-                              {category.name}
+                              {category.type}
                             </span>
                           </div>
                         ))}

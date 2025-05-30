@@ -1,83 +1,55 @@
-// export default function SearchBar() {
-//   return (
-//     <div>
-//       <h3>SearchBar</h3>
-//     </div>
-//   );
-// }
-
 "use client";
 
+import { useGetValueQuery } from "@/redux/features/value/valueApi";
 import { SearchOutlined } from "@ant-design/icons";
-import { AutoComplete, Input } from "antd";
+import { Input } from "antd";
 import { useState } from "react";
 
-const categories = [
-  "Nursing",
-  "Allied",
-  "Advance practice",
-  "Leadership",
-  "Language interpreters",
-];
+type JobCategory = {
+  _id: string;
+  type: string;
+};
 
 export default function SearchBar() {
   const [searchVisible, setSearchVisible] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
+
+  const { data } = useGetValueQuery("Category");
+  const categories: JobCategory[] = data?.data || [];
 
   const handleSearch = (value: string) => {
     if (value && !recentSearches.includes(value)) {
       setRecentSearches([value, ...recentSearches].slice(0, 5));
     }
     // Redirect to search results page
-    window.location.href = `/all-jobs?category=${value}`;
+    window.location.href = `/all-jobs?category=${encodeURIComponent(value)}`;
   };
 
   return (
     <div className="relative w-full max-w-2xl">
-      <AutoComplete
-        options={categories.map((category) => ({ value: category }))}
-        onSelect={handleSearch}
-        onSearch={() => setSearchVisible(true)}
-        onBlur={() => setSearchVisible(false)}
-        className="w-full"
-      >
-        <Input
-          size="large"
-          placeholder="Search for jobs..."
-          prefix={<SearchOutlined />}
-        />
-      </AutoComplete>
+      {/* Input is readonly, so user can only click/select, no typing */}
+      <Input
+        size="large"
+        placeholder="Select a category..."
+        prefix={<SearchOutlined />}
+        readOnly
+        onFocus={() => setSearchVisible(true)}
+        onBlur={() => setTimeout(() => setSearchVisible(false), 200)}
+        className="cursor-pointer"
+      />
 
       {searchVisible && (
-        <div className="absolute z-10 w-full mt-2 bg-white rounded-md shadow-lg">
-          <div className="p-4 border-b">
-            <h4 className="font-semibold">Recent searches</h4>
-            {recentSearches.length > 0 ? (
-              <div className="mt-2 space-y-2">
-                {recentSearches.map((search, index) => (
-                  <div
-                    key={index}
-                    className="p-2 hover:bg-gray-100 cursor-pointer"
-                    onClick={() => handleSearch(search)}
-                  >
-                    {search}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500 mt-2">No recent searches</p>
-            )}
-          </div>
+        <div className="absolute z-10 w-full mt-2 bg-white rounded-md shadow-lg max-h-80 overflow-auto">
           <div className="p-4">
             <h4 className="font-semibold">Categories</h4>
-            <div className="mt-2 space-y-2">
-              {categories.map((category, index) => (
+            <div className="mt-2 space-y-2 max-h-60 overflow-auto">
+              {categories?.map((category: JobCategory) => (
                 <div
-                  key={index}
+                  key={category._id}
                   className="p-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleSearch(category)}
+                  onClick={() => handleSearch(category.type)}
                 >
-                  {category}
+                  {category.type}
                 </div>
               ))}
             </div>
