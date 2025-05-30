@@ -2,6 +2,8 @@
 
 import CustomErrorPage from "@/components/CustomErrorPage";
 import JobCard from "@/components/JobCard";
+import { useGetJobsQuery } from "@/redux/features/jobs/jobsApi";
+import { useGetValueQuery } from "@/redux/features/value/valueApi";
 import {
   CloseOutlined,
   DownOutlined,
@@ -13,14 +15,16 @@ import { Button } from "antd";
 import { useEffect, useState } from "react";
 
 interface Job {
-  id: string;
+  _id: string;
   title: string;
-  hospital: string;
+  hospitalName: string;
   description: string;
-  salary: string;
+  salary: number;
   deadline: string;
-  type: string;
+  jobType: string;
   category: string;
+  profession: string;
+  companyLogo: string;
 }
 
 interface Filters {
@@ -29,86 +33,6 @@ interface Filters {
   category: string | null;
 }
 
-const jobsData: Job[] = [
-  {
-    id: "1",
-    title: "Registered nurse- progressive care",
-    hospital: "AB Hospital",
-    description:
-      "We are seeking a compassionate and dedicated nurse to join our healthcare team. The ideal candidate will have excellent clinical and communication skills with a strong...",
-    salary: "$ 1500 - $ 1800",
-    deadline: "12 May 2025",
-    type: "Permanent",
-    category: "Nursing",
-  },
-  {
-    id: "2",
-    title: "Registered nurse- progressive care",
-    hospital: "AB Hospital",
-    description:
-      "We are seeking a compassionate and dedicated nurse to join our healthcare team. The ideal candidate will have excellent clinical and communication skills with a strong...",
-    salary: "$ 1500 - $ 1800",
-    deadline: "12 May 2025",
-    type: "Permanent",
-    category: "Nursing",
-  },
-  {
-    id: "3",
-    title: "Registered nurse- progressive care",
-    hospital: "AB Hospital",
-    description:
-      "We are seeking a compassionate and dedicated nurse to join our healthcare team. The ideal candidate will have excellent clinical and communication skills with a strong...",
-    salary: "$ 1500 - $ 1800",
-    deadline: "12 May 2025",
-    type: "Permanent",
-    category: "Nursing",
-  },
-  {
-    id: "4",
-    title: "Physician assistant",
-    hospital: "AB Hospital",
-    description:
-      "We are seeking a compassionate and dedicated physician assistant to join our healthcare team. The ideal candidate will have excellent clinical and communication skills with a strong...",
-    salary: "$ 2000 - $ 2500",
-    deadline: "15 May 2025",
-    type: "Contract",
-    category: "Physician",
-  },
-];
-
-const filterCategories = {
-  Category: [
-    "Nursing",
-    "Allied",
-    "Physician",
-    "Advance practice",
-    "Dentistry",
-    "Leadership",
-    "Schools",
-    "Language Interpreters",
-    "Revenue Cycle",
-  ],
-  Profession: [
-    "Nursing",
-    "Allied",
-    "Physician",
-    "Advance practice",
-    "Dentistry",
-    "Leadership",
-    "Schools",
-    "Language Interpreters",
-    "Revenue Cycle",
-  ],
-  "Job type": [
-    "Travel",
-    "Telehealth",
-    "Permanent",
-    "Contract",
-    "Part-time",
-    "Full-time",
-  ],
-};
-
 const AllJobs = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>({
@@ -116,9 +40,28 @@ const AllJobs = () => {
     jobType: null,
     category: null,
   });
-  const [availableJobs, setAvailableJobs] = useState<Job[]>(jobsData);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Fetch all jobs
+
+  // Fetch dynamic filter options
+  const { data: categoryData, isLoading: loadingCategory } =
+    useGetValueQuery("Category");
+  const { data: professionData, isLoading: loadingProfession } =
+    useGetValueQuery("Profession");
+
+  // Static job types
+  const jobTypes = ["full-time", "part-time"];
+
+  // Extract dynamic options safely
+  const categories = categoryData?.data?.map((item: any) => item.type) || [];
+  const professions = professionData?.data?.map((item: any) => item.type) || [];
+
+  const { data: jobsResponse, isLoading, isError } = useGetJobsQuery({});
+
+  // Jobs array from API response
+  const allJobs: Job[] = jobsResponse?.data?.allJobs || [];
 
   useEffect(() => {
     const checkMobile = () => {
@@ -134,18 +77,11 @@ const AllJobs = () => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
 
-  const applyFilter = (category: string, value: string) => {
-    const newFilters = { ...filters };
-
-    if (category === "Profession") {
-      newFilters.profession = value;
-    } else if (category === "Job type") {
-      newFilters.jobType = value;
-    } else if (category === "Category") {
-      newFilters.category = value;
-    }
-
-    setFilters(newFilters);
+  const applyFilter = (category: keyof Filters, value: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      [category.toLowerCase()]: value,
+    }));
     setOpenDropdown(null);
     if (isMobile) setShowMobileFilters(false);
   };
@@ -158,38 +94,48 @@ const AllJobs = () => {
     });
   };
 
-  useEffect(() => {
-    let filteredJobs = jobsData;
+  // Filter jobs on client side (optional if backend doesn't filter)
+  const filteredJobs = allJobs.filter((job) => {
+    if (
+      filters.profession &&
+      job.profession.toLowerCase() !== filters.profession.toLowerCase()
+    )
+      return false;
+    if (
+      filters.jobType &&
+      job.jobType.toLowerCase() !== filters.jobType.toLowerCase()
+    )
+      return false;
+    if (
+      filters.category &&
+      job.category.toLowerCase() !== filters.category.toLowerCase()
+    )
+      return false;
+    return true;
+  });
 
-    if (filters.profession) {
-      filteredJobs = filteredJobs.filter(
-        (job) => job.category === filters.profession
-      );
-    }
+  if (isLoading || loadingCategory || loadingProfession) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
 
-    if (filters.jobType) {
-      filteredJobs = filteredJobs.filter((job) => job.type === filters.jobType);
-    }
-
-    if (filters.category) {
-      filteredJobs = filteredJobs.filter(
-        (job) => job.category === filters.category
-      );
-    }
-
-    setAvailableJobs(filteredJobs);
-  }, [filters]);
+  if (isError) {
+    return (
+      <div className="text-center py-10 text-red-600">
+        Error loading jobs. Please try again later.
+      </div>
+    );
+  }
 
   return (
     <>
       <div className="flex flex-col md:flex-row min-h-screen relative">
-        {/* Mobile header with filter toggle */}
+        {/* Mobile header */}
         <div className="md:hidden sticky top-0 z-20 bg-white shadow-sm">
           <div className="flex items-center justify-between p-4">
             <div className="font-bold text-xl text-primary">
               Available jobs:{" "}
               <span className="text-primary text-2xl font-bold">
-                {availableJobs.length}
+                {filteredJobs.length}
               </span>
             </div>
             <Button
@@ -201,7 +147,7 @@ const AllJobs = () => {
           </div>
         </div>
 
-        {/* Filters sidebar - Hidden on mobile unless toggled */}
+        {/* Filters sidebar */}
         <div
           className={`fixed bg-white md:bg-white/0 md:static w-[70%] md:w-72 lg:w-80 px-4 py-10 h-full z-30 transition-all duration-300 ease-in-out ${
             showMobileFilters ? "left-0" : "-left-[70%]"
@@ -223,30 +169,36 @@ const AllJobs = () => {
           </div>
 
           {/* Filter sections */}
-          {Object.keys(filterCategories).map((category) => (
-            <div key={category} className="mb-6">
+          {[
+            { label: "Category", options: categories },
+            { label: "Profession", options: professions },
+            { label: "JobType", options: jobTypes },
+          ].map(({ label, options }) => (
+            <div key={label} className="mb-6">
               <Button
-                onClick={() => toggleDropdown(category)}
+                onClick={() => toggleDropdown(label)}
                 className="w-full flex justify-between items-center px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg"
               >
-                <span className="font-medium">{category}</span>
-                {openDropdown === category ? <UpOutlined /> : <DownOutlined />}
+                <span className="font-medium">{label}</span>
+                {openDropdown === label ? <UpOutlined /> : <DownOutlined />}
               </Button>
 
-              {openDropdown === category && (
-                <div className="mt-2 border border-gray-200 bg-white rounded-lg shadow-sm">
-                  {filterCategories[
-                    category as keyof typeof filterCategories
-                  ].map((option) => (
+              {openDropdown === label && (
+                <div className="mt-2 border border-gray-200 bg-white rounded-lg shadow-sm max-h-60 overflow-auto">
+                  {options.map((option: string) => (
                     <div
                       key={option}
-                      onClick={() => applyFilter(category, option)}
+                      onClick={() =>
+                        applyFilter(
+                          label.toLowerCase() as keyof Filters,
+                          option
+                        )
+                      }
                       className={`px-4 py-3 cursor-pointer hover:bg-primary/10 transition-colors ${
-                        (category === "Profession" &&
+                        (label === "Profession" &&
                           filters.profession === option) ||
-                        (category === "Job type" &&
-                          filters.jobType === option) ||
-                        (category === "Category" && filters.category === option)
+                        (label === "JobType" && filters.jobType === option) ||
+                        (label === "Category" && filters.category === option)
                           ? "bg-blue-50 text-primary font-medium"
                           : "text-gray-700"
                       }`}
@@ -260,20 +212,21 @@ const AllJobs = () => {
           ))}
         </div>
 
-        {/* Main content area */}
+        {/* Main content */}
         <div className="flex-1 p-4 md:p-6 lg:p-8">
           {/* Desktop header */}
           <div className="hidden md:flex items-center justify-between mb-6">
             <div className="font-bold text-xl text-primary">
               Available jobs:{" "}
               <span className="text-primary text-2xl font-bold">
-                {availableJobs.length}
+                {filteredJobs.length}
               </span>
             </div>
           </div>
-          {/* Job cards grid */}
+
+          {/* Job cards */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
-            {availableJobs?.length === 0 ? (
+            {filteredJobs.length === 0 ? (
               <div className="bg-white rounded-lg shadow-sm p-8 text-center">
                 <CustomErrorPage />
                 <Button type="primary" onClick={clearAllFilters}>
@@ -281,7 +234,7 @@ const AllJobs = () => {
                 </Button>
               </div>
             ) : (
-              availableJobs.map((job) => <JobCard key={job.id} job={job} />)
+              filteredJobs.map((job) => <JobCard key={job._id} job={job} />)
             )}
           </div>
         </div>

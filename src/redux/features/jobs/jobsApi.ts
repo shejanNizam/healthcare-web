@@ -5,7 +5,7 @@ export const jobsApi = baseApi.injectEndpoints({
     // all beautician
     getJobs: builder.query({
       query: ({ page = 1, limit = 10 }) => ({
-        url: `/`,
+        url: `/job/all`,
         method: "GET",
         params: {
           page,
@@ -35,4 +35,4 @@ export const jobsApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {} = jobsApi;
+export const { useGetJobsQuery, useGetJobDetailsQuery } = jobsApi;
