@@ -12,19 +12,31 @@ import {
   UpOutlined,
 } from "@ant-design/icons";
 import { Button } from "antd";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Job {
   _id: string;
-  title: string;
   hospitalName: string;
-  description: string;
-  salary: number;
+  title: string;
+  address: string;
   deadline: string;
-  jobType: string;
   category: string;
   profession: string;
+  jobType: string;
+  salary: number;
+  vacancy: number;
+  startDate: string;
+  hoursPerWeek: number;
+  description: string;
+  summary: string;
+  responsibilities: string[];
+  requirements: string[];
+  benefits: string[];
   companyLogo: string;
+  createdAt: string;
+  updatedAt: string;
+  totalApply: number;
 }
 
 interface Filters {
@@ -34,6 +46,9 @@ interface Filters {
 }
 
 const AllJobs = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>({
     profession: null,
@@ -43,31 +58,36 @@ const AllJobs = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Fetch all jobs
-
-  // Fetch dynamic filter options
   const { data: categoryData, isLoading: loadingCategory } =
     useGetValueQuery("Category");
   const { data: professionData, isLoading: loadingProfession } =
     useGetValueQuery("Profession");
 
-  // Static job types
-  const jobTypes = ["full-time", "part-time"];
+  const jobTypes = ["full-time", "part-time", "contract"];
 
-  // Extract dynamic options safely
-  const categories = categoryData?.data?.map((item: any) => item.type) || [];
-  const professions = professionData?.data?.map((item: any) => item.type) || [];
+  interface ValueItem {
+    type: string;
+    [key: string]: unknown;
+  }
 
-  const { data: jobsResponse, isLoading, isError } = useGetJobsQuery({});
+  const categories =
+    categoryData?.data?.map((item: ValueItem) => item.type) || [];
+  const professions =
+    professionData?.data?.map((item: ValueItem) => item.type) || [];
 
-  // Jobs array from API response
-  const allJobs: Job[] = jobsResponse?.data?.allJobs || [];
+  // Sync filters from URL on mount and when URL changes
+  useEffect(() => {
+    setFilters({
+      category: searchParams?.get("category") ?? null,
+      profession: searchParams?.get("profession") ?? null,
+      jobType: searchParams?.get("jobType") ?? null,
+    });
+  }, [searchParams]);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
@@ -77,24 +97,51 @@ const AllJobs = () => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
 
-  const applyFilter = (category: keyof Filters, value: string) => {
-    setFilters((prev) => ({
-      ...prev,
-      [category.toLowerCase()]: value,
-    }));
+  const applyFilter = (categoryKey: keyof Filters, value: string) => {
+    setFilters((prev) => {
+      const updatedFilters = {
+        ...prev,
+        [categoryKey]: value,
+      };
+
+      const query = new URLSearchParams();
+
+      if (updatedFilters.category)
+        query.set("category", updatedFilters.category);
+      if (updatedFilters.profession)
+        query.set("profession", updatedFilters.profession);
+      if (updatedFilters.jobType) query.set("jobType", updatedFilters.jobType);
+
+      router.replace(`/all-jobs?${query.toString()}`);
+
+      return updatedFilters;
+    });
+
     setOpenDropdown(null);
     if (isMobile) setShowMobileFilters(false);
   };
 
   const clearAllFilters = () => {
-    setFilters({
-      profession: null,
-      jobType: null,
-      category: null,
-    });
+    setFilters({ category: null, profession: null, jobType: null });
+    router.replace("/all-jobs");
   };
 
-  // Filter jobs on client side (optional if backend doesn't filter)
+  // Updated API endpoint with filters included in params
+  const {
+    data: jobsResponse,
+    isLoading,
+    isError,
+  } = useGetJobsQuery({
+    page: 1,
+    limit: 10,
+    category: filters.category || undefined,
+    profession: filters.profession || undefined,
+    jobType: filters.jobType || undefined,
+  });
+
+  const allJobs: Job[] = jobsResponse?.data?.allJobs || [];
+
+  // Client side fallback filtering
   const filteredJobs = allJobs.filter((job) => {
     if (
       filters.profession &&
@@ -234,7 +281,7 @@ const AllJobs = () => {
                 </Button>
               </div>
             ) : (
-              filteredJobs.map((job) => <JobCard key={job._id} job={job} />)
+              filteredJobs?.map((job) => <JobCard key={job._id} job={job} />)
             )}
           </div>
         </div>

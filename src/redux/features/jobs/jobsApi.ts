@@ -3,18 +3,35 @@ import baseApi from "@/redux/api/baseApi/baseApi";
 export const jobsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // all beautician
+    // getJobs: builder.query({
+    //   query: ({ page = 1, limit = 10 }) => ({
+    //     // url: `/job/all?${type}=${value}`,
+    //     url: `/job/all`,
+    //     method: "GET",
+    //     params: {
+    //       page,
+    //       limit,
+    //     },
+    //   }),
+    //   providesTags: ["jobs"],
+    // }),
+
     getJobs: builder.query({
-      query: ({ page = 1, limit = 10 }) => ({
+      query: ({ page = 1, limit = 10, category, profession, jobType }) => ({
         url: `/job/all`,
         method: "GET",
         params: {
           page,
           limit,
+          ...(category ? { category } : {}),
+          ...(profession ? { profession } : {}),
+          ...(jobType ? { jobType } : {}),
         },
       }),
       providesTags: ["jobs"],
     }),
-    // get beautician by id
+
+    // get jobs by id
     getJobDetails: builder.query({
       query: (id) => ({
         url: `//${id}`,
