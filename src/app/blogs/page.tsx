@@ -7,7 +7,10 @@ import CustomErrorPage from "@/components/CustomErrorPage";
 import { List } from "antd";
 import { useState } from "react";
 import { HiMenu } from "react-icons/hi";
-import { useAllblogsQuery, useAllCategoryblogsQuery } from "../../redux/features/blog/blogApi";
+import {
+  useAllblogsQuery,
+  useAllCategoryblogsQuery,
+} from "../../redux/features/blog/blogApi";
 
 // interface Category {
 //   id: string;
@@ -21,8 +24,6 @@ import { useAllblogsQuery, useAllCategoryblogsQuery } from "../../redux/features
 //   summary: string;
 //   image: string | StaticImageData;
 // }
-
-
 
 // const blogs: Record<number, Blog[]> = {
 //   1: [
@@ -103,20 +104,20 @@ import { useAllblogsQuery, useAllCategoryblogsQuery } from "../../redux/features
 // };
 
 export default function BlogsPage() {
-  const { data } = useAllblogsQuery(undefined)
+  const { data } = useAllblogsQuery(undefined);
   // console.log(data?.data?.allBlogs);
 
   const [selectedCategory, setSelectedCategory] = useState<number>();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [categoryValue, setCatagoryValue] = useState<string>()
+  const [categoryValue, setCatagoryValue] = useState<string>();
   console.log(categoryValue);
 
   const onCategoryClick = (categoryType: string, id: number) => {
-    setCatagoryValue(categoryType)
+    setCatagoryValue(categoryType);
     setSelectedCategory(id);
     if (sidebarOpen) setSidebarOpen(false);
   };
-  const { data: categoryData } = useAllCategoryblogsQuery(categoryValue)
+  const { data: categoryData } = useAllCategoryblogsQuery(categoryValue);
 
   return (
     <div className="max-w-7xl mx-auto p-4 sm:p-6 md:p-8 min-h-screen flex">
@@ -127,9 +128,10 @@ export default function BlogsPage() {
           w-auto z-40
           transform transition-transform duration-300 ease-in-out
           md:relative md:translate-x-0
-          ${sidebarOpen
-            ? "translate-x-0 shadow-xl"
-            : "-translate-x-full md:translate-x-0"
+          ${
+            sidebarOpen
+              ? "translate-x-0 shadow-xl"
+              : "-translate-x-full md:translate-x-0"
           }
         `}
       >
@@ -139,11 +141,14 @@ export default function BlogsPage() {
           renderItem={(cat: any) => (
             <List.Item
               key={cat?._id}
-              className={`cursor-pointer rounded-md px-3 py-1 ${selectedCategory === parseInt(cat?._id, 10)
-                ? "bg-primary/50 text-white font-semibold"
-                : "hover:bg-primary/40"
-                }`}
-              onClick={() => onCategoryClick(cat.categoryType, parseInt(cat.id, 10))}
+              className={`cursor-pointer rounded-md px-3 py-1 ${
+                selectedCategory === parseInt(cat?._id, 10)
+                  ? "bg-primary/50 text-white font-semibold"
+                  : "hover:bg-primary/40"
+              }`}
+              onClick={() =>
+                onCategoryClick(cat.categoryType, parseInt(cat.id, 10))
+              }
             >
               <div className="flex justify-between items-center gap-16 w-full px-2">
                 <span>{cat.categoryType}</span>
@@ -188,12 +193,13 @@ export default function BlogsPage() {
             ))
           )} */}
 
-          {
-            data?.data?.allBlogs.length === 0 ? (<CustomErrorPage />) :
-              (data?.data?.allBlogs.map((blog: any) => (
-                <BlogCard key={blog.id} blog={blog} />
-              )))
-          }
+          {data?.data?.allBlogs.length === 0 ? (
+            <CustomErrorPage />
+          ) : (
+            data?.data?.allBlogs.map((blog: any) => (
+              <BlogCard key={blog.id} blog={blog} />
+            ))
+          )}
         </div>
       </main>
     </div>

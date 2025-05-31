@@ -66,7 +66,7 @@ export default function JobCard({ job }: { job: Job }) {
 
       <div
         className="text-sm text-gray-700 mt-1 line-clamp-2"
-        dangerouslySetInnerHTML={{ __html: job.description.slice(0, 170) }}
+        dangerouslySetInnerHTML={{ __html: job.description.slice(0, 200) }}
       />
 
       <div className="flex flex-wrap justify-between items-center gap-2 mt-3">

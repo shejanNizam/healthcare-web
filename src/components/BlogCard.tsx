@@ -8,7 +8,8 @@ interface Blog {
   description: string;
   banner: string | StaticImageData;
 }
-const baseImageUrl: any = process.env.NEXT_PUBLIC_IMAGE_URL
+const baseImageUrl: any = process.env.NEXT_PUBLIC_IMAGE_URL;
+
 export default function BlogCard({ blog }: { blog: Blog }) {
   const router = useRouter();
   return (
@@ -28,10 +29,12 @@ export default function BlogCard({ blog }: { blog: Blog }) {
           />
         </div>
         <div className="p-4 flex flex-col justify-between">
+          <p className="text-xl text-primary font-bold mb-2">
+            {blog.blogTitle}
+          </p>
           <div
-            dangerouslySetInnerHTML={{ __html: blog.description }}
+            dangerouslySetInnerHTML={{ __html: blog.description.slice(0, 140) }}
           />
-          {/* <p className="text-sm text-gray-700">{blog.description}</p> */}
         </div>
       </div>
     </>
