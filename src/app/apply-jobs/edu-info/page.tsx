@@ -14,10 +14,12 @@ import {
   Space,
 } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEduInfoMutation } from "../../../redux/features/jobApply/jobApplyAPI";
 
 const { Option } = Select;
 
 export default function EducationInfo() {
+  const [eduInfo] = useEduInfoMutation()
   const router = useRouter();
   const searchParams = useSearchParams();
   const jobId = searchParams?.get("jobId") || "";
@@ -41,12 +43,24 @@ export default function EducationInfo() {
     city: string;
   }
 
-  const onFinish = (values: FormValues) => {
-    console.log("Form values:", values);
-    SuccessSwal({
-      title: "Success",
-      text: "Your education information has been saved successfully.",
-    });
+  const onFinish = async (values: FormValues) => {
+    const body = {
+      id: jobId,
+      data: values
+    }
+    const res = await eduInfo(body)
+    if (res?.data?.success) {
+      SuccessSwal({
+        title: "Success",
+        text: "Your personal information has been saved successfully.",
+      });
+      router.push(`/apply-jobs/edu-info?jobId=${res?.data?.data?._id}`);
+    } else {
+      SuccessSwal({
+        title: "Error",
+        text: "Some thing is wrong ",
+      });
+    }
     router.push(`/apply-jobs/emp-history?jobId=${jobId}`);
   };
 
@@ -104,7 +118,7 @@ export default function EducationInfo() {
                       <Form.Item
                         {...restField}
                         name={[name, "licenseName"]}
-                        //   rules={[{ required: true, message: "Required" }]}
+                      //   rules={[{ required: true, message: "Required" }]}
                       >
                         <Input placeholder="Medical Assistant" />
                       </Form.Item>
@@ -114,7 +128,7 @@ export default function EducationInfo() {
                       <Form.Item
                         {...restField}
                         name={[name, "licenseState"]}
-                        //   rules={[{ required: true, message: "Required" }]}
+                      //   rules={[{ required: true, message: "Required" }]}
                       >
                         <Input placeholder="New York" />
                       </Form.Item>
@@ -124,7 +138,7 @@ export default function EducationInfo() {
                       <Form.Item
                         {...restField}
                         name={[name, "licenseType"]}
-                        //   rules={[{ required: true, message: "Required" }]}
+                      //   rules={[{ required: true, message: "Required" }]}
                       >
                         <Select placeholder="License type">
                           <Option value="type1">Type 1</Option>
@@ -137,7 +151,7 @@ export default function EducationInfo() {
                       <Form.Item
                         {...restField}
                         name={[name, "licenseCountry"]}
-                        //   rules={[{ required: true, message: "Required" }]}
+                      //   rules={[{ required: true, message: "Required" }]}
                       >
                         <Select placeholder="State">
                           <Option value="state1">State 1</Option>
@@ -191,12 +205,12 @@ export default function EducationInfo() {
                     <Form.Item
                       {...restField}
                       name={[name, "certificationName"]}
-                      // rules={[
-                      //   {
-                      //     required: true,
-                      //     message: "Please enter certification name",
-                      //   },
-                      // ]}
+                    // rules={[
+                    //   {
+                    //     required: true,
+                    //     message: "Please enter certification name",
+                    //   },
+                    // ]}
                     >
                       <Input placeholder="Certification name..." />
                     </Form.Item>

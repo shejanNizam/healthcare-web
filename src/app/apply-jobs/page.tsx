@@ -1,17 +1,19 @@
 "use client";
 
-import { SuccessSwal } from "@/utils/allSwal";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useApplyInfoMutation } from "../../redux/features/jobApply/jobApplyAPI";
+import { SuccessSwal } from "../../utils/allSwal";
 
 const { Option } = Select;
 
 export default function ApplyJobs() {
+  const [applyInfo] = useApplyInfoMutation()
   const router = useRouter();
   const searchParams = useSearchParams();
   const jobId = searchParams?.get("jobId") || "";
 
-  const onFinish = (_values: {
+  const onFinish = async (_values: {
     fullName: string;
     email: string;
     gender: string;
@@ -24,12 +26,24 @@ export default function ApplyJobs() {
     specialty?: string;
     secondarySpecialty?: string;
   }) => {
-    console.log(_values);
-    SuccessSwal({
-      title: "Success",
-      text: "Your personal information has been saved successfully.",
-    });
-    router.push(`/apply-jobs/edu-info?jobId=${jobId}`);
+    const data = {
+      ..._values,
+      jobPost: jobId
+    }
+    const res = await applyInfo(data)
+    if (res?.data?.success) {
+      SuccessSwal({
+        title: "Success",
+        text: "Your personal information has been saved successfully.",
+      });
+      router.push(`/apply-jobs/edu-info?jobId=${res?.data?.data?._id}`);
+    } else {
+      SuccessSwal({
+        title: "Error",
+        text: "Some thing is wrong ",
+      });
+    }
+
   };
 
   return (
@@ -69,9 +83,9 @@ export default function ApplyJobs() {
             rules={[{ required: true, message: "Please select your gender." }]}
           >
             <Select placeholder="Select...">
-              <Option value="male">Male</Option>
-              <Option value="female">Female</Option>
-              <Option value="other">Other</Option>
+              <Option value="Male">Male</Option>
+              <Option value="Female">Female</Option>
+              <Option value="Other">Other</Option>
             </Select>
           </Form.Item>
 
