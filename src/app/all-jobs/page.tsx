@@ -282,7 +282,7 @@ const AllJobs = () => {
                 </Button>
               </div>
             ) : (
-              filteredJobs.map((job) => <JobCard key={job._id} job={job} />)
+              filteredJobs?.map((job) => <JobCard key={job._id} job={job} />)
             )}
           </div>
         </div>

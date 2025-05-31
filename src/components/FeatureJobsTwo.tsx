@@ -1,55 +1,37 @@
+import { useGetJobsQuery } from "@/redux/features/jobs/jobsApi";
 import Link from "next/link";
 import CustomErrorPage from "./CustomErrorPage";
 import JobCard from "./JobCard";
 
 interface Job {
-  id: string;
+  _id: string;
+  hospitalName: string;
   title: string;
-  hospital: string;
-  description: string;
-  salary: string;
+  address: string;
   deadline: string;
-  type: string;
   category: string;
+  profession: string;
+  jobType: string;
+  salary: number;
+  vacancy: number;
+  startDate: string;
+  hoursPerWeek: number;
+  description: string;
+  summary: string;
+  responsibilities: string[];
+  requirements: string[];
+  benefits: string[];
+  companyLogo: string;
+  createdAt: string;
+  updatedAt: string;
+  totalApply: number;
 }
 
-const jobsData: Job[] = [
-  {
-    id: "1",
-    title: "Registered nurse- progressive care",
-    hospital: "AB Hospital",
-    description:
-      "We are seeking a compassionate and dedicated nurse to join our healthcare team. The ideal candidate will have excellent clinical and communication skills with a strong...",
-    salary: "$ 1500 - $ 1800",
-    deadline: "12 May 2025",
-    type: "Permanent",
-    category: "Nursing",
-  },
-  {
-    id: "2",
-    title: "Registered nurse- progressive care",
-    hospital: "AB Hospital",
-    description:
-      "We are seeking a compassionate and dedicated nurse to join our healthcare team. The ideal candidate will have excellent clinical and communication skills with a strong...",
-    salary: "$ 1500 - $ 1800",
-    deadline: "12 May 2025",
-    type: "Permanent",
-    category: "Nursing",
-  },
-  {
-    id: "3",
-    title: "Registered nurse- progressive care",
-    hospital: "AB Hospital",
-    description:
-      "We are seeking a compassionate and dedicated nurse to join our healthcare team. The ideal candidate will have excellent clinical and communication skills with a strong...",
-    salary: "$ 1500 - $ 1800",
-    deadline: "12 May 2025",
-    type: "Permanent",
-    category: "Nursing",
-  },
-];
-
 export default function FeatureJobsTwo() {
+  const { data: jobsResponse } = useGetJobsQuery({});
+
+  const jobsData: Job[] = jobsResponse?.data?.allJobs || [];
+
   return (
     <div>
       <div className="flex-1 p-4 xl:px-12">
@@ -60,7 +42,9 @@ export default function FeatureJobsTwo() {
               <CustomErrorPage />
             </div>
           ) : (
-            jobsData.map((job) => <JobCard key={job.id} job={job} />)
+            jobsData
+              .slice(0, 6)
+              .map((job) => <JobCard key={job._id} job={job} />)
           )}
         </div>
       </div>

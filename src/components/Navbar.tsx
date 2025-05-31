@@ -1,5 +1,6 @@
 "use client";
 
+import { useSavedJobs } from "@/context/SavedJobsContext";
 import { useGetValueQuery } from "@/redux/features/value/valueApi";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Button, Drawer } from "antd";
@@ -21,6 +22,9 @@ export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const router = useRouter();
+
+  // const { savedJobIds } = useSavedJobs();
+  const { savedJobs } = useSavedJobs();
 
   const { data } = useGetValueQuery("Category");
 
@@ -58,7 +62,12 @@ export default function Navbar() {
     { href: "#", label: "Job Seekers", hasDropdown: true },
     { href: "/all-jobs", label: "All Jobs" },
     { href: "/blogs", label: "Blogs" },
-    { href: "/saved-jobs", label: "Saved Jobs(6)" },
+    {
+      href: "/saved-jobs",
+      label: `Saved Jobs${
+        savedJobs.length > 0 ? ` (${savedJobs.length})` : "(0)"
+      }`,
+    },
   ];
 
   const isActive = (href: string) =>

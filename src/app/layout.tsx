@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { SavedJobsProvider } from "@/context/SavedJobsContext";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -32,16 +33,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        <StoreProvider>
-          <AntdRegistry>
-            <Suspense>
-              <Navbar />
-              {children}
+        <SavedJobsProvider>
+          <StoreProvider>
+            <AntdRegistry>
+              <Suspense>
+                <Navbar />
+                {children}
 
-              <Footer />
-            </Suspense>
-          </AntdRegistry>
-        </StoreProvider>
+                <Footer />
+              </Suspense>
+            </AntdRegistry>
+          </StoreProvider>
+        </SavedJobsProvider>
       </body>
     </html>
   );
