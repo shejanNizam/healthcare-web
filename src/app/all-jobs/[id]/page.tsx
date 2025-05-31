@@ -15,7 +15,6 @@ import { FiBookmark, FiChevronLeft } from "react-icons/fi";
 
 export default function JobDetails({ params }: { params: { id: string } }) {
   const router = useRouter();
-  // const [isBookmarked, setIsBookmarked] = useState(false);
 
   const { id } = params;
 
@@ -45,10 +44,6 @@ export default function JobDetails({ params }: { params: { id: string } }) {
     };
     return new Date(isoDate).toLocaleDateString(undefined, options);
   };
-
-  // const toggleBookmark = () => {
-  //   setIsBookmarked(!isBookmarked);
-  // };
 
   const handleBack = () => {
     window.history.back();
