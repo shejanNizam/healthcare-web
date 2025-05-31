@@ -219,6 +219,7 @@ export default function JobDetails({ params }: { params: { id: string } }) {
                       Hours per week
                     </p>
                     <p className="text-gray-700">{job.hoursPerWeek}</p>
+                    {/* // */}
                   </div>
                 </div>
 

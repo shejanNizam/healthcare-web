@@ -62,18 +62,20 @@ const AllJobs = () => {
     useGetValueQuery("Category");
   const { data: professionData, isLoading: loadingProfession } =
     useGetValueQuery("Profession");
-
-  const jobTypes = ["full-time", "part-time", "contract"];
+  const { data: jobTypeData, isLoading: loadingJobType } =
+    useGetValueQuery("job-type");
 
   interface ValueItem {
     type: string;
     [key: string]: unknown;
   }
 
+  // Extract string arrays for filters from dynamic API data
   const categories =
     categoryData?.data?.map((item: ValueItem) => item.type) || [];
   const professions =
     professionData?.data?.map((item: ValueItem) => item.type) || [];
+  const jobtypes = jobTypeData?.data?.map((item: ValueItem) => item.type) || [];
 
   // Sync filters from URL on mount and when URL changes
   useEffect(() => {
@@ -85,9 +87,7 @@ const AllJobs = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
@@ -99,11 +99,7 @@ const AllJobs = () => {
 
   const applyFilter = (categoryKey: keyof Filters, value: string) => {
     setFilters((prev) => {
-      const updatedFilters = {
-        ...prev,
-        [categoryKey]: value,
-      };
-
+      const updatedFilters = { ...prev, [categoryKey]: value };
       const query = new URLSearchParams();
 
       if (updatedFilters.category)
@@ -126,7 +122,7 @@ const AllJobs = () => {
     router.replace("/all-jobs");
   };
 
-  // Updated API endpoint with filters included in params
+  // Fetch jobs with applied filters
   const {
     data: jobsResponse,
     isLoading,
@@ -141,7 +137,7 @@ const AllJobs = () => {
 
   const allJobs: Job[] = jobsResponse?.data?.allJobs || [];
 
-  // Client side fallback filtering
+  // Client side filtering fallback (case insensitive)
   const filteredJobs = allJobs.filter((job) => {
     if (
       filters.profession &&
@@ -161,7 +157,7 @@ const AllJobs = () => {
     return true;
   });
 
-  if (isLoading || loadingCategory || loadingProfession) {
+  if (isLoading || loadingCategory || loadingProfession || loadingJobType) {
     return <div className="text-center py-10">Loading...</div>;
   }
 
@@ -219,7 +215,7 @@ const AllJobs = () => {
           {[
             { label: "Category", options: categories },
             { label: "Profession", options: professions },
-            { label: "JobType", options: jobTypes },
+            { label: "JobType", options: jobtypes },
           ].map(({ label, options }) => (
             <div key={label} className="mb-6">
               <Button
@@ -232,27 +228,32 @@ const AllJobs = () => {
 
               {openDropdown === label && (
                 <div className="mt-2 border border-gray-200 bg-white rounded-lg shadow-sm max-h-60 overflow-auto">
-                  {options.map((option: string) => (
-                    <div
-                      key={option}
-                      onClick={() =>
-                        applyFilter(
-                          label.toLowerCase() as keyof Filters,
-                          option
-                        )
-                      }
-                      className={`px-4 py-3 cursor-pointer hover:bg-primary/10 transition-colors ${
-                        (label === "Profession" &&
-                          filters.profession === option) ||
-                        (label === "JobType" && filters.jobType === option) ||
-                        (label === "Category" && filters.category === option)
-                          ? "bg-blue-50 text-primary font-medium"
-                          : "text-gray-700"
-                      }`}
-                    >
-                      {option}
-                    </div>
-                  ))}
+                  {options.map((option: string) => {
+                    const isSelected =
+                      (label === "Profession" &&
+                        filters.profession === option) ||
+                      (label === "JobType" && filters.jobType === option) ||
+                      (label === "Category" && filters.category === option);
+
+                    return (
+                      <div
+                        key={option}
+                        onClick={() =>
+                          applyFilter(
+                            label.toLowerCase() as keyof Filters,
+                            option
+                          )
+                        }
+                        className={`px-4 py-3 cursor-pointer hover:bg-primary/10 transition-colors ${
+                          isSelected
+                            ? "bg-blue-50 text-primary font-medium"
+                            : "text-gray-700"
+                        }`}
+                      >
+                        {option}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -281,7 +282,7 @@ const AllJobs = () => {
                 </Button>
               </div>
             ) : (
-              filteredJobs?.map((job) => <JobCard key={job._id} job={job} />)
+              filteredJobs.map((job) => <JobCard key={job._id} job={job} />)
             )}
           </div>
         </div>
