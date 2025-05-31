@@ -1,8 +1,8 @@
 "use client";
 
+import { useSavedJobs } from "@/context/SavedJobsContext";
 import { useGetJobDetailsQuery } from "@/redux/features/jobs/jobsApi";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import {
   FaCalendarAlt,
   FaClock,
@@ -15,12 +15,25 @@ import { FiBookmark, FiChevronLeft } from "react-icons/fi";
 
 export default function JobDetails({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  // const [isBookmarked, setIsBookmarked] = useState(false);
 
   const { id } = params;
 
   const { data, isLoading, isError } = useGetJobDetailsQuery(id);
   const job = data?.data;
+
+  const { addJob, removeJob, isJobSaved } = useSavedJobs();
+
+  const bookmarked = isJobSaved(id);
+
+  const toggleBookmark = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (bookmarked) {
+      removeJob(id);
+    } else {
+      addJob(job);
+    }
+  };
 
   // Format ISO date strings to readable format
   const formatDate = (isoDate?: string) => {
@@ -33,9 +46,9 @@ export default function JobDetails({ params }: { params: { id: string } }) {
     return new Date(isoDate).toLocaleDateString(undefined, options);
   };
 
-  const toggleBookmark = () => {
-    setIsBookmarked(!isBookmarked);
-  };
+  // const toggleBookmark = () => {
+  //   setIsBookmarked(!isBookmarked);
+  // };
 
   const handleBack = () => {
     window.history.back();
@@ -84,7 +97,7 @@ export default function JobDetails({ params }: { params: { id: string } }) {
               >
                 <FiBookmark
                   className={`w-5 h-5 ${
-                    isBookmarked ? "text-primary fill-primary" : "text-gray-400"
+                    bookmarked ? "text-primary fill-primary" : "text-gray-400"
                   }`}
                 />
               </button>
