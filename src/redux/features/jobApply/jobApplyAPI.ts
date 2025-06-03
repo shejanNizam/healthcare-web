@@ -18,7 +18,14 @@ export const jobsApplyApi = baseApi.injectEndpoints({
                 body: body.data
             }),
         }),
+        finalApply: builder.mutation({
+            query: (body) => ({
+                url: `/apply/education-info/${body.id}`,
+                method: "PUT",
+                body: body.data
+            }),
+        }),
     }),
 });
 
-export const { useApplyInfoMutation, useEduInfoMutation } = jobsApplyApi;
+export const { useApplyInfoMutation, useEduInfoMutation, useFinalApplyMutation } = jobsApplyApi;

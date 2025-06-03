@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Button, Col, Form, Input, Row, Select } from "antd";
@@ -30,7 +31,7 @@ export default function ApplyJobs() {
       ..._values,
       jobPost: jobId
     }
-    const res = await applyInfo(data)
+    const res: any = await applyInfo(data)
     if (res?.data?.success) {
       SuccessSwal({
         title: "Success",
@@ -39,8 +40,8 @@ export default function ApplyJobs() {
       router.push(`/apply-jobs/edu-info?jobId=${res?.data?.data?._id}`);
     } else {
       SuccessSwal({
-        title: "Error",
-        text: "Some thing is wrong ",
+        title: "Something went wrong",
+        text: res?.error?.data?.message || "Please try again later.",
       });
     }
 

@@ -1,9 +1,16 @@
+"use client"
+
 import image from "@/assets/banner/apply_int_img.png";
 import IntBanner from "@/components/IntBanner";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function International() {
+  const searchParams = useSearchParams();
+  const international = searchParams?.get("international") || "";
+  console.log(international);
+
   return (
     <div className="min-h-screen">
       <IntBanner

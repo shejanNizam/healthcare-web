@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { SuccessSwal } from "@/utils/allSwal";
@@ -36,7 +37,7 @@ export default function EducationInfo() {
       certificationName: string;
     }[];
     schoolProgram: string;
-    graduationDate: string;
+    graduationDate: any;
     degree: string;
     major: string;
     country: string;
@@ -44,24 +45,50 @@ export default function EducationInfo() {
   }
 
   const onFinish = async (values: FormValues) => {
+    const transformedData = {
+      professional_licenses: (values.professionalLicenses || []).map((item) => ({
+        medical_assistant: item.licenseName,
+        city: item.licenseState,
+        state: item.licenseCountry,
+        license_type: item.licenseType,
+      })),
+      certifications: (values.certifications || []).map(
+        (item) => item.certificationName
+      ),
+      education: [
+        {
+          degree: values.degree,
+          school: values.schoolProgram,
+          year: values.graduationDate
+            ? values.graduationDate.format("YYYY")
+            : "",
+          major: values.major,
+          city: values.city,
+          country: values.country,
+        },
+      ],
+    };
+
     const body = {
       id: jobId,
-      data: values
-    }
-    const res = await eduInfo(body)
+      data: transformedData,
+    };
+
+    const res: any = await eduInfo(body);
     if (res?.data?.success) {
       SuccessSwal({
         title: "Success",
         text: "Your personal information has been saved successfully.",
       });
-      router.push(`/apply-jobs/edu-info?jobId=${res?.data?.data?._id}`);
+      router.push(`/apply-jobs/emp-history?jobId=${res?.data?.data?._id}`);
     } else {
       SuccessSwal({
-        title: "Error",
-        text: "Some thing is wrong ",
+        title: "Something went wrong",
+        text: res?.error?.data?.message || "Please try again later.",
       });
     }
-    router.push(`/apply-jobs/emp-history?jobId=${jobId}`);
+
+
   };
 
   return (

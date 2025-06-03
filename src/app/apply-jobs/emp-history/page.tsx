@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // export default function EmploymentHistory() {
 //   return (
 //     <div>
@@ -12,32 +13,48 @@ import { SuccessSwal } from "@/utils/allSwal";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Col, DatePicker, Form, Input, Row, Select } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useFinalApplyMutation } from "../../../redux/features/jobApply/jobApplyAPI";
 
 
 const { Option } = Select;
 
 export default function EmploymentHistory() {
-
+  const [finalApply] = useFinalApplyMutation()
   const router = useRouter();
   const searchParams = useSearchParams();
   const jobId = searchParams?.get("jobId") || "";
-  const onFinish = (values: {
-    employments: {
+  const onFinish = async (values: {
+    emploment: {
       company?: string;
       specialty?: string;
       country?: string;
       state?: string;
       city?: string;
-      startDate?: string;
-      endDate?: string;
+      start_Date?: string;
+      end_Date?: string;
     }[];
   }) => {
-    SuccessSwal({
-      title: "Success",
-      text: "Your employment history has been saved successfully.",
-    });
-    console.log("Employment history values:", values, jobId);
-    router.push(`/`);
+    const body = {
+      id: jobId,
+      data: values,
+    };
+
+
+
+
+    const res: any = await finalApply(body);
+    if (res?.data?.success) {
+      SuccessSwal({
+        title: "Success",
+        text: "Apply Complete",
+      });
+    } else {
+      SuccessSwal({
+        title: "Something went wrong",
+        text: res?.error?.data?.message || "Please try again later.",
+      });
+    }
+    // router.push(`/`);
   };
 
   return (
@@ -47,7 +64,7 @@ export default function EmploymentHistory() {
         onFinish={onFinish}
         initialValues={{ employments: [{}] }}
       >
-        <Form.List name="employments">
+        <Form.List name="emploment">
           {(fields, { add, remove }) => (
             <>
               <h3 className="text-xl text-primary font-bold my-2">
