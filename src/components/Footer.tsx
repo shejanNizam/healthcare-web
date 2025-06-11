@@ -22,7 +22,7 @@ const Footer = () => (
           <div className="w-full md:w-2/5 flex flex-col gap-4 items-center md:items-start">
             <Link href="/">
               <Image
-                className="w-20 h-16"
+                className="w-28 h-20"
                 width={1000}
                 height={1000}
                 src={main_logo}

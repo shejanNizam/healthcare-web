@@ -77,14 +77,14 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`py-4 bg-white bg-gradient-to-r from-primary to-primary/10 z-50 shadow-md sticky top-0 transition-all duration-300 ${
-        isScrolled ? "py-4" : "py-6"
+      className={`py-2 bg-white bg-gradient-to-r from-primary/80 to-primary/10 z-50 shadow-md sticky top-0 transition-all duration-300 ${
+        isScrolled ? "py-2" : "py-4"
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-white">
+        <Link href="/">
           <Image
-            className="w-20 h-16"
+            className="w-28 h-20"
             width={1000}
             height={1000}
             src={main_logo}
