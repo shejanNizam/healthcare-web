@@ -11,7 +11,7 @@ import {
   MenuOutlined,
   UpOutlined,
 } from "@ant-design/icons";
-import { Button } from "antd";
+import { Button, Pagination } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -45,6 +45,22 @@ interface Filters {
   category: string | null;
 }
 
+// interface JobsResponse {
+//   success: boolean;
+//   statusCode: number;
+//   message: string;
+//   data: {
+//     pagination: {
+//       totalPage: number;
+//       currentPage: number;
+//       prevPage: number;
+//       nextPage: number;
+//       totalData: number;
+//     };
+//     allJobs: Job[];
+//   };
+// }
+
 const AllJobs = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -55,21 +71,26 @@ const AllJobs = () => {
     jobType: null,
     category: null,
   });
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  const { data: categoryData, isLoading: loadingCategory } = useGetValueQuery("Category");
-  const { data: professionData, isLoading: loadingProfession } = useGetValueQuery("Profession");
-  const { data: jobTypeData, isLoading: loadingJobType } = useGetValueQuery("job-type");
+  const { data: categoryData, isLoading: loadingCategory } =
+    useGetValueQuery("Category");
+  const { data: professionData, isLoading: loadingProfession } =
+    useGetValueQuery("Profession");
+  const { data: jobTypeData, isLoading: loadingJobType } =
+    useGetValueQuery("job-type");
 
   interface ValueItem {
     type: string;
     [key: string]: unknown;
   }
 
-  const categories = categoryData?.data?.map((item: ValueItem) => item.type) || [];
-  const professions = professionData?.data?.map((item: ValueItem) => item.type) || [];
+  const categories =
+    categoryData?.data?.map((item: ValueItem) => item.type) || [];
+  const professions =
+    professionData?.data?.map((item: ValueItem) => item.type) || [];
   const jobtypes = jobTypeData?.data?.map((item: ValueItem) => item.type) || [];
 
   useEffect(() => {
@@ -87,6 +108,10 @@ const AllJobs = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters.category, filters.profession, filters.jobType]);
+
   const toggleDropdown = (dropdown: string) => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
@@ -95,8 +120,10 @@ const AllJobs = () => {
     setFilters((prev) => {
       const updatedFilters = { ...prev, [key]: value };
       const query = new URLSearchParams();
-      if (updatedFilters.category) query.set("category", updatedFilters.category);
-      if (updatedFilters.profession) query.set("profession", updatedFilters.profession);
+      if (updatedFilters.category)
+        query.set("category", updatedFilters.category);
+      if (updatedFilters.profession)
+        query.set("profession", updatedFilters.profession);
       if (updatedFilters.jobType) query.set("jobType", updatedFilters.jobType);
 
       router.replace(`/all-jobs?${query.toString()}`);
@@ -112,8 +139,12 @@ const AllJobs = () => {
     router.replace("/all-jobs");
   };
 
-  const { data: jobsResponse, isLoading, isError } = useGetJobsQuery({
-    page: 1,
+  const {
+    data: jobsResponse,
+    isLoading,
+    isError,
+  } = useGetJobsQuery({
+    page: currentPage,
     limit: 10,
     category: filters.category || undefined,
     profession: filters.profession || undefined,
@@ -121,11 +152,30 @@ const AllJobs = () => {
   });
 
   const allJobs: Job[] = jobsResponse?.data?.allJobs || [];
+  const pagination = jobsResponse?.data?.pagination || {
+    totalPage: 1,
+    currentPage: 1,
+    prevPage: 1,
+    nextPage: 1,
+    totalData: 0,
+  };
 
   const filteredJobs = allJobs.filter((job) => {
-    if (filters.profession && job.profession.toLowerCase() !== filters.profession.toLowerCase()) return false;
-    if (filters.jobType && job.jobType.toLowerCase() !== filters.jobType.toLowerCase()) return false;
-    if (filters.category && job.category.toLowerCase() !== filters.category.toLowerCase()) return false;
+    if (
+      filters.profession &&
+      job.profession.toLowerCase() !== filters.profession.toLowerCase()
+    )
+      return false;
+    if (
+      filters.jobType &&
+      job.jobType.toLowerCase() !== filters.jobType.toLowerCase()
+    )
+      return false;
+    if (
+      filters.category &&
+      job.category.toLowerCase() !== filters.category.toLowerCase()
+    )
+      return false;
     return true;
   });
 
@@ -148,7 +198,9 @@ const AllJobs = () => {
         <div className="flex items-center justify-between p-4">
           <div className="font-bold text-xl text-primary">
             Available jobs:{" "}
-            <span className="text-primary text-2xl font-bold">{filteredJobs.length}</span>
+            <span className="text-primary text-2xl font-bold">
+              {pagination.totalData}
+            </span>
           </div>
           <Button
             type="text"
@@ -161,8 +213,9 @@ const AllJobs = () => {
 
       {/* Sidebar Filters */}
       <div
-        className={`fixed bg-white md:bg-white/0 md:static w-[70%] md:w-72 lg:w-80 px-4 py-10 h-full z-30 transition-all duration-300 ease-in-out ${showMobileFilters ? "left-0" : "-left-[70%]"
-          } md:left-0`}
+        className={`fixed bg-white md:bg-white/0 md:static w-[70%] md:w-72 lg:w-80 px-4 py-10 h-full z-30 transition-all duration-300 ease-in-out ${
+          showMobileFilters ? "left-0" : "-left-[70%]"
+        } md:left-0`}
       >
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center text-primary text-lg font-semibold gap-1">
@@ -202,10 +255,11 @@ const AllJobs = () => {
                     <div
                       key={option}
                       onClick={() => applyFilter(key as keyof Filters, option)}
-                      className={`px-4 py-3 cursor-pointer hover:bg-primary/10 transition-colors ${isSelected
-                        ? "bg-blue-50 text-primary font-medium"
-                        : "text-gray-700"
-                        }`}
+                      className={`px-4 py-3 cursor-pointer hover:bg-primary/10 transition-colors ${
+                        isSelected
+                          ? "bg-blue-50 text-primary font-medium"
+                          : "text-gray-700"
+                      }`}
                     >
                       {option}
                     </div>
@@ -222,7 +276,9 @@ const AllJobs = () => {
         <div className="hidden md:flex items-center justify-between mb-6">
           <div className="font-bold text-xl text-primary">
             Available jobs:{" "}
-            <span className="text-primary text-2xl font-bold">{filteredJobs.length}</span>
+            <span className="text-primary text-2xl font-bold">
+              {pagination.totalData}
+            </span>
           </div>
         </div>
 
@@ -238,19 +294,34 @@ const AllJobs = () => {
             filteredJobs.map((job) => <JobCard key={job._id} job={job} />)
           )}
         </div>
+
+        {filteredJobs.length > 0 && (
+          <div className="mt-8 flex justify-center">
+            <Pagination
+              current={pagination.currentPage}
+              total={pagination.totalData}
+              pageSize={10}
+              onChange={(page) => {
+                setCurrentPage(page);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              showSizeChanger={false}
+              showQuickJumper
+              className="mt-6"
+            />
+          </div>
+        )}
       </div>
 
       {/* Mobile Overlay */}
       <div
-        className={`fixed inset-0 bg-black/70 bg-opacity-20 z-20 transition-opacity duration-300 ${showMobileFilters
-          ? "opacity-100"
-          : "opacity-0 pointer-events-none"
-          } md:hidden`}
+        className={`fixed inset-0 bg-black/70 bg-opacity-20 z-20 transition-opacity duration-300 ${
+          showMobileFilters ? "opacity-100" : "opacity-0 pointer-events-none"
+        } md:hidden`}
         onClick={() => setShowMobileFilters(false)}
       />
     </div>
   );
 };
-
 
 export default AllJobs;
