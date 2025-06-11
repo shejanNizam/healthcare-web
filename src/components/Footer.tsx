@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 // import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,7 +11,7 @@ import {
   FaPhoneAlt,
   FaTwitter,
 } from "react-icons/fa";
-// import main_logo_img from "../../assets/mail_logo_img.svg";
+import main_logo from "../assets/healthcare_main_logo.svg";
 
 const Footer = () => (
   <footer className="bg-[#E7F1F8] text-primary py-8 w-full mx-auto">
@@ -20,14 +21,13 @@ const Footer = () => (
           {/* Logo & text & Social icon here */}
           <div className="w-full md:w-2/5 flex flex-col gap-4 items-center md:items-start">
             <Link href="/">
-              {/* <Image
-                className="w-20 h-20"
+              <Image
+                className="w-20 h-16"
                 width={1000}
                 height={1000}
-                src={main_logo_img}
+                src={main_logo}
                 alt="main_logo"
-              /> */}
-              <h1>Clement</h1>
+              />
             </Link>
 
             <p className="text-sm text-center md:text-left">

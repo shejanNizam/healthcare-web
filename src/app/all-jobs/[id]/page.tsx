@@ -13,7 +13,13 @@ import {
 } from "react-icons/fa";
 import { FiBookmark, FiChevronLeft } from "react-icons/fi";
 
-export default function JobDetails({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function JobDetails({ params }: PageProps) {
   const router = useRouter();
 
   const { id } = params;

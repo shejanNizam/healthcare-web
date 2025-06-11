@@ -4,10 +4,12 @@ import { useSavedJobs } from "@/context/SavedJobsContext";
 import { useGetValueQuery } from "@/redux/features/value/valueApi";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Button, Drawer } from "antd";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
+import main_logo from "../assets/healthcare_main_logo.svg";
 import SearchBar from "./SearchBar";
 
 interface JobCategory {
@@ -64,8 +66,9 @@ export default function Navbar() {
     { href: "/blogs", label: "Blogs" },
     {
       href: "/saved-jobs",
-      label: `Saved Jobs${savedJobs.length > 0 ? ` (${savedJobs.length})` : "(0)"
-        }`,
+      label: `Saved Jobs${
+        savedJobs.length > 0 ? ` (${savedJobs.length})` : "(0)"
+      }`,
     },
   ];
 
@@ -74,12 +77,19 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`py-4 bg-white bg-gradient-to-r from-primary to-primary/10 z-50 shadow-md sticky top-0 transition-all duration-300 ${isScrolled ? "py-4" : "py-6"
-        }`}
+      className={`py-4 bg-white bg-gradient-to-r from-primary to-primary/10 z-50 shadow-md sticky top-0 transition-all duration-300 ${
+        isScrolled ? "py-4" : "py-6"
+      }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold text-white">
-          Clement
+          <Image
+            className="w-20 h-16"
+            width={1000}
+            height={1000}
+            src={main_logo}
+            alt="main_logo"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -88,10 +98,11 @@ export default function Navbar() {
             link.hasDropdown ? (
               <div key={link.href} className="relative group">
                 <div
-                  className={`hover:text-primary transition-colors duration-200 relative flex items-center cursor-pointer ${isActive(link.href)
-                    ? "text-primary after:bg-primary after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-full after:h-[2px]"
-                    : ""
-                    }`}
+                  className={`hover:text-primary transition-colors duration-200 relative flex items-center cursor-pointer ${
+                    isActive(link.href)
+                      ? "text-primary after:bg-primary after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-full after:h-[2px]"
+                      : ""
+                  }`}
                   onClick={() => isMobile && toggleDropdown(link.label)}
                 >
                   {link.label}
@@ -145,10 +156,11 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`hover:text-primary transition-colors duration-200 relative ${isActive(link.href)
-                  ? "text-primary after:bg-primary after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-full after:h-[2px]"
-                  : ""
-                  }`}
+                className={`hover:text-primary transition-colors duration-200 relative ${
+                  isActive(link.href)
+                    ? "text-primary after:bg-primary after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-full after:h-[2px]"
+                    : ""
+                }`}
               >
                 {link.label}
               </Link>
@@ -215,17 +227,19 @@ export default function Navbar() {
                 {link.hasDropdown ? (
                   <div>
                     <div
-                      className={`text-primary text-semibold cursor-pointer py-2 px-3 rounded transition-colors duration-200 block ${isActive(link.href)
-                        ? "text-primary after:bg-primary after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-full after:h-[2px]"
-                        : ""
-                        }`}
+                      className={`text-primary text-semibold cursor-pointer py-2 px-3 rounded transition-colors duration-200 block ${
+                        isActive(link.href)
+                          ? "text-primary after:bg-primary after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-full after:h-[2px]"
+                          : ""
+                      }`}
                       onClick={() => toggleDropdown(link.label)}
                     >
                       <div className="flex items-center justify-between">
                         <span>{link.label}</span>
                         <div
-                          className={`w-4 h-4 transition-transform ${openDropdown === link.label ? "rotate-180" : ""
-                            }`}
+                          className={`w-4 h-4 transition-transform ${
+                            openDropdown === link.label ? "rotate-180" : ""
+                          }`}
                         >
                           <TiArrowSortedDown />
                         </div>
@@ -260,10 +274,11 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className={`text-white py-2 px-3 rounded transition-colors duration-200 block ${isActive(link.href)
-                      ? "bg-primary/20 font-bold underline"
-                      : ""
-                      }`}
+                    className={`text-white py-2 px-3 rounded transition-colors duration-200 block ${
+                      isActive(link.href)
+                        ? "bg-primary/20 font-bold underline"
+                        : ""
+                    }`}
                     onClick={toggleMenu}
                   >
                     {link.label}
