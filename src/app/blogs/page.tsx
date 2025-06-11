@@ -12,18 +12,16 @@ import {
   useAllCategoryblogsQuery,
 } from "../../redux/features/blog/blogApi";
 
-
 export default function BlogsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [categoryValue, setCatagoryValue] = useState<string>();
-  const onCategoryClick = (categoryType: string,) => {
+  const onCategoryClick = (categoryType: string) => {
     setCatagoryValue(categoryType);
 
     if (sidebarOpen) setSidebarOpen(false);
   };
   const { data: categoryData } = useAllCategoryblogsQuery(undefined);
   const { data } = useAllblogsQuery(categoryValue);
-
 
   return (
     <div className=" container mx-auto p-4 sm:p-6 md:p-8 min-h-screen flex">
@@ -34,9 +32,10 @@ export default function BlogsPage() {
           w-auto z-40
           transform transition-transform duration-300 ease-in-out
           md:relative md:translate-x-0
-          ${sidebarOpen
-            ? "translate-x-0 shadow-xl"
-            : "-translate-x-full md:translate-x-0"
+          ${
+            sidebarOpen
+              ? "translate-x-0 shadow-xl"
+              : "-translate-x-full md:translate-x-0"
           }
         `}
       >
@@ -46,16 +45,17 @@ export default function BlogsPage() {
           renderItem={(cat: any) => (
             <List.Item
               key={cat?._id}
-              className={`cursor-pointer rounded-md px-3 py-1 ${data?.data?.allBlogs?.[0]?.catagory === cat.categoryType
-                ? "bg-primary/50 text-white font-semibold"
-                : "hover:bg-primary/40"
-                }`}
+              className={`cursor-pointer rounded-md px-3 py-1 ${
+                data?.data?.allBlogs?.[0]?.catagory === cat.categoryType
+                  ? "bg-primary/50 text-white font-semibold"
+                  : "hover:bg-primary/40"
+              }`}
               onClick={() => onCategoryClick(cat.categoryType)}
             >
               <div className="flex justify-between items-center gap-16 w-full px-2">
                 <span>{cat.categoryType}</span>
                 <div className="rounded-full bg-primary/80 w-8 h-8 shadow-2xl flex items-center justify-center text-white font-semibold">
-                  {cat.length}
+                  {cat?.length}
                 </div>
               </div>
             </List.Item>

@@ -1,9 +1,12 @@
 "use client";
 
 import { Job, useSavedJobs } from "@/context/SavedJobsContext";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaHospital } from "react-icons/fa";
 import { FiBookmark } from "react-icons/fi";
+
+const baseImageUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
 
 export default function JobCard({ job }: { job: Job }) {
   const router = useRouter();
@@ -33,6 +36,8 @@ export default function JobCard({ job }: { job: Job }) {
     }
   );
 
+  console.log(job);
+
   return (
     <div
       onClick={handleCardDetails}
@@ -52,7 +57,19 @@ export default function JobCard({ job }: { job: Job }) {
 
       <div className="mb-3 flex items-start gap-3">
         <div className="flex-shrink-0 p-2 bg-blue-50 rounded-full text-blue-600">
-          <FaHospital className="w-5 h-5" />
+          {job.companyLogo ? (
+            <>
+              <Image
+                width={1000}
+                height={1000}
+                src={baseImageUrl + job.companyLogo}
+                alt={`${job.hospitalName} logo`}
+                className="w-8 h-8 rounded-full object-cover"
+              />
+            </>
+          ) : (
+            <FaHospital className="w-5 h-5" />
+          )}
         </div>
         <div className="flex-1 min-w-0">
           <h1 className="text-lg font-bold text-gray-800 truncate">

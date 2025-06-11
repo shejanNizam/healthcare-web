@@ -60,6 +60,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 export interface Job {
+  companyLogo?: string;
   _id: string;
   hospitalName: string;
   title: string;

@@ -288,11 +288,11 @@ const AllJobs = () => {
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
           {filteredJobs.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+            <div className=" flex justify-center items-center col-span-full min-h-[300px]">
               <CustomErrorPage />
-              <Button type="primary" onClick={clearAllFilters}>
+              {/* <Button type="primary" onClick={clearAllFilters}>
                 Clear filters
-              </Button>
+              </Button> */}
             </div>
           ) : (
             filteredJobs.map((job) => <JobCard key={job._id} job={job} />)

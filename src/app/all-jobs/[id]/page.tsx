@@ -2,6 +2,8 @@
 
 import { useSavedJobs } from "@/context/SavedJobsContext";
 import { useGetJobDetailsQuery } from "@/redux/features/jobs/jobsApi";
+import { Spin } from "antd";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   FaCalendarAlt,
@@ -12,6 +14,7 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { FiBookmark, FiChevronLeft } from "react-icons/fi";
+const baseImageUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
 
 interface PageProps {
   params: {
@@ -61,7 +64,14 @@ export default function JobDetails({ params }: PageProps) {
   };
 
   if (isLoading)
-    return <div className="text-center py-10">Loading job details...</div>;
+    return (
+      <div
+        className="
+          flex items-center justify-center min-h-screen"
+      >
+        <Spin size="large" />
+      </div>
+    );
 
   if (isError || !job)
     return (
@@ -106,7 +116,19 @@ export default function JobDetails({ params }: PageProps) {
               {/* Hospital Info */}
               <div className="flex items-center mb-6">
                 <div className="p-3 bg-blue-50 rounded-full text-primary mr-4">
-                  <FaHospital className="w-6 h-6" />
+                  {job.companyLogo ? (
+                    <>
+                      <Image
+                        width={1000}
+                        height={1000}
+                        src={baseImageUrl + job.companyLogo}
+                        alt={`${job.hospitalName} logo`}
+                        className="w-8 h-8 rounded-full object-cover"
+                      />
+                    </>
+                  ) : (
+                    <FaHospital className="w-4 h-4" />
+                  )}
                 </div>
                 <div>
                   <h2 className="text-xl font-bold">{job.hospitalName}</h2>

@@ -6,7 +6,7 @@ interface Blog {
   _id: string;
   blogTitle: string;
   description: string;
-  category: string
+  category: string;
   banner: string | StaticImageData;
 }
 const baseImageUrl: any = process.env.NEXT_PUBLIC_IMAGE_URL;
@@ -31,7 +31,8 @@ export default function BlogCard({ blog }: { blog: Blog }) {
         </div>
         <div className="p-4 flex flex-col justify-between">
           <p className="text-xl text-primary font-bold mb-2">
-            {blog.blogTitle} <span className=" text-[15px]">({blog.category})</span>
+            {blog.blogTitle}{" "}
+            <span className=" text-[15px]">({blog.category})</span>
           </p>
           <p></p>
           <div
