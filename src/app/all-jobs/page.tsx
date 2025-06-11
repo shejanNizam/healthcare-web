@@ -11,7 +11,7 @@ import {
   MenuOutlined,
   UpOutlined,
 } from "@ant-design/icons";
-import { Button, Pagination } from "antd";
+import { Button, Pagination, Spin } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -180,7 +180,11 @@ const AllJobs = () => {
   });
 
   if (isLoading || loadingCategory || loadingProfession || loadingJobType) {
-    return <div className="text-center py-10">Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spin size="large" />
+      </div>
+    );
   }
 
   if (isError) {
