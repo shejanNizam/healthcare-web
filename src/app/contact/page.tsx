@@ -1,12 +1,53 @@
 "use client";
 
-import { Button, Form, Input } from "antd";
+import { useContactMutation } from "@/redux/features/contact/contactApi";
+import { ErrorSwal, SuccessSwal } from "@/utils/allSwal";
+import { Button, Form, FormProps, Input } from "antd";
 import Image from "next/image";
 import contact_image from "../../assets/contact/contact_image.png";
 
 const { TextArea } = Input;
 
+type ContactFormValues = {
+  fullname: string;
+  email: string;
+  message: string;
+};
+
+type ContactApiPayload = {
+  name: string;
+  description: string;
+  email: string;
+};
+
 export default function Contact() {
+  const [form] = Form.useForm<ContactFormValues>();
+  const [contact, { isLoading }] = useContactMutation();
+
+  const onFinish: FormProps<ContactFormValues>["onFinish"] = async (values) => {
+    try {
+      const payload: ContactApiPayload = {
+        name: values.fullname,
+        description: values.message,
+        email: values.email,
+      };
+
+      await contact(payload).unwrap();
+
+      SuccessSwal({
+        title: "Message sent successfully!",
+        text: "",
+      });
+      // message.success("Message sent successfully!");
+      form.resetFields();
+    } catch (error) {
+      ErrorSwal({
+        title: error instanceof Error ? error.message : "An error occurred",
+        text: "Please try again later.",
+      });
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
       <div className="text-center mb-8 md:mb-12">
@@ -32,10 +73,12 @@ export default function Contact() {
 
         {/* Form Section */}
         <div className="order-1 lg:order-2">
-          <Form
+          <Form<ContactFormValues>
+            form={form}
             layout="vertical"
             className="w-full max-w-md mx-auto lg:mx-0"
             initialValues={{ remember: true }}
+            onFinish={onFinish}
           >
             <Form.Item
               label={
@@ -87,8 +130,10 @@ export default function Contact() {
                 type="primary"
                 htmlType="submit"
                 className="w-full bg-primary hover:bg-primary/80 h-10 sm:h-12 text-base sm:text-lg font-medium"
+                loading={isLoading}
+                disabled={isLoading}
               >
-                Submit
+                {isLoading ? "Sending..." : "Submit"}
               </Button>
             </Form.Item>
           </Form>
