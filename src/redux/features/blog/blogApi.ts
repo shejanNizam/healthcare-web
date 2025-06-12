@@ -4,8 +4,6 @@ export const blogs = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     Allblogs: builder.query({
       query: (value) => {
-        console.log(value);
-
         return {
           url: value ? `/blog/all/?category=${value}` : `/blog/all/`,
           method: "GET",
