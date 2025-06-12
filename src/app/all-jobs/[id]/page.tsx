@@ -5,6 +5,7 @@ import { useGetJobDetailsQuery } from "@/redux/features/jobs/jobsApi";
 import { Spin } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { use } from "react";
 import {
   FaCalendarAlt,
   FaClock,
@@ -16,16 +17,14 @@ import {
 import { FiBookmark, FiChevronLeft } from "react-icons/fi";
 const baseImageUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
+type Params = {
+  id: string;
+};
 
-export default function JobDetails({ params }: PageProps) {
+export default function JobDetails({ params }: { params: Promise<Params> }) {
   const router = useRouter();
 
-  const { id } = params;
+  const { id } = use(params);
 
   const { data, isLoading, isError } = useGetJobDetailsQuery(id);
   const job = data?.data;

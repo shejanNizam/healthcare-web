@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetValueQuery } from "@/redux/features/value/valueApi";
-import { Carousel } from "antd";
+import { Carousel, Spin } from "antd";
 import { CarouselRef } from "antd/es/carousel";
 import Image from "next/image";
 import Link from "next/link";
@@ -57,7 +57,7 @@ export default function FeatureJobs() {
   if (isLoading) {
     return (
       <div className="container mx-auto px-8 py-12 text-center">
-        <p>Loading categories...</p>
+        <Spin size="large" className="text-primary" />
       </div>
     );
   }
