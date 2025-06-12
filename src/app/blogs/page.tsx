@@ -39,7 +39,9 @@ export default function BlogsPage() {
           }
         `}
       >
-        <h2 className="text-2xl text-primary font-bold mb-4">Category</h2>
+        <h2 className="text-2xl text-primary font-bold mb-4 mt-4 md:mt-0">
+          Category
+        </h2>
         <List
           dataSource={categoryData?.data}
           renderItem={(cat: any) => (

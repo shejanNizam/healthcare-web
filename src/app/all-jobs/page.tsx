@@ -245,7 +245,7 @@ const AllJobs = () => {
           <div key={label} className="mb-6">
             <Button
               onClick={() => toggleDropdown(label)}
-              className="w-full flex justify-between items-center px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg"
+              className="w-full flex justify-between items-center px-4 py-3 hover:bg-gray-100 rounded-lg"
             >
               <span className="font-medium">{label}</span>
               {openDropdown === label ? <UpOutlined /> : <DownOutlined />}
@@ -261,8 +261,8 @@ const AllJobs = () => {
                       onClick={() => applyFilter(key as keyof Filters, option)}
                       className={`px-4 py-3 cursor-pointer hover:bg-primary/10 transition-colors ${
                         isSelected
-                          ? "bg-blue-50 text-primary font-medium"
-                          : "text-gray-700"
+                          ? "bg-primary/40 text-primary font-medium"
+                          : "text-black"
                       }`}
                     >
                       {option}
