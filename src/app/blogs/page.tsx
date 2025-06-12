@@ -46,7 +46,7 @@ export default function BlogsPage() {
             <List.Item
               key={cat?._id}
               className={`cursor-pointer rounded-md px-3 py-1 ${
-                data?.data?.allBlogs?.[0]?.catagory === cat.categoryType
+                categoryValue === cat.categoryType
                   ? "bg-primary/50 text-white font-semibold"
                   : "hover:bg-primary/40"
               }`}
