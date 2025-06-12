@@ -1,18 +1,50 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import { useGetValueQuery } from "@/redux/features/value/valueApi";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useApplyInfoMutation } from "../../redux/features/jobApply/jobApplyAPI";
-import { SuccessSwal } from "../../utils/allSwal";
+import { ErrorSwal, SuccessSwal } from "../../utils/allSwal";
 
 const { Option } = Select;
 
 export default function ApplyJobs() {
-  const [applyInfo] = useApplyInfoMutation()
+  const [applyInfo] = useApplyInfoMutation();
   const router = useRouter();
   const searchParams = useSearchParams();
   const jobId = searchParams?.get("jobId") || "";
+
+  const { data: professionV } = useGetValueQuery("Profession");
+  const { data: disciplineV } = useGetValueQuery("Discipline");
+  const { data: specialtyV } = useGetValueQuery("Specialty");
+  const { data: licenseV } = useGetValueQuery("License");
+
+  const professionValue = professionV?.data;
+  const disciplineValue = disciplineV?.data;
+  const specialtyValue = specialtyV?.data;
+  const licenseValue = licenseV?.data;
+
+  interface ICat {
+    _id: string;
+    value: string;
+    type: string;
+  }
+
+  interface IJobInfo {
+    fullName: string;
+    email: string;
+    gender: string;
+    phone: string;
+    country: string;
+    state: string;
+    city: string;
+    profession?: string;
+    discipline?: string;
+    specialty?: string;
+    secondarySpecialty?: string;
+    jobId?: string;
+  }
 
   const onFinish = async (_values: {
     fullName: string;
@@ -27,11 +59,14 @@ export default function ApplyJobs() {
     specialty?: string;
     secondarySpecialty?: string;
   }) => {
-    const data = {
+    const data: IJobInfo = {
       ..._values,
-      jobPost: jobId
+    };
+    if (jobId) {
+      data.jobId = jobId;
     }
-    const res: any = await applyInfo(data)
+
+    const res: any = await applyInfo(data);
     if (res?.data?.success) {
       SuccessSwal({
         title: "Success",
@@ -39,12 +74,11 @@ export default function ApplyJobs() {
       });
       router.push(`/apply-jobs/edu-info?jobId=${res?.data?.data?._id}`);
     } else {
-      SuccessSwal({
+      ErrorSwal({
         title: "Something went wrong",
         text: res?.error?.data?.message || "Please try again later.",
       });
     }
-
   };
 
   return (
@@ -97,7 +131,11 @@ export default function ApplyJobs() {
                 label="Phone No."
                 name="phone"
                 rules={[
-                  { required: true, message: "Please enter your phone no." },
+                  { required: true, message: "Please enter your phone no!" },
+                  {
+                    pattern: /^\+?[1-9]\d{7,14}$/,
+                    message: "Enter a valid number!",
+                  },
                 ]}
               >
                 <Input placeholder="Enter your phone no." />
@@ -152,18 +190,32 @@ export default function ApplyJobs() {
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={24} md={12}>
               <Form.Item label="Profession" name="profession">
-                <Select placeholder="Select...">
+                {/* <Select placeholder="Select...">
                   <Option value="profession1">Profession 1</Option>
                   <Option value="profession2">Profession 2</Option>
+                </Select> */}
+                <Select placeholder="Select Profession">
+                  {professionValue?.map((cat: ICat) => (
+                    <Option key={cat._id} value={cat.type}>
+                      {cat.type}
+                    </Option>
+                  ))}
                 </Select>
               </Form.Item>
             </Col>
 
             <Col xs={24} sm={24} md={12}>
               <Form.Item label="Discipline" name="discipline">
-                <Select placeholder="Select...">
+                {/* <Select placeholder="Select...">
                   <Option value="discipline1">Discipline 1</Option>
                   <Option value="discipline2">Discipline 2</Option>
+                </Select> */}
+                <Select placeholder="Select Discipline">
+                  {disciplineValue?.map((cat: ICat) => (
+                    <Option key={cat._id} value={cat.type}>
+                      {cat.type}
+                    </Option>
+                  ))}
                 </Select>
               </Form.Item>
             </Col>
@@ -172,22 +224,33 @@ export default function ApplyJobs() {
           {/* Specialty/Setting and Secondary Specialty/Setting */}
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={24} md={12}>
-              <Form.Item label="Specialty/Setting" name="specialty">
-                <Select placeholder="Select...">
+              <Form.Item label="Specialty" name="specialty">
+                {/* <Select placeholder="Select...">
                   <Option value="specialty1">Specialty 1</Option>
                   <Option value="specialty2">Specialty 2</Option>
+                </Select> */}
+                <Select placeholder="Select Specialty">
+                  {specialtyValue?.map((cat: ICat) => (
+                    <Option key={cat._id} value={cat.type}>
+                      {cat.type}
+                    </Option>
+                  ))}
                 </Select>
               </Form.Item>
             </Col>
 
             <Col xs={24} sm={24} md={12}>
-              <Form.Item
-                label="Secondary Specialty/Setting"
-                name="secondarySpecialty"
-              >
-                <Select placeholder="Select...">
+              <Form.Item label="License Type" name="secondarySpecialty">
+                {/* <Select placeholder="Select...">
                   <Option value="secondary1">Secondary 1</Option>
                   <Option value="secondary2">Secondary 2</Option>
+                </Select> */}
+                <Select placeholder="Select License">
+                  {licenseValue?.map((cat: ICat) => (
+                    <Option key={cat._id} value={cat.type}>
+                      {cat.type}
+                    </Option>
+                  ))}
                 </Select>
               </Form.Item>
             </Col>

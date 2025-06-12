@@ -3,24 +3,14 @@
 
 import { SuccessSwal } from "@/utils/allSwal";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  Radio,
-  Row,
-  Select,
-  Space,
-} from "antd";
+import { Button, Col, DatePicker, Form, Input, Row, Select, Space } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEduInfoMutation } from "../../../redux/features/jobApply/jobApplyAPI";
 
 const { Option } = Select;
 
 export default function EducationInfo() {
-  const [eduInfo] = useEduInfoMutation()
+  const [eduInfo] = useEduInfoMutation();
   const router = useRouter();
   const searchParams = useSearchParams();
   const jobId = searchParams?.get("jobId") || "";
@@ -46,12 +36,14 @@ export default function EducationInfo() {
 
   const onFinish = async (values: FormValues) => {
     const transformedData = {
-      professional_licenses: (values.professionalLicenses || []).map((item) => ({
-        medical_assistant: item.licenseName,
-        city: item.licenseState,
-        state: item.licenseCountry,
-        license_type: item.licenseType,
-      })),
+      professional_licenses: (values.professionalLicenses || []).map(
+        (item) => ({
+          medical_assistant: item.licenseName,
+          city: item.licenseState,
+          state: item.licenseCountry,
+          license_type: item.licenseType,
+        })
+      ),
       certifications: (values.certifications || []).map(
         (item) => item.certificationName
       ),
@@ -87,8 +79,6 @@ export default function EducationInfo() {
         text: res?.error?.data?.message || "Please try again later.",
       });
     }
-
-
   };
 
   return (
@@ -114,7 +104,7 @@ export default function EducationInfo() {
             Educations and credentials
           </h3>
           {/* Disciplinary Action */}
-          <Form.Item
+          {/* <Form.Item
             label={
               <span className="font-semibold ">
                 {" "}
@@ -130,7 +120,7 @@ export default function EducationInfo() {
               <Radio value={true}>Yes</Radio>
               <Radio value={false}>No</Radio>
             </Radio.Group>
-          </Form.Item>
+          </Form.Item> */}
 
           {/* Professional Licenses (Optional) */}
           <Form.List name="professionalLicenses">
@@ -145,9 +135,9 @@ export default function EducationInfo() {
                       <Form.Item
                         {...restField}
                         name={[name, "licenseName"]}
-                      //   rules={[{ required: true, message: "Required" }]}
+                        //   rules={[{ required: true, message: "Required" }]}
                       >
-                        <Input placeholder="Medical Assistant" />
+                        <Input placeholder="License Name" />
                       </Form.Item>
                     </Col>
 
@@ -155,9 +145,9 @@ export default function EducationInfo() {
                       <Form.Item
                         {...restField}
                         name={[name, "licenseState"]}
-                      //   rules={[{ required: true, message: "Required" }]}
+                        //   rules={[{ required: true, message: "Required" }]}
                       >
-                        <Input placeholder="New York" />
+                        <Input placeholder="State" />
                       </Form.Item>
                     </Col>
 
@@ -165,12 +155,13 @@ export default function EducationInfo() {
                       <Form.Item
                         {...restField}
                         name={[name, "licenseType"]}
-                      //   rules={[{ required: true, message: "Required" }]}
+                        //   rules={[{ required: true, message: "Required" }]}
                       >
-                        <Select placeholder="License type">
+                        {/* <Select placeholder="License type">
                           <Option value="type1">Type 1</Option>
                           <Option value="type2">Type 2</Option>
-                        </Select>
+                        </Select> */}
+                        <Input placeholder="License type" />
                       </Form.Item>
                     </Col>
 
@@ -178,12 +169,13 @@ export default function EducationInfo() {
                       <Form.Item
                         {...restField}
                         name={[name, "licenseCountry"]}
-                      //   rules={[{ required: true, message: "Required" }]}
+                        //   rules={[{ required: true, message: "Required" }]}
                       >
-                        <Select placeholder="State">
+                        {/* <Select placeholder="State">
                           <Option value="state1">State 1</Option>
                           <Option value="state2">State 2</Option>
-                        </Select>
+                        </Select> */}
+                        <Input placeholder="Country" />
                       </Form.Item>
                     </Col>
 
@@ -232,12 +224,6 @@ export default function EducationInfo() {
                     <Form.Item
                       {...restField}
                       name={[name, "certificationName"]}
-                    // rules={[
-                    //   {
-                    //     required: true,
-                    //     message: "Please enter certification name",
-                    //   },
-                    // ]}
                     >
                       <Input placeholder="Certification name..." />
                     </Form.Item>

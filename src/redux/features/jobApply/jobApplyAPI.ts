@@ -2,7 +2,6 @@ import baseApi from "@/redux/api/baseApi/baseApi";
 
 export const jobsApplyApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // get value
     applyInfo: builder.mutation({
       query: (body) => ({
         url: `/apply/personal-info`,
@@ -10,6 +9,7 @@ export const jobsApplyApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+
     eduInfo: builder.mutation({
       query: (body) => ({
         url: `/apply/create/${body.id}`,
@@ -17,6 +17,7 @@ export const jobsApplyApi = baseApi.injectEndpoints({
         body: body.data,
       }),
     }),
+
     finalApply: builder.mutation({
       query: (body) => ({
         url: `/apply/education-info/${body.id}`,

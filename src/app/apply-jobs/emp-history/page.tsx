@@ -15,14 +15,14 @@ import { Button, Col, DatePicker, Form, Input, Row, Select } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useFinalApplyMutation } from "../../../redux/features/jobApply/jobApplyAPI";
 
-
 const { Option } = Select;
 
 export default function EmploymentHistory() {
-  const [finalApply] = useFinalApplyMutation()
+  const [finalApply] = useFinalApplyMutation();
   const router = useRouter();
   const searchParams = useSearchParams();
   const jobId = searchParams?.get("jobId") || "";
+
   const onFinish = async (values: {
     emploment: {
       company?: string;
@@ -39,22 +39,19 @@ export default function EmploymentHistory() {
       data: values,
     };
 
-
-
-
     const res: any = await finalApply(body);
     if (res?.data?.success) {
       SuccessSwal({
         title: "Success",
         text: "Apply Complete",
       });
+      router.push(`/all-jobs`);
     } else {
       SuccessSwal({
         title: "Something went wrong",
         text: res?.error?.data?.message || "Please try again later.",
       });
     }
-    // router.push(`/`);
   };
 
   return (
@@ -79,9 +76,9 @@ export default function EmploymentHistory() {
                         {...restField}
                         name={[name, "company"]}
                         label="Company/Office Name"
-                      // rules={[
-                      //   { required: true, message: "Please enter company name" },
-                      // ]}
+                        // rules={[
+                        //   { required: true, message: "Please enter company name" },
+                        // ]}
                       >
                         <Input placeholder="Enter your company/office name" />
                       </Form.Item>
