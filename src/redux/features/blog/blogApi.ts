@@ -3,9 +3,11 @@ import baseApi from "@/redux/api/baseApi/baseApi";
 export const blogs = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     Allblogs: builder.query({
-      query: (value) => {
+      // query: (value) => {
+      query: () => {
         return {
-          url: value ? `/blog/all/?category=${value}` : `/blog/all/`,
+          // url: value ? `/blog/all/?category=${value}` : `/blog/all/`,
+          url: `/blog/all`,
           method: "GET",
         };
       },

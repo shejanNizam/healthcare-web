@@ -4,29 +4,24 @@
 
 import BlogCard from "@/components/BlogCard";
 import CustomErrorPage from "@/components/CustomErrorPage";
-import { List } from "antd";
-import { useState } from "react";
-import { HiMenu } from "react-icons/hi";
-import {
-  useAllblogsQuery,
-  useAllCategoryblogsQuery,
-} from "../../redux/features/blog/blogApi";
+import { useAllblogsQuery } from "../../redux/features/blog/blogApi";
 
 export default function BlogsPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [categoryValue, setCatagoryValue] = useState<string>();
-  const onCategoryClick = (categoryType: string) => {
-    setCatagoryValue(categoryType);
+  // const [sidebarOpen, setSidebarOpen] = useState(false);
+  // const [categoryValue, setCatagoryValue] = useState<string>();
+  // const onCategoryClick = (categoryType: string) => {
+  //   setCatagoryValue(categoryType);
 
-    if (sidebarOpen) setSidebarOpen(false);
-  };
-  const { data: categoryData } = useAllCategoryblogsQuery(undefined);
-  const { data } = useAllblogsQuery(categoryValue);
+  //   if (sidebarOpen) setSidebarOpen(false);
+  // };
+  // const { data: categoryData } = useAllCategoryblogsQuery(undefined);
+  // const { data } = useAllblogsQuery(categoryValue);
+  const { data } = useAllblogsQuery({});
 
   return (
     <div className=" container mx-auto p-4 sm:p-6 md:p-8 min-h-screen flex">
       {/* Sidebar */}
-      <div
+      {/* <div
         className={`
           fixed top-18 md:top-0 left-0 h-full bg-secondary rounded-r-lg p-6
           w-auto z-40
@@ -63,28 +58,28 @@ export default function BlogsPage() {
             </List.Item>
           )}
         />
-      </div>
+      </div> */}
 
       {/* Overlay */}
-      {sidebarOpen && (
+      {/* {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black opacity-50 z-30 md:hidden"
           onClick={() => setSidebarOpen(false)}
           aria-hidden="true"
         />
-      )}
+      )} */}
 
       {/* Main Content */}
       <main className="flex-1 ml-0 md:ml-4 relative">
         <h3 className="text-2xl text-primary font-bold mb-4">Most Recent</h3>
         {/* Hamburger Button */}
-        <button
+        {/* <button
           className="md:hidden absolute top-4 right-4 z-10 p-2 rounded-md bg-primary text-white shadow-lg"
           onClick={() => setSidebarOpen((open) => !open)}
           aria-label="Toggle categories sidebar"
         >
           <HiMenu size={24} />
-        </button>
+        </button> */}
 
         {/* Main Content Grid */}
 
@@ -95,7 +90,7 @@ export default function BlogsPage() {
             </div>
           ) : (
             data?.data?.allBlogs.map((blog: any) => (
-              <BlogCard key={blog.id} blog={blog} />
+              <BlogCard key={blog._id} blog={blog} />
             ))
           )}
         </div>
