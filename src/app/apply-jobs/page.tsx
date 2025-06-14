@@ -43,7 +43,7 @@ export default function ApplyJobs() {
     discipline?: string;
     specialty?: string;
     secondarySpecialty?: string;
-    jobId?: string;
+    jobPost?: string;
   }
 
   const onFinish = async (_values: {
@@ -63,7 +63,8 @@ export default function ApplyJobs() {
       ..._values,
     };
     if (jobId) {
-      data.jobId = jobId;
+      // data.jobId = jobId;
+      data.jobPost = jobId;
     }
 
     const res: any = await applyInfo(data);
