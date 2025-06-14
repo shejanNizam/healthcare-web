@@ -71,7 +71,9 @@ export default function BlogsPage() {
 
       {/* Main Content */}
       <main className="flex-1 ml-0 md:ml-4 relative">
-        <h3 className="text-2xl text-primary font-bold mb-4">Most Recent</h3>
+        <h3 className="text-2xl text-primary font-bold mb-4">
+          Most Recent Blogs
+        </h3>
         {/* Hamburger Button */}
         {/* <button
           className="md:hidden absolute top-4 right-4 z-10 p-2 rounded-md bg-primary text-white shadow-lg"
