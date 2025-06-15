@@ -1,78 +1,31 @@
+"use client";
+
 import IntBanner from "@/components/IntBanner";
+import { useGetAboutQuery } from "@/redux/features/setting/settingApi";
+import { Spin } from "antd";
 
 export default function About() {
+  const { data, isLoading } = useGetAboutQuery({});
+
   return (
     <div className=" min-h-screen">
       <IntBanner
         title={" Empowering Healthcare Careers, One Connection at a Time "}
         description={` We are a dedicated platform for treatment-related job opportunities, connecting healthcare providers with skilled professionals like nurses and caregivers. Our mission is to support compassionate care by making it easier to find, apply, and hire for essential healthcare roles across the globe.`}
       />
-      <div className="text-gray-900 leading-relaxed space-y-8 max-w-6xl mx-auto px-6 py-12">
-        <p>
-          We prioritize your privacy and are committed to protecting your
-          personal information. We collect data such as your name, email, and
-          job application details to help match you with relevant career
-          opportunities, improve user experience, and communicate important
-          updates. Your data is stored securely using encryption and other
-          safety measures to prevent unauthorized access. We do not share your
-          information with third parties without your consent, except when
-          required by law or to fulfill our services. You have the right to
-          access, update, or delete your data at any time. For inquiries, feel
-          free to contact us.
-        </p>
-
-        <section>
-          <h2 className="font-semibold text-lg mb-2 text-primary">
-            How We Use Your Information. Your personal data is used to:
-          </h2>
-          <ul className="list-disc list-inside space-y-1 text-gray-700">
-            <li>Connect you with job opportunities</li>
-            <li>Improve user experience on the website</li>
-            <li>Respond to inquiries and support requests</li>
-            <li>Send relevant job alerts and notifications</li>
-          </ul>
-          <p className="mt-4">
-            Your data is stored securely using encryption and other safety
-            measures to prevent unauthorized access. We do not share your
-            information with third parties without your consent, except when
-            required by law or to fulfill our services. You have the right to
-            access, update, or delete your data at any time. For inquiries, feel
-            free to contact us.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="font-semibold text-lg mb-2 text-primary">
-            How We Use Your Information. Your personal data is used to:
-          </h2>
-          <ul className="list-disc list-inside space-y-1 text-gray-700">
-            <li>Connect you with job opportunities</li>
-            <li>Improve user experience on the website</li>
-            <li>Respond to inquiries and support requests</li>
-            <li>Send relevant job alerts and notifications</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 className="font-semibold text-lg mb-2 text-primary">
-            Cookies and Tracking
-          </h2>
-          <p>
-            We use cookies to improve website functionality and analyze user
-            behavior. By using our website, you consent to the use of cookies.
-          </p>
-          <p className="mt-2">
-            You have the right to access, update, or delete your personal
-            information at any time. Please contact us if you wish to make any
-            changes.
-          </p>
-          <p className="mt-2">
-            Changes to This Privacy Policy We reserve the right to modify this
-            policy. Any changes will be posted on this page, with an updated
-            date. Contact Us For any questions regarding your privacy, please
-            reach out to us through our contact page.
-          </p>
-        </section>
+      <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        {/* Render the HTML content from the API */}
+        {isLoading ? (
+          <div className="h-[60vh] w-full flex justify-center items-center">
+            <Spin size="large" />
+          </div>
+        ) : (
+          <div
+            className="no-tailwind"
+            // dangerouslySetInnerHTML={{ __html: data?.data?.description }}
+            dangerouslySetInnerHTML={{ __html: data?.data[0]?.description }}
+          />
+        )}
       </div>
     </div>
   );

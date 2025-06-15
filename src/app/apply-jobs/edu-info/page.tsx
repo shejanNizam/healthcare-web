@@ -143,7 +143,7 @@ export default function EducationInfo() {
 
                     <Col xs={24} sm={12} md={6}>
                       <Form.Item {...restField} name={[name, "licenseType"]}>
-                        <Input placeholder="License type" />
+                        <Input placeholder="License Number" />
                       </Form.Item>
                     </Col>
 
