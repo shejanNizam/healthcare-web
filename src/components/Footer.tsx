@@ -76,11 +76,7 @@ const Footer = () => (
                     Home
                   </Link>
                 </li>
-                <li className="mb-1">
-                  <Link href="/about" className="text-sm hover:text-primary">
-                    About Us
-                  </Link>
-                </li>
+
                 <li className="mb-1">
                   <Link href="/blogs" className="text-sm hover:text-primary">
                     Blogs
@@ -100,6 +96,11 @@ const Footer = () => (
                 Utility Pages
               </h3>
               <ul className="text-center md:text-left">
+                <li className="mb-1">
+                  <Link href="/about" className="text-sm hover:text-primary">
+                    About Us
+                  </Link>
+                </li>
                 <li className="mb-1">
                   <Link href="/privacy" className="text-sm hover:text-primary">
                     Privacy Policy

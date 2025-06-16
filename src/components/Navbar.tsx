@@ -60,7 +60,6 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
     { href: "#", label: "Job Seekers", hasDropdown: true },
     { href: "/all-jobs", label: "All Jobs" },
     { href: "/blogs", label: "Blogs" },
@@ -70,6 +69,7 @@ export default function Navbar() {
         savedJobs.length > 0 ? ` (${savedJobs.length})` : "(0)"
       }`,
     },
+    { href: "/about", label: "About" },
   ];
 
   const isActive = (href: string) =>
@@ -172,9 +172,9 @@ export default function Navbar() {
           <div className="hidden lg:block">
             <SearchBar />
           </div>
-          <Link href="/contact">
-            <Button size="large" type="primary" className="hidden md:block">
-              Contact
+          <Link href="/all-jobs">
+            <Button size="large" type="default" className="hidden md:block">
+              Apply Now
             </Button>
           </Link>
 
