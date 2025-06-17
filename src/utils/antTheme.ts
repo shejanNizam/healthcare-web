@@ -81,7 +81,19 @@ export const mainTheme = {
       borderRadius: 8,
       // Add other Modal tokens as needed
     },
-
-    // Add other components as needed
+    Tabs: {
+      itemActiveColor: "#8E0003",
+      colorPrimary: "#8E0003",
+      colorText: "#8E0003",
+      colorTextHeading: "#8E0003",
+      colorBorderSecondary: "#8E0003",
+      itemColor: "#8E0003",
+      itemSelectedColor: "#8E0003",
+      itemHoverColor: "#8E0003",
+      inkBarColor: "#8E0003",
+      titleFontSize: 16,
+      horizontalMargin: "0 0 12px 0",
+      horizontalItemGutter: 32,
+    },
   },
 };

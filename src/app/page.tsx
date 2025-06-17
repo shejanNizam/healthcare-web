@@ -1,6 +1,7 @@
 // app/page.tsx
 import AppliedProcess from "@/components/AppliedProcess";
 import Banner from "@/components/Banner";
+import BannerForServices from "@/components/BannerForServices";
 import FeatureJobs from "@/components/FeatureJobs";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <main className="">
         <Banner />
         <FeatureJobs />
+        <BannerForServices />
         <AppliedProcess />
       </main>
     </div>
