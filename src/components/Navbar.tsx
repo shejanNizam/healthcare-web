@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FaTimes } from "react-icons/fa";
 import { TiArrowSortedDown } from "react-icons/ti";
 import main_logo from "../assets/healthcare_main_logo.svg";
 import SearchBar from "./SearchBar";
@@ -77,14 +78,15 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`py-2 bg-white bg-gradient-to-r from-primary/80 to-primary/10 z-50 shadow-md sticky top-0 transition-all duration-300 ${
-        isScrolled ? "py-2" : "py-4"
+      className={`py-2 bg-white  z-50 shadow-md sticky top-0 transition-all duration-300 ${
+        isScrolled ? "py-2" : "py-3"
       }`}
+      // bg-gradient-to-r from-primary/80 to-primary/10
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/">
           <Image
-            className="w-28 h-20"
+            className="w-24 h-20 lg:w-32 lg:h-24"
             width={1000}
             height={1000}
             src={main_logo}
@@ -93,7 +95,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex md:space-x-4 text-white text-md font-semibold">
+        <div className="hidden md:flex md:space-x-2 xl:space-x-4 text-primary text-md font-semibold">
           {navLinks.map((link) =>
             link.hasDropdown ? (
               <div key={link.href} className="relative group">
@@ -180,6 +182,7 @@ export default function Navbar() {
 
           <button
             className="md:hidden text-primary focus:outline-none cursor-pointer"
+            // className="text-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary w-8 h-8"
             onClick={toggleMenu}
           >
             {isMenuOpen ? (
@@ -194,7 +197,7 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       <Drawer
         placement="left"
-        closable={true}
+        closable={false}
         onClose={toggleMenu}
         open={isMenuOpen}
         styles={{
@@ -206,15 +209,25 @@ export default function Navbar() {
         }}
         width="60%"
       >
+        {" "}
         <div className="flex flex-col h-full">
-          <div className="p-4">
-            <Link
-              href="/"
-              className="text-2xl font-bold text-white"
-              onClick={toggleMenu}
-            >
-              Clement
+          <div className="flex items-center justify-between p-2 border-b border-white">
+            <Link href="/" onClick={toggleMenu}>
+              <Image
+                className="w-20 h-16"
+                width={1000}
+                height={1000}
+                src={main_logo}
+                alt="main_logo"
+              />
             </Link>
+            <button
+              onClick={toggleMenu}
+              className="text-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary w-8 h-8"
+              aria-label="Close menu"
+            >
+              <FaTimes size={20} />
+            </button>
           </div>
 
           <div className="flex-1 flex flex-col p-4 space-y-2">
@@ -289,9 +302,9 @@ export default function Navbar() {
           </div>
 
           <div className="p-4 border-t border-white/20">
-            <Link href="/contact" onClick={toggleMenu}>
+            <Link href="/all-jobs" onClick={toggleMenu}>
               <Button type="primary" size="large" className="w-full">
-                Contact
+                Apply Now
               </Button>
             </Link>
           </div>
