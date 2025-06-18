@@ -45,22 +45,6 @@ interface Filters {
   category: string | null;
 }
 
-// interface JobsResponse {
-//   success: boolean;
-//   statusCode: number;
-//   message: string;
-//   data: {
-//     pagination: {
-//       totalPage: number;
-//       currentPage: number;
-//       prevPage: number;
-//       nextPage: number;
-//       totalData: number;
-//     };
-//     allJobs: Job[];
-//   };
-// }
-
 const AllJobs = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -130,12 +114,12 @@ const AllJobs = () => {
       return updatedFilters;
     });
 
-    setOpenDropdown(null);
     if (isMobile) setShowMobileFilters(false);
   };
 
   const clearAllFilters = () => {
     setFilters({ category: null, profession: null, jobType: null });
+    setOpenDropdown(null);
     router.replace("/all-jobs");
   };
 
@@ -236,7 +220,7 @@ const AllJobs = () => {
           )}
         </div>
 
-        {/* Updated Filter Sections with explicit keys */}
+        {/* Filter Sections */}
         {[
           { label: "Category", key: "category", options: categories },
           { label: "Profession", key: "profession", options: professions },
@@ -288,11 +272,8 @@ const AllJobs = () => {
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
           {filteredJobs.length === 0 ? (
-            <div className=" flex justify-center items-center col-span-full min-h-[300px]">
+            <div className="flex justify-center items-center col-span-full min-h-[300px]">
               <CustomErrorPage />
-              {/* <Button type="primary" onClick={clearAllFilters}>
-                Clear filters
-              </Button> */}
             </div>
           ) : (
             filteredJobs.map((job) => <JobCard key={job._id} job={job} />)
