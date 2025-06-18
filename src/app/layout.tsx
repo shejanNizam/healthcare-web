@@ -4,9 +4,20 @@ import { SavedJobsProvider } from "@/context/SavedJobsContext";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { Suspense } from "react";
 import "./globals.css";
 import StoreProvider from "./providers/StoreProvider";
+
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
+
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,6 +27,17 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const times_raleway = localFont({
+  src: "./../fonts/Raleway-VariableFont_wght.ttf",
+  variable: "--times-new-roman",
+  weight: "100 400",
+});
+const times_raleway_bold = localFont({
+  src: "./../fonts/Raleway-VariableFont_wght.ttf",
+  variable: "--times-new-roman-bold",
+  weight: "500 900",
 });
 
 export const metadata: Metadata = {
@@ -31,16 +53,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={`${geistMono.variable} ${geistSans.variable} ${times_raleway.className} ${times_raleway_bold.variable} antialiased`}
+        // className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         <SavedJobsProvider>
           <StoreProvider>
             <AntdRegistry>
               <Suspense>
                 <Navbar />
-                <div className="  md:min-h-[calc(100vh-180px)]">
-                  {children}
-                </div>
+                <div className="  md:min-h-[calc(100vh-180px)]">{children}</div>
 
                 <Footer />
               </Suspense>

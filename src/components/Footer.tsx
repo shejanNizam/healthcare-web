@@ -164,7 +164,8 @@ const Footer = () => (
 
         {/* copyright part */}
         <div className="text-center text-sm">
-          &copy; {new Date().getFullYear()} MyCompany. All rights reserved.
+          &copy; {new Date().getFullYear()} CENM HEALTHCARE. All rights
+          reserved.
         </div>
       </div>
     </div>
