@@ -4,11 +4,15 @@ export const blogs = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     Allblogs: builder.query({
       // query: (value) => {
-      query: () => {
+      query: ({ page = 1, limit = 10 }) => {
         return {
           // url: value ? `/blog/all/?category=${value}` : `/blog/all/`,
           url: `/blog/all`,
           method: "GET",
+          params: {
+            page,
+            limit,
+          },
         };
       },
     }),

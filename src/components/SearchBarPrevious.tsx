@@ -3,25 +3,19 @@
 import { useGetValueQuery } from "@/redux/features/value/valueApi";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 type JobCategory = {
   _id: string;
   type: string;
 };
 
-export default function SearchBar() {
+export default function SearchBarPrevious() {
   const [searchVisible, setSearchVisible] = useState(false);
-  const [searchText, setSearchText] = useState("");
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
-  const searchRef = useRef<HTMLDivElement>(null);
 
   const { data } = useGetValueQuery("Category");
   const categories: JobCategory[] = data?.data || [];
-
-  const filteredCategories = categories.filter((category) =>
-    category.type.toLowerCase().includes(searchText.toLowerCase())
-  );
 
   const handleSearch = (value: string) => {
     if (value && !recentSearches.includes(value)) {
@@ -31,50 +25,25 @@ export default function SearchBar() {
     window.location.href = `/all-jobs?category=${encodeURIComponent(value)}`;
   };
 
-  // Close dropdown when clicking outside
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      searchRef.current &&
-      !searchRef.current.contains(event.target as Node)
-    ) {
-      setSearchVisible(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   return (
-    <div className="relative w-full max-w-2xl" ref={searchRef}>
+    <div className="relative w-full max-w-2xl">
+      {/* Input is readonly, so user can only click/select, no typing */}
       <Input
         size="large"
-        placeholder="Search by category..."
+        placeholder="Select a category..."
         prefix={<SearchOutlined />}
-        value={searchText}
-        onChange={(e) => {
-          setSearchText(e.target.value);
-          setSearchVisible(true);
-        }}
+        readOnly
         onFocus={() => setSearchVisible(true)}
-        className="cursor-text"
+        onBlur={() => setTimeout(() => setSearchVisible(false), 200)}
+        className="cursor-pointer"
       />
 
       {searchVisible && (
         <div className="absolute z-10 w-full mt-2 bg-white rounded-md shadow-lg max-h-80 overflow-auto">
           <div className="p-4">
-            {searchText && (
-              <h4 className="font-semibold">
-                {filteredCategories.length > 0
-                  ? "Categories"
-                  : "No matches found"}
-              </h4>
-            )}
+            <h4 className="font-semibold">Categories</h4>
             <div className="mt-2 space-y-2 max-h-60 overflow-auto">
-              {filteredCategories?.map((category: JobCategory) => (
+              {categories?.map((category: JobCategory) => (
                 <div
                   key={category._id}
                   className="p-2 hover:bg-gray-100 cursor-pointer"
