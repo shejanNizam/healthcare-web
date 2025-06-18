@@ -86,7 +86,7 @@ export default function ApplyJobs() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-6">
       <Form layout="vertical" onFinish={onFinish} autoComplete="off">
         <div className="mb-8 border rounded-lg p-4">
-          <h3 className="text-xl text-primary font-bold my-2">
+          <h3 className="text-xl text-primary font-bold font-raleway-bold my-2">
             Personal Information
           </h3>
           {/* Full Name */}
@@ -183,7 +183,7 @@ export default function ApplyJobs() {
 
           {/* Expertise Section */}
 
-          <h3 className="text-xl text-primary font-bold my-2">
+          <h3 className="text-xl text-primary font-bold font-raleway-bold my-2">
             Expertise (Optional)
           </h3>
 

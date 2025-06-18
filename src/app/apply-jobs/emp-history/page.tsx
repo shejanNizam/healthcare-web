@@ -85,7 +85,7 @@ export default function EmploymentHistory() {
         <Form.List name="emploment">
           {(fields, { add, remove }) => (
             <>
-              <h3 className="text-xl text-primary font-bold my-2">
+              <h3 className="text-xl text-primary font-bold font-raleway-bold my-2">
                 Employment History (Required)
               </h3>
 

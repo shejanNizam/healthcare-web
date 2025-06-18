@@ -116,7 +116,7 @@ export default function EducationInfo() {
         autoComplete="off"
       >
         <div className="mb-8 border rounded-lg p-4">
-          <h3 className="text-xl text-primary font-bold my-2">
+          <h3 className="text-xl text-primary font-bold font-raleway-bold my-2">
             Educations and credentials
           </h3>
 
@@ -124,7 +124,7 @@ export default function EducationInfo() {
           <Form.List name="professionalLicenses">
             {(fields, { add, remove }) => (
               <>
-                <h3 className="text-xl text-primary font-bold mt-8 mb-4">
+                <h3 className="text-xl text-primary font-bold font-raleway-bold mt-8 mb-4">
                   Your professional licenses (Optional)
                 </h3>
                 {fields.map(({ key, name, ...restField }) => (
@@ -184,10 +184,10 @@ export default function EducationInfo() {
           <Form.List name="certifications">
             {(fields, { add, remove }) => (
               <>
-                <h3 className="text-xl text-primary font-bold mt-8 mb-4">
+                <h3 className="text-xl text-primary font-bold font-raleway-bold mt-8 mb-4">
                   Certifications (Optional)
                 </h3>
-                <p className="mb-4 font-semibold">
+                <p className="mb-4 font-semibold font-raleway-bold">
                   Check all of the current (not expired) certifications that you
                   have or add any that are missing.
                 </p>
@@ -231,7 +231,7 @@ export default function EducationInfo() {
           <Form.List name="educations">
             {(fields, { add, remove }) => (
               <>
-                <h3 className="text-xl text-primary font-bold mt-8 mb-4">
+                <h3 className="text-xl text-primary font-bold font-raleway-bold mt-8 mb-4">
                   Your Education (Required)
                 </h3>
 

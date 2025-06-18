@@ -33,9 +33,20 @@ export const mainTheme = {
       boxShadow: "0 0px 0 rgba(5, 145, 255, 0.1)",
       // Add other Button tokens as needed
     },
+    // Form: {
+    //   labelColor: "#FFEB3B",
+    //   // Add other Form tokens as needed
+    // },
     Form: {
       labelColor: "#FFEB3B",
-      // Add other Form tokens as needed
+      labelFontFamily: "'raleway', sans-serif",
+      labelFontWeight: "bold",
+      labelFontSize: "16px",
+      labelLineHeight: "1.5",
+      inputFontFamily: "'raleway', sans-serif",
+      inputFontWeight: "normal",
+      inputFontSize: "14px",
+      inputLineHeight: "1.4",
     },
     Input: {
       colorBorder: "#DEAD35",
