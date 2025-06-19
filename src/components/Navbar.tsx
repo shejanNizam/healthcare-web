@@ -70,7 +70,7 @@ export default function Navbar() {
         savedJobs.length > 0 ? ` (${savedJobs.length})` : "(0)"
       }`,
     },
-    { href: "/about", label: "About" },
+    { href: "/about", label: "About us" },
   ];
 
   const isActive = (href: string) =>
@@ -174,7 +174,7 @@ export default function Navbar() {
           <div className="hidden lg:block">
             <SearchBar />
           </div>
-          <Link href="/all-jobs">
+          <Link href="/apply-jobs">
             <Button size="large" type="default" className="hidden md:block">
               Apply Now
             </Button>
@@ -302,7 +302,7 @@ export default function Navbar() {
           </div>
 
           <div className="p-4 border-t border-white/20">
-            <Link href="/all-jobs" onClick={toggleMenu}>
+            <Link href="/apply-jobs" onClick={toggleMenu}>
               <Button type="primary" size="large" className="w-full">
                 Apply Now
               </Button>
