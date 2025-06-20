@@ -194,7 +194,7 @@ export default function EmploymentHistory() {
                         <Col xs={24} sm={12}>
                           <Form.Item
                             {...restField}
-                            name={[name, "startDate"]}
+                            name={[name, "start_date"]}
                             label="Start Date"
                             rules={[
                               {
@@ -210,7 +210,7 @@ export default function EmploymentHistory() {
                         <Col xs={24} sm={12}>
                           <Form.Item
                             {...restField}
-                            name={[name, "endDate"]}
+                            name={[name, "end_date"]}
                             label="End Date"
                             rules={[
                               {
