@@ -140,7 +140,7 @@ const Footer = () => (
                     className="flex items-center mb-2 justify-center md:justify-start text-sm hover:text-primary transition"
                   >
                     <FaEnvelope className="mr-2" />
-                    info@mycompany.com
+                    info@cenmhealthcare.com
                   </a>
                 </div>
 
