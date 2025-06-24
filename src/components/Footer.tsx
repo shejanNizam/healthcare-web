@@ -129,7 +129,8 @@ const Footer = () => (
                     className="flex items-center mb-2 justify-center md:justify-start text-sm hover:text-primary transition"
                   >
                     <FaMapMarkerAlt className="mr-2" />
-                    1234 Street Name, City, State
+                    9050 Carron Dr.Suite #244Pico Rivera, <br /> CA-90660(562)
+                    273-8746
                   </a>
                 </div>
 
