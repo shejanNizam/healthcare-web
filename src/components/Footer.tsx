@@ -123,21 +123,20 @@ const Footer = () => (
                 {/* Address with Google Maps Link */}
                 <div className="">
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=1234+Street+Name,City,State"
+                    href="https://www.google.com/maps/search/?api=1&query=9050+Carron+Dr.+Suite+%23244+Pico+Rivera,+CA-90660"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center mb-2 justify-center md:justify-start text-sm hover:text-primary transition"
                   >
                     <FaMapMarkerAlt className="mr-2" />
-                    9050 Carron Dr.Suite #244Pico Rivera, <br /> CA-90660(562)
-                    273-8746
+                    9050 Carron Dr. Suite #244 Pico Rivera, CA-90660
                   </a>
                 </div>
 
                 {/* Email with mailto Link */}
                 <div className="">
                   <a
-                    href="mailto:info@mycompany.com"
+                    href="mailto:info@cenmhealthcare.com"
                     className="flex items-center mb-2 justify-center md:justify-start text-sm hover:text-primary transition"
                   >
                     <FaEnvelope className="mr-2" />
@@ -148,11 +147,11 @@ const Footer = () => (
                 {/* Phone Number with tel Link */}
                 <div className="">
                   <a
-                    href="tel:1234567890"
+                    href="tel:+15622738746"
                     className="flex items-center justify-center md:justify-start text-sm hover:text-primary transition"
                   >
                     <FaPhoneAlt className="mr-2" />
-                    (123) 456-7890
+                    (562) 273-8746
                   </a>
                 </div>
               </ul>
