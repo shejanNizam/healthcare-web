@@ -63,7 +63,7 @@ export default function BannerForServices() {
             </p>
             <Link href="/client-services">
               <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-1 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out">
-                Client Services
+                Discover Our Services
               </button>
             </Link>
           </div>

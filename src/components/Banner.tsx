@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 import bannerRightImage from "../assets/banner/banner_right_side.png";
 import SearchBar from "./SearchBar";
 
@@ -6,16 +8,21 @@ export default function Banner() {
   return (
     <div className="bg-gradient-to-r from-primary to-primary/40 md:to-primary/20 h-auto">
       <div className="bg-primary-light  flex flex-col md:flex-row items-center justify-around px-4 md:px-24 xl:px-40 w-full">
-        <div className="w-full md:w-[50%] flex flex-col gap-4 md:gap-8 my-4">
-          <h1 className="text-3xl md:text-4xl xl:text-5xl text-white font-extrabold">
-            Find a job that aligns with your interests and skills
+        <div className="w-full md:w-[50%] flex flex-col gap-4 md:gap-6 my-4">
+          <h1 className="text-2xl md:text-2xl xl:text-4xl text-white font-bold w-[95%]">
+            Empowering healthcare facilities with dependable, compassionate
+            staffing-whenever and wherever care is needed.
           </h1>
-          <p className="w-full md:w-[90%] text-white text-sm ">
-            Our platform connects qualified nurses with reputable employers,
-            making it easy to search and apply for nursing jobs. Explore
-            opportunities that match your skills and career goals in a
-            professional, efficient way.
+          <p className="w-full md:w-[80%] text-white text-sm ">
+            {
+              "From Southern California to beyond, CENM Healthcare delivers top-tier nurses, allied health professionals, and specialized support tailored to your facility's needs."
+            }
           </p>
+          <Link href="/contact">
+            <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-1 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out flex items-center gap-2">
+              Request Staffing Now <FaArrowRight />
+            </button>
+          </Link>
           <div className="w-full mb-8">
             <SearchBar />
           </div>

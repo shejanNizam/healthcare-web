@@ -72,11 +72,13 @@ export default function FeatureJobs() {
 
   return (
     <div className="container mx-auto px-8 py-12">
-      <h2 className="text-2xl md:text-3xl text-primary font-bold text-center">
-        Featured Jobs
+      <h2 className="text-2xl md:text-3xl text-primary font-bold text-center mb-2">
+        Find a job that aligns with your interests and skills
       </h2>
-      <p className="text-sm md:text-md text-center mb-6 md:mb-8">
-        Choose jobs from the top employers and apply for the same.
+      <p className=" w-full mx-auto md:w-[50%] text-sm md:text-md text-center mb-6 md:mb-8">
+        Our platform connects qualified nurses with reputable employers, making
+        it easy to search and apply for nursing jobs. Explore opportunities that
+        match your skills and career goals in a professional, efficient way.
       </p>
 
       <div className="relative max-w-7xl mx-auto">
