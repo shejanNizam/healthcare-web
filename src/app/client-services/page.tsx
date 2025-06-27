@@ -6,6 +6,12 @@ import { Tabs } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Client Services | CENM Healthcare",
+  description:
+    "Learn about our mission to provide top-tier nursing staff in Southern California.",
+};
+
 export default function ClientServices() {
   const items = [
     {
