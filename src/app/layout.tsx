@@ -40,6 +40,9 @@ export const metadata: Metadata = {
   description:
     "C.E.N.M. Healthcare connects nurse managers and directors with reliable, professional travel nurses, CNAs, and LVNs across Southern California. High performance, no drama.",
   keywords: [
+    "cenm",
+    "CENM",
+    "cenmhealthcare",
     "CENM Healthcare",
     "nurse staffing",
     "healthcare staffing California",
