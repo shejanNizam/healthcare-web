@@ -34,7 +34,7 @@ export default function FeatureJobsTwo() {
 
   return (
     <div>
-      <div className="flex-1 p-4 xl:px-12">
+      <div className="flex-1  xl:px-12">
         {/* Job cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {jobsData?.length === 0 ? (
