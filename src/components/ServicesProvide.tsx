@@ -13,19 +13,19 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 // Primary color palette
-const primaryColor = "#2563eb"; // Vibrant blue
+const primaryColor = "#2563eb";
 const primaryLight = "#93c5fd";
-const primaryDark = "#1e40af";
-const accentColor = "#f59e0b"; // Amber for accents
+
+import type { Variants } from "framer-motion";
 
 export default function ServicesProvide() {
-  const fadeInUp = {
+  const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 10,
         stiffness: 100,
       },
@@ -207,7 +207,7 @@ export default function ServicesProvide() {
           transition={{ delay: 0.4 }}
           className="text-center text-2xl font-bold mt-16 text-primary bg-blue-50 py-4 px-6 rounded-full inline-block"
         >
-          We don't just send a nurse. We send the{" "}
+          {" We don't just send a nurse. We send the "}
           <span className="text-amber-500">right</span> nurse.
         </motion.p>
       </section>
@@ -324,7 +324,7 @@ export default function ServicesProvide() {
           transition={{ delay: 0.3 }}
           className="text-center text-xl mt-16 bg-secondary text-primary py-4 px-8 rounded-full inline-block shadow-lg"
         >
-          From a single shift to a full care team — we've got your back.
+          {"From a single shift to a full care team — we've got your back."}
         </motion.p>
       </section>
 
@@ -346,7 +346,7 @@ export default function ServicesProvide() {
           </motion.div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight text-primary">
             You Run the Floor. <br className="md:hidden" />
-            <span className="text-amber-300">We'll Handle the Roster.</span>
+            <span className="text-amber-300">{"We'll Handle the Roster."}</span>
           </h2>
           <Divider className="w-20 mx-auto border-white/30" />
           <div className="flex flex-col sm:flex-row justify-center gap-6 mt-12">
@@ -425,8 +425,9 @@ export default function ServicesProvide() {
           transition={{ delay: 0.3 }}
           className="text-center text-lg mt-16 bg-blue-100 text-blue-800 py-3 px-6 rounded-full inline-block"
         >
-          Out-of-state? No problem. We're expanding fast — with the same core
-          values.
+          {
+            "Out-of-state? No problem. We're expanding fast — with the same core values."
+          }
         </motion.p>
       </section>
 
@@ -520,13 +521,14 @@ export default function ServicesProvide() {
             <PhoneFilled className="text-5xl text-amber-300" />
           </motion.div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
-            Let's Make Your Next Call <br className="md:hidden" />
+            {"Let's"} Make Your Next Call <br className="md:hidden" />
             <span className="text-amber-300">a Calm One</span>
           </h2>
           <Divider className="w-20 mx-auto border-white/30" />
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Staffing doesn't have to be chaos. With C.E.N.M. Healthcare, you get
-            a reliable partner who gets it.
+            {
+              "Staffing doesn't have to be chaos. With C.E.N.M. Healthcare, you get a reliable partner who gets it."
+            }
           </p>
           <p className="mb-10 text-blue-200">
             Based in Southern California. Built for nurse leaders like you.
