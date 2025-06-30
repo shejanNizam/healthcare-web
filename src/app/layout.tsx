@@ -30,16 +30,6 @@ const times_raleway_bold = localFont({
   weight: "500 900",
 });
 
-// before seo
-
-// export const metadata: Metadata = {
-//   title: "Trusted Nurse Staffing for Nurse Managers | C.E.N.M. Healthcare",
-//   description:
-//     "C.E.N.M. Healthcare provides vetted, reliable travel nurses, CNAs, and LVNs for Nurse Managers and DONs across Southern California. Zero drama. High performance.",
-// };
-
-// after seo
-
 export const metadata: Metadata = {
   title: "Trusted Nurse Staffing | C.E.N.M. Healthcare",
   description:

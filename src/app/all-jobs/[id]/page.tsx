@@ -121,8 +121,9 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
                         width={1000}
                         height={1000}
                         src={baseImageUrl + job.companyLogo}
-                        alt={`${job.hospitalName} logo`}
+                        alt="Healthcare workforce management solutions in Southern California"
                         className="w-8 h-8 rounded-full object-cover"
+                        priority
                       />
                     </>
                   ) : (

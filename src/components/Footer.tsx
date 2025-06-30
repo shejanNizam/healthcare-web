@@ -27,6 +27,7 @@ const Footer = () => (
                 height={1000}
                 src={main_logo}
                 alt="main_logo"
+                priority
               />
             </Link>
 

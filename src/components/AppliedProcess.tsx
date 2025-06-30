@@ -25,6 +25,7 @@ export default function AppliedProcess() {
             width={1000}
             height={1000}
             className="rounded-xl w-full h-auto md:w-3/4 md:mx-auto"
+            priority
           />
         </div>
 

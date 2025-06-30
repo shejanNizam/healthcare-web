@@ -70,7 +70,7 @@ export default function Shejan() {
                 alt="contact_image"
                 fill
                 className="object-contain"
-                priority={false}
+                priority
               />
             </div>
           </div>

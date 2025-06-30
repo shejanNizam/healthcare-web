@@ -42,7 +42,7 @@ export default function BlogDetails({ params }: { params: Promise<Params> }) {
               alt={singleBlog?.description}
               fill
               style={{ objectFit: "cover" }}
-              priority={false}
+              priority
             />
           </div>
 

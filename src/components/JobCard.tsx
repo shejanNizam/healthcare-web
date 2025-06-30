@@ -65,6 +65,7 @@ export default function JobCard({ job }: { job: Job }) {
                 src={baseImageUrl + job.companyLogo}
                 alt={`${job.hospitalName} logo`}
                 className="w-8 h-8 rounded-full object-cover"
+                priority
               />
             </>
           ) : (

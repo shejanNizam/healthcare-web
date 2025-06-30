@@ -126,7 +126,7 @@ export default function FeatureJobs() {
                               alt={categoryType}
                               fill
                               style={{ objectFit: "contain" }}
-                              priority={true}
+                              priority
                             />
                           </div>
                           <div className="text-sm sm:text-base md:text-lg font-semibold text-center">

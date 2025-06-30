@@ -91,6 +91,7 @@ export default function Navbar() {
             height={1000}
             src={main_logo}
             alt="main_logo"
+            priority
           />
         </Link>
 
@@ -222,7 +223,8 @@ export default function Navbar() {
                 width={1000}
                 height={1000}
                 src={main_logo}
-                alt="main_logo"
+                alt="Healthcare workforce management solutions in Southern California"
+                priority
               />
             </Link>
             <button

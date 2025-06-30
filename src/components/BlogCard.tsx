@@ -26,7 +26,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
             alt={blog.description}
             fill
             style={{ objectFit: "cover" }}
-            priority={false}
+            priority
           />
         </div>
         <div className="p-4 flex flex-col justify-between">
