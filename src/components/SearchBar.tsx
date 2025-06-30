@@ -60,7 +60,7 @@ export default function SearchBar() {
           setSearchVisible(true);
         }}
         onFocus={() => setSearchVisible(true)}
-        className="cursor-text"
+        className="cursor-text h-12"
       />
 
       {searchVisible && (

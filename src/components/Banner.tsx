@@ -18,8 +18,8 @@ export default function Banner() {
               "From Southern California to beyond, CENM Healthcare delivers top-tier nurses, allied health professionals, and specialized support tailored to your facility's needs."
             }
           </p>
-          <Link href="/contact">
-            <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-1 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out flex items-center gap-2">
+          <Link href="/services">
+            <button className="bg-[#E7F1F8] text-primary text-xl font-semibold cursor-pointer rounded-t-lg px-10 py-4 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out flex items-center gap-2">
               Request Staffing Now <FaArrowRight />
             </button>
           </Link>

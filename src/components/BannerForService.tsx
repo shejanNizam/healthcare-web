@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import bannerRightImage from "../assets/banner/banner_right_side.png";
+import { FaArrowRight } from "react-icons/fa";
+import bannerRightImage from "../assets/banner/int_banner_right_side.png";
 
 export default function BannerForService() {
   return (
@@ -16,9 +17,9 @@ export default function BannerForService() {
             challenges.
           </p>
 
-          <Link href="/contact">
-            <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-1 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out">
-              Learn More {"->"}
+          <Link href="/services">
+            <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-1 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out flex items-center gap-2">
+              Learn More <FaArrowRight />
             </button>
           </Link>
         </div>

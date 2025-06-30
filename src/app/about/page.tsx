@@ -66,9 +66,9 @@ export default function About() {
                 with reliable, compassionate professionals.
               </p>
               <p className="text-xl text-gray-800 mt-4 leading-relaxed">
-                C.E.N.M. stands for Clement, Efua, Nathaniel, and Maxwell—our
-                founder, his wife, and their two sons. Our name is our mission:
-                to deliver care as if our own family depended on it.
+                C.E.N.M. stands for family —our founder & his family. Our family
+                is our mission: to deliver care as if our own family depended on
+                it.
               </p>
             </div>
             <div className="md:w-1/3 bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-lg border border-blue-100">

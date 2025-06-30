@@ -87,7 +87,7 @@ export default function ClientServices() {
       </div>
 
       <div className="text-center my-8">
-        <Link href="/contact">
+        <Link href="/services">
           <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-2 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out">
             Learn More
           </button>

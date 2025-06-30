@@ -135,7 +135,7 @@ export default function ServicesProvide() {
             schedule juggling.
           </p>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="/shejan">
+            <Link href="/contact">
               <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-1 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out">
                 Request Nurses Now
               </button>
@@ -351,14 +351,14 @@ export default function ServicesProvide() {
           <Divider className="w-20 mx-auto border-white/30" />
           <div className="flex flex-col sm:flex-row justify-center gap-6 mt-12">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/shejan">
+              <Link href="/contact">
                 <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-1 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out">
                   Request Nurses Now
                 </button>
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/shejan">
+              <Link href="/contact">
                 <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-1 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out">
                   Schedule a Staffing Call
                 </button>
@@ -534,7 +534,7 @@ export default function ServicesProvide() {
             Based in Southern California. Built for nurse leaders like you.
           </p>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="/shejan">
+            <Link href="/contact">
               <button className="bg-[#E7F1F8] text-primary font-semibold cursor-pointer rounded-t-lg px-6 py-1 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out">
                 Start Staffing Now
               </button>

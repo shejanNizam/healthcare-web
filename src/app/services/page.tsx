@@ -1,5 +1,6 @@
 "use client";
 
+import ServicesProvide from "@/components/ServicesProvide";
 import { useContactMutation } from "@/redux/features/contact/contactApi";
 import { ErrorSwal, SuccessSwal } from "@/utils/allSwal";
 import { Button, Form, FormProps, Input } from "antd";
@@ -22,7 +23,7 @@ type ContactApiPayload = {
   phone: string;
 };
 
-export default function Shejan() {
+export default function Contact() {
   const [form] = Form.useForm<ContactFormValues>();
   const [contact, { isLoading }] = useContactMutation();
 
@@ -52,7 +53,8 @@ export default function Shejan() {
   };
 
   return (
-    <div>
+    <>
+      <ServicesProvide />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="text-center mb-8 md:mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold">Contact Us</h1>
@@ -169,6 +171,6 @@ export default function Shejan() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
