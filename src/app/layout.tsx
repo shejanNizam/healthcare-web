@@ -30,11 +30,15 @@ const times_raleway_bold = localFont({
   weight: "500 900",
 });
 
+// before seo
+
 // export const metadata: Metadata = {
 //   title: "Trusted Nurse Staffing for Nurse Managers | C.E.N.M. Healthcare",
 //   description:
 //     "C.E.N.M. Healthcare provides vetted, reliable travel nurses, CNAs, and LVNs for Nurse Managers and DONs across Southern California. Zero drama. High performance.",
 // };
+
+// after seo
 
 export const metadata: Metadata = {
   title: "Trusted Nurse Staffing | C.E.N.M. Healthcare",
@@ -66,8 +70,7 @@ export const metadata: Metadata = {
     siteName: "CENM Healthcare",
     images: [
       {
-        // url: "https://cenmhealthcare.com/og-image.jpg",
-        url: "https://ibb.co/0Vtg1WJ",
+        url: "https://api.cenmhealthcare.com/images/12b2a2a6-1518-4e20-a3df-80d78b3f8277.svg",
         width: 1200,
         height: 630,
         alt: "CENM Healthcare - Trusted Nurse Staffing",
@@ -81,8 +84,9 @@ export const metadata: Metadata = {
     title: "CENM Healthcare | Trusted Nurse Staffing",
     description:
       "Find travel nurses, CNAs, and LVNs ready to support your team with reliability and performance.",
-    // images: ["https://cenmhealthcare.com/twitter-image.jpg"],
-    images: ["https://ibb.co/0Vtg1WJ"],
+    images: [
+      "https://api.cenmhealthcare.com/images/12b2a2a6-1518-4e20-a3df-80d78b3f8277.svg",
+    ],
   },
 };
 
