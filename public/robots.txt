@@ -1,13 +1,9 @@
 # *
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /api/
 
 # Host
 Host: https://cenmhealthcare.com
 
 # Sitemaps
 Sitemap: https://cenmhealthcare.com/sitemap.xml
-
-
