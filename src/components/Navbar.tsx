@@ -64,6 +64,7 @@ export default function Navbar() {
     { href: "#", label: "Job Seekers", hasDropdown: true },
     { href: "/all-jobs", label: "All Jobs" },
     { href: "/blogs", label: "Blogs" },
+    { href: "#", label: "Stuff Solutions", hasDropdown: true },
     {
       href: "/saved-jobs",
       label: `Saved Jobs${
