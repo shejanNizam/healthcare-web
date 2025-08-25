@@ -13,6 +13,7 @@ type Params = {
 const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_URL;
 export default function BlogDetails({ params }: { params: Promise<Params> }) {
   const { id } = use(params);
+  console.log(id);
   const { data, isLoading } = useSingleBlogsQuery(id);
   const singleBlog = data?.data;
 

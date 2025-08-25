@@ -23,6 +23,7 @@ export const blogs = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
     AllCategoryblogs: builder.query({
       query: () => ({
         url: `/blog/category/blogs`,

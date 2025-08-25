@@ -8,6 +8,7 @@ interface Blog {
   description: string;
   category: string;
   banner: string | StaticImageData;
+  url: string;
 }
 const baseImageUrl: any = process.env.NEXT_PUBLIC_IMAGE_URL;
 
@@ -17,7 +18,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
     <>
       <div
         key={blog._id}
-        onClick={() => router.push(`/blogs/${blog._id}`)}
+        onClick={() => router.push(`/blogs/${blog.url}`)}
         className="relative w-full h-auto p-4 md:p-6 lg:p-6 xl:p-7 bg-[#E7F1F8] rounded-lg shadow-sm hover:shadow-md border border-gray-200 cursor-pointer transition-shadow duration-200"
       >
         <div className="relative w-full h-40 object-fill">
