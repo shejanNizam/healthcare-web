@@ -393,8 +393,8 @@ export default function Navbar() {
       hasDropdown: true,
       // Add static dropdown options
       dropdownItems: [
-        { href: "/staffing-solutions", label: "Staffing Solutions" },
-        { href: "/workforce-management", label: "Workforce Management" },
+        { href: "/statting_solutions", label: "Staffing Solutions" },
+        { href: "/workforce_solutions", label: "Workforce Management" },
       ],
     },
     {
