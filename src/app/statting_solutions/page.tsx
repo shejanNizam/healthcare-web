@@ -36,31 +36,11 @@ async function getStuffData() {
 
 export default async function StaffingSolutions() {
   const stuffDetails = await getStuffData();
-  console.log(stuffDetails);
+  // console.log(stuffDetails);
 
-  // Handle the case where data might be null or empty
   const FAQ = stuffDetails && stuffDetails[0] ? stuffDetails[0].FAQ : [];
 
-  // Fallback FAQ data in case API fails
-  const fallbackFAQ = [
-    {
-      question: "What is the staffing?",
-      ans: "Staffing refers to the allocation of workers for specific needs.",
-      _id: "68ad37dd2fc8672f0478c35b",
-    },
-    {
-      question: "What is the staffing?",
-      ans: "Staffing refers to the allocation of workers for specific needs.",
-      _id: "68ad37de2fc8672f0478c35f",
-    },
-    {
-      question: "Test One Question",
-      ans: "seftgw3",
-      _id: "68ad58302fc8672f0478c760",
-    },
-  ];
-
-  const faqData = FAQ.length > 0 ? FAQ : fallbackFAQ;
+  const faqData = FAQ.length > 0 ? FAQ : [];
 
   return (
     <div className="min-h-screen bg-gray-50">

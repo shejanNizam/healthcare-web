@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-// Define types for the FAQ data
 interface FAQ {
   _id: string;
   question: string;

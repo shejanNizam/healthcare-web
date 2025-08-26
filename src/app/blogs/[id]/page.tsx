@@ -51,7 +51,7 @@ export async function generateMetadata({
   const resolvedParams = await params;
   const { id } = resolvedParams;
   const singleBlog = await getBlogData(id);
-  console.log(singleBlog);
+  // console.log(singleBlog);
 
   if (!singleBlog) {
     return {
