@@ -12,7 +12,7 @@ const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
 interface Blog {
   _id: string;
-  title: string;
+  blogTitle: string;
   description: string;
   banner: string;
   category: string;
@@ -51,6 +51,7 @@ export async function generateMetadata({
   const resolvedParams = await params;
   const { id } = resolvedParams;
   const singleBlog = await getBlogData(id);
+  console.log(singleBlog);
 
   if (!singleBlog) {
     return {
@@ -60,17 +61,17 @@ export async function generateMetadata({
   }
 
   return {
-    title: singleBlog.pageTitle || singleBlog.title,
+    title: singleBlog.pageTitle || singleBlog.blogTitle,
     description: singleBlog.meteDescription || singleBlog.description,
     openGraph: {
-      title: singleBlog.pageTitle || singleBlog.title,
+      title: singleBlog.pageTitle || singleBlog.blogTitle,
       description: singleBlog.meteDescription || singleBlog.description,
       images: [imageBaseURL + singleBlog.banner],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
-      title: singleBlog.pageTitle || singleBlog.title,
+      title: singleBlog.pageTitle || singleBlog.blogTitle,
       description: singleBlog.meteDescription || singleBlog.description,
       images: [imageBaseURL + singleBlog.banner],
     },
@@ -134,7 +135,7 @@ export default async function BlogDetails({
             </div>
 
             <h1 className="text-3xl font-bold text-primary mb-6">
-              {singleBlog.title}
+              {singleBlog.blogTitle}
             </h1>
 
             <div
