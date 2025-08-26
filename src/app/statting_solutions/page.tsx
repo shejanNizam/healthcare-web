@@ -1,19 +1,6 @@
-// export default function StaffingSolutions() {
-//   return (
-//     <div className="flex justify-center items-center h-screen">
-//       <h3>StaffingSolutions</h3>
-//     </div>
-//   );
-// }
-
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
 import {
   FaBrain,
-  FaChevronDown,
-  FaChevronUp,
   FaHeart,
   FaPills,
   FaUserCheck,
@@ -21,45 +8,59 @@ import {
   FaUsers,
 } from "react-icons/fa";
 
+import FAQSection from "@/components/FAQSection";
 import IntBanner from "@/components/IntBanner";
+import { BASE_URL } from "@/redux/api/baseApi/baseApi";
 import chooseUsImage from "../../assets/staff/choose_us.svg";
 import faqImage from "../../assets/staff/faq.svg";
 import subBannerImage from "../../assets/staff/sub_banner_img.svg";
 
-export default function StaffingSolutions() {
-  const [openFAQ, setOpenFAQ] = useState(null);
+async function getStuffData() {
+  try {
+    const response = await fetch(`${BASE_URL}/staffing/all`, {
+      method: "GET",
+      cache: "no-store",
+    });
 
-  const FAQ = [
+    if (!response.ok) {
+      throw new Error(`Failed to fetch blog: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching blog data:", error);
+    return null;
+  }
+}
+
+export default async function StaffingSolutions() {
+  const stuffDetails = await getStuffData();
+  console.log(stuffDetails);
+
+  // Handle the case where data might be null or empty
+  const FAQ = stuffDetails && stuffDetails[0] ? stuffDetails[0].FAQ : [];
+
+  // Fallback FAQ data in case API fails
+  const fallbackFAQ = [
     {
-      question: "How quickly can you provide staff?",
-      ans: "We can typically provide qualified healthcare professionals within 24-48 hours for urgent needs, with comprehensive placement services available.",
+      question: "What is the staffing?",
+      ans: "Staffing refers to the allocation of workers for specific needs.",
       _id: "68ad37dd2fc8672f0478c35b",
     },
     {
-      question: "Are all staff fully credentialed?",
-      ans: "Yes, all our healthcare professionals are fully licensed, credentialed, and background-checked before placement.",
+      question: "What is the staffing?",
+      ans: "Staffing refers to the allocation of workers for specific needs.",
       _id: "68ad37de2fc8672f0478c35f",
     },
     {
-      question: "Do you offer permanent placements?",
-      ans: "We offer both temporary and permanent staffing solutions tailored to your facility's specific needs and requirements.",
+      question: "Test One Question",
+      ans: "seftgw3",
       _id: "68ad58302fc8672f0478c760",
-    },
-    {
-      question: "What specialties do you cover?",
-      ans: "We cover all major healthcare specialties including general medicine, surgery, cardiology, neurology, pharmacy, and support staff.",
-      _id: "68ad58302fc8672f0478c761",
-    },
-    {
-      question: "How do you ensure quality?",
-      ans: "Through rigorous screening, ongoing performance monitoring, client feedback systems, and continuous professional development programs.",
-      _id: "68ad58302fc8672f0478c762",
     },
   ];
 
-  const toggleFAQ = (id: any) => {
-    setOpenFAQ(openFAQ === id ? null : id);
-  };
+  const faqData = FAQ.length > 0 ? FAQ : fallbackFAQ;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -69,11 +70,11 @@ export default function StaffingSolutions() {
         description={`We are a dedicated platform for treatment-related job opportunities, connecting healthcare providers with skilled professionals like nurses and caregivers. Our mission is to support compassionate care by making it easier to find, apply, and hire for essential healthcare roles across the globe.`}
       />
 
-      {/* sub banned */}
+      {/* sub banner */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div className="">
-            <Image src={subBannerImage} alt="choose_us_image" />
+            <Image src={subBannerImage} alt="sub_banner_image" />
           </div>
 
           <div>
@@ -90,8 +91,8 @@ export default function StaffingSolutions() {
                 strategy. Our goal is to deeply understand your challenges,
                 allowing us to provide a seamless workforce strategy without
                 involving multiple providers. As you work towards stability, we
-                can fill the gaps to support your core staff in the
-                interim.We’ll make staffing more effective and cost-efficien
+                can fill the gaps to support your core staff in the interim.
+                Well make staffing more effective and cost-efficient.
               </p>
             </div>
           </div>
@@ -214,59 +215,16 @@ export default function StaffingSolutions() {
                 strategy. Our goal is to deeply understand your challenges,
                 allowing us to provide a seamless workforce strategy without
                 involving multiple providers. As you work towards stability, we
-                can fill the gaps to support your core staff in the
-                interim.We’ll make staffing more effective and cost-efficien
+                can fill the gaps to support your core staff in the interim.
+                Well make staffing more effective and cost-efficient.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-gray-800">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-gray-600">Common questions, clear answers.</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 items-start">
-            <div className="text-center">
-              <Image src={faqImage} alt="faq_image" />
-            </div>
-
-            <div className="space-y-4">
-              {FAQ.map((faq) => (
-                <div
-                  key={faq._id}
-                  className="border border-gray-200 rounded-lg overflow-hidden"
-                >
-                  <button
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
-                    onClick={() => toggleFAQ(faq._id)}
-                  >
-                    <h3 className="font-semibold text-gray-800">
-                      {faq.question}
-                    </h3>
-                    {openFAQ === faq._id ? (
-                      <FaChevronUp className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                    ) : (
-                      <FaChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                    )}
-                  </button>
-                  {openFAQ === faq._id && (
-                    <div className="px-6 pb-4 border-t border-gray-100">
-                      <p className="text-gray-600 pt-3">{faq.ans}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* FAQ Section - Now using Client Component */}
+      <FAQSection faqData={faqData} faqImage={faqImage} />
     </div>
   );
 }
