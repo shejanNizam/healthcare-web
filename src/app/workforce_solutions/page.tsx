@@ -4,7 +4,7 @@ import FAQSection from "@/components/FAQSection";
 import IntBanner from "@/components/IntBanner";
 import { getStuffData } from "@/utils/getStuffData";
 import { Metadata } from "next";
-import chooseUsImage from "../../assets/staff/choose_us.svg";
+import chooseUsImage from "../../assets/staff/why_choose_two.svg";
 import faqImage from "../../assets/staff/faq.svg";
 import subBannerImage from "../../assets/staff/sub_banner_img.svg";
 
@@ -18,13 +18,13 @@ interface TWeDo {
 // Generate metadata for SEO
 export async function generateMetadata(): Promise<Metadata> {
   const stuffDetails = await getStuffData();
-  const singleStuff = await stuffDetails[0];
+  const singleStuff = await stuffDetails[1];
   console.log(singleStuff);
 
   if (!singleStuff) {
     return {
-      title: "Stuff Not Found",
-      description: "The requested stuff post could not be found.",
+      title: "Workeforce Not Found",
+      description: "The requested workforce post could not be found.",
     };
   }
 
