@@ -388,7 +388,7 @@ export default function Navbar() {
     { href: "/all-jobs", label: "All Jobs" },
     { href: "/blogs", label: "Blogs" },
     {
-      href: "#",
+      href: "*",
       label: "Stuff Solutions",
       hasDropdown: true,
       // Add static dropdown options
