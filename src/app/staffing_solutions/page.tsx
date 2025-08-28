@@ -18,7 +18,6 @@ import subBannerImage from "../../assets/staff/sub_banner_img.svg";
 
 // const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
-// Generate metadata for SEO
 export async function generateMetadata(): Promise<Metadata> {
   const stuffDetails = await getStuffData();
   const singleStuff = await stuffDetails[0];
@@ -114,7 +113,7 @@ const medicalServices = [
 
 export default async function StaffingSolutions() {
   const stuffDetails = await getStuffData();
-  console.log(stuffDetails);
+  // console.log(stuffDetails);
 
   if (!stuffDetails || stuffDetails.length === 0) {
     return (
@@ -209,7 +208,7 @@ export default async function StaffingSolutions() {
         </div>
       </section>
 
-      {/* FAQ Section - Now using Client Component */}
+      {/* faqs */}
       <FAQSection faqData={faqData} faqImage={faqImage} />
     </div>
   );

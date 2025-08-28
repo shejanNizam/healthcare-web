@@ -22,7 +22,6 @@ interface Blog {
   url: string;
 }
 
-// This function fetches the blog data on the server
 async function getBlogData(id: string): Promise<Blog | null> {
   try {
     const response = await fetch(`${BASE_URL}/blog/single/${id}`, {
@@ -42,7 +41,6 @@ async function getBlogData(id: string): Promise<Blog | null> {
   }
 }
 
-// Generate metadata for SEO
 export async function generateMetadata({
   params,
 }: {

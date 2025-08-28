@@ -36,7 +36,7 @@ export default function JobCard({ job }: { job: Job }) {
     }
   );
 
-  console.log(job);
+  // console.log(job);
 
   return (
     <div
