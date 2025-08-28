@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   if (!singleStuff) {
     return {
-      title: "Stuff Not Found",
+      title: "Staff Not Found",
       description: "The requested stuff post could not be found.",
     };
   }
@@ -114,7 +114,7 @@ const medicalServices = [
 
 export default async function StaffingSolutions() {
   const stuffDetails = await getStuffData();
-  // console.log(singleStuffDetails);
+  console.log(stuffDetails);
 
   if (!stuffDetails || stuffDetails.length === 0) {
     return (
