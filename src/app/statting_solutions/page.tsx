@@ -22,7 +22,7 @@ import subBannerImage from "../../assets/staff/sub_banner_img.svg";
 export async function generateMetadata(): Promise<Metadata> {
   const stuffDetails = await getStuffData();
   const singleStuff = await stuffDetails[0];
-  console.log(singleStuff);
+  // console.log(singleStuff);
 
   if (!singleStuff) {
     return {
@@ -114,11 +114,23 @@ const medicalServices = [
 
 export default async function StaffingSolutions() {
   const stuffDetails = await getStuffData();
-  const singleStuffDetails = await stuffDetails[0];
-  console.log(singleStuffDetails);
+  // console.log(singleStuffDetails);
 
+  if (!stuffDetails || stuffDetails.length === 0) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800">
+            Data not available
+          </h1>
+          <p className="text-gray-600">Please try again later.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const singleStuffDetails = stuffDetails[0];
   const FAQ = stuffDetails && singleStuffDetails ? singleStuffDetails?.FAQ : [];
-
   const faqData = FAQ.length > 0 ? FAQ : [];
 
   return (

@@ -4,9 +4,9 @@ import FAQSection from "@/components/FAQSection";
 import IntBanner from "@/components/IntBanner";
 import { getStuffData } from "@/utils/getStuffData";
 import { Metadata } from "next";
-import chooseUsImage from "../../assets/staff/why_choose_two.svg";
 import faqImage from "../../assets/staff/faq.svg";
 import subBannerImage from "../../assets/staff/sub_banner_img.svg";
+import chooseUsImage from "../../assets/staff/why_choose_two.svg";
 
 // const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
@@ -19,7 +19,7 @@ interface TWeDo {
 export async function generateMetadata(): Promise<Metadata> {
   const stuffDetails = await getStuffData();
   const singleStuff = await stuffDetails[1];
-  console.log(singleStuff);
+  // console.log(singleStuff);
 
   if (!singleStuff) {
     return {
@@ -48,13 +48,25 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function WorkforceManagement() {
   const stuffDetails = await getStuffData();
-  const singleStuffDetails = await stuffDetails[1];
 
-  console.log(singleStuffDetails);
+  // console.log(singleStuffDetails);
+  if (!stuffDetails || stuffDetails.length === 0) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800">
+            Data not available
+          </h1>
+          <p className="text-gray-600">Please try again later.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const singleStuffDetails = await stuffDetails[1];
   const FAQ = stuffDetails && singleStuffDetails ? singleStuffDetails?.FAQ : [];
   const whatWeDo =
     stuffDetails && singleStuffDetails ? singleStuffDetails?.what_we_do : [];
-
   const faqData = FAQ.length > 0 ? FAQ : [];
 
   return (
