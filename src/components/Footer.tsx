@@ -38,12 +38,16 @@ const Footer = () => (
             </p>
 
             <div className="flex gap-4">
-              <Link href="https://facebook.com" className="hover:text-primary">
+              <Link
+                target="_blank"
+                href="https://facebook.com"
+                className="hover:text-primary"
+              >
                 <FaFacebook size={32} />
               </Link>
               <Link
                 target="_blank"
-                href="https://instagram.com"
+                href="https://www.instagram.com/cenmhealthcare?igsh=ZnZibjhwcXJyYWRm"
                 className="hover:text-primary"
               >
                 <FaInstagram size={32} />
@@ -57,7 +61,7 @@ const Footer = () => (
               </Link>
               <Link
                 target="_blank"
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/cenm-healthcare/"
                 className="hover:text-primary"
               >
                 <FaLinkedinIn size={32} />
@@ -122,15 +126,15 @@ const Footer = () => (
               </h3>
               <ul className="text-center md:text-left">
                 {/* Address with Google Maps Link */}
-                <div className="">
+                <div>
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=9050+Carron+Dr.+Suite+%23244+Pico+Rivera,+CA-90660"
+                    href="https://www.google.com/maps/search/?api=1&query=41877+Enterprise+Circle+North+Temecula,+CA-92590"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center mb-2 justify-center md:justify-start text-sm hover:text-primary transition"
                   >
                     <FaMapMarkerAlt className="mr-2" />
-                    9050 Carron Dr. Suite #244 Pico Rivera, CA-90660
+                    41877 Enterprise Circle North Temecula, CA-92590
                   </a>
                 </div>
 
