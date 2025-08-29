@@ -273,7 +273,7 @@ const AllJobs = () => {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
           {filteredJobs.length === 0 ? (
             <div className="flex justify-center items-center col-span-full min-h-[300px]">
-              <CustomErrorPage />
+              <CustomErrorPage text={`No jobs yet!!`} />
             </div>
           ) : (
             filteredJobs.map((job) => <JobCard key={job._id} job={job} />)

@@ -1,7 +1,11 @@
-export default function CustomErrorPage() {
+interface TText {
+  text: string;
+}
+
+export default function CustomErrorPage({ text }: TText) {
   return (
-    <div>
-      <p className=" font-semibold"> Nothing found here! </p>
+    <div className="text-center">
+      <p className="font-semibold"> {text} </p>
     </div>
   );
 }

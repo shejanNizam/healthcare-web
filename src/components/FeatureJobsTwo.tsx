@@ -36,15 +36,17 @@ export default function FeatureJobsTwo() {
     <div>
       <div className="flex-1  xl:px-12">
         {/* Job cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div>
           {jobsData?.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-              <CustomErrorPage />
+            <div className="p-8">
+              <CustomErrorPage text={`No jobs yet!!`} />
             </div>
           ) : (
-            jobsData
-              .slice(0, 3)
-              .map((job) => <JobCard key={job._id} job={job} />)
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {jobsData.slice(0, 3).map((job) => (
+                <JobCard key={job._id} job={job} />
+              ))}
+            </div>
           )}
         </div>
       </div>

@@ -32,7 +32,7 @@ export default function BlogsPage() {
           <div className="mt-10 md:mt-0 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4">
             {data?.data?.allBlogs.length === 0 ? (
               <div className="flex justify-center items-center col-span-full min-h-[300px]">
-                <CustomErrorPage />
+                <CustomErrorPage text={`No blogs yet!!`} />
               </div>
             ) : (
               data?.data?.allBlogs.map((blog: any) => (

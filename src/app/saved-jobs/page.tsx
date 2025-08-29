@@ -16,7 +16,7 @@ export default function SavedJobs() {
         {savedJobs.length === 0 ? (
           <div className="bg-white rounded-lg  p-8 w-full flex flex-col items-center justify-center">
             <div className="flex justify-center items-center h-80 w-80">
-              <CustomErrorPage />
+              <CustomErrorPage text={`No saved jobs yet!!`} />
             </div>
           </div>
         ) : (
