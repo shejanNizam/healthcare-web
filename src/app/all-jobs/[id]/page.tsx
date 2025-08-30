@@ -145,7 +145,7 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
                   {job.title}
                 </h1>
                 <div
-                  className="text-gray-700 mb-6"
+                  className="no-tailwind text-gray-700 mb-6"
                   dangerouslySetInnerHTML={{ __html: job.description }}
                 />
               </div>
@@ -196,7 +196,7 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
               {job.summary && (
                 <div className="mb-6">
                   <p
-                    className="text-gray-700"
+                    className="no-tailwind text-gray-700"
                     dangerouslySetInnerHTML={{ __html: job.summary }}
                   />
                 </div>

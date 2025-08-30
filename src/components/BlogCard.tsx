@@ -37,6 +37,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
           </p>
           <p></p>
           <div
+            className="no-tailwind"
             dangerouslySetInnerHTML={{ __html: blog.description.slice(0, 140) }}
           />
         </div>

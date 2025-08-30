@@ -137,7 +137,7 @@ export default async function BlogDetails({
             </h1>
 
             <div
-              className="prose max-w-none mb-2 text-wrap"
+              className="no-tailwind prose max-w-none mb-2 text-wrap"
               dangerouslySetInnerHTML={{ __html: singleBlog.description }}
             />
           </div>

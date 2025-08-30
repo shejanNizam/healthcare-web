@@ -83,7 +83,7 @@ export default function JobCard({ job }: { job: Job }) {
       <h2 className="text-md font-semibold text-primary">{job.title}</h2>
 
       <div
-        className="text-sm text-gray-700 mt-1 line-clamp-2"
+        className="no-tailwind text-sm text-gray-700 mt-1 line-clamp-2"
         dangerouslySetInnerHTML={{ __html: job.description.slice(0, 200) }}
       />
 
