@@ -152,11 +152,11 @@ const Footer = () => (
                 {/* Phone Number with tel Link */}
                 <div className="">
                   <a
-                    href="tel:+15622738746"
+                    href="tel:+19512968800"
                     className="flex items-center justify-center md:justify-start text-sm hover:text-primary transition"
                   >
                     <FaPhoneAlt className="mr-2" />
-                    (562) 273-8746
+                    (951) 296-8800
                   </a>
                 </div>
               </ul>
