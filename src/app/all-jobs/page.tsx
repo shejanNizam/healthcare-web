@@ -59,10 +59,10 @@ const AllJobs = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  const { data: categoryData, isLoading: loadingCategory } =
-    useGetValueQuery("Category");
-  const { data: professionData, isLoading: loadingProfession } =
-    useGetValueQuery("Profession");
+  // const { data: categoryData, isLoading: loadingCategory } =
+  //   useGetValueQuery("Category");
+  // const { data: professionData, isLoading: loadingProfession } =
+  //   useGetValueQuery("Profession");
   const { data: jobTypeData, isLoading: loadingJobType } =
     useGetValueQuery("job-type");
 
@@ -71,10 +71,10 @@ const AllJobs = () => {
     [key: string]: unknown;
   }
 
-  const categories =
-    categoryData?.data?.map((item: ValueItem) => item.type) || [];
-  const professions =
-    professionData?.data?.map((item: ValueItem) => item.type) || [];
+  // const categories =
+  //   categoryData?.data?.map((item: ValueItem) => item.type) || [];
+  // const professions =
+  //   professionData?.data?.map((item: ValueItem) => item.type) || [];
   const jobtypes = jobTypeData?.data?.map((item: ValueItem) => item.type) || [];
 
   useEffect(() => {
@@ -163,7 +163,8 @@ const AllJobs = () => {
     return true;
   });
 
-  if (isLoading || loadingCategory || loadingProfession || loadingJobType) {
+  // if (isLoading || loadingCategory || loadingProfession || loadingJobType) {
+  if (isLoading || loadingJobType) {
     return (
       <div className="flex justify-center items-center h-screen">
         <Spin size="large" />
@@ -222,8 +223,8 @@ const AllJobs = () => {
 
         {/* Filter Sections */}
         {[
-          { label: "Category", key: "category", options: categories },
-          { label: "Profession", key: "profession", options: professions },
+          // { label: "Category", key: "category", options: categories },
+          // { label: "Profession", key: "profession", options: professions },
           { label: "Job Type", key: "jobType", options: jobtypes },
         ].map(({ label, key, options }) => (
           <div key={label} className="mb-6">
