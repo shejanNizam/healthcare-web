@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 import bannerRightImage from "../assets/banner/banner_right_side.png";
-import SearchBar from "./SearchBar";
 
 export default function Banner() {
   return (
@@ -30,9 +29,7 @@ export default function Banner() {
               Request Staffing Now <FaArrowRight />
             </button>
           </Link>
-          <div className="w-full mb-8">
-            <SearchBar />
-          </div>
+          <div className="w-full mb-8">{/* <SearchBar /> */}</div>
         </div>
         <div className="  w-full md:w-[40%] mt-8 md:mt-2 flex justify-center">
           <Image

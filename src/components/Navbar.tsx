@@ -227,9 +227,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <div className="hidden lg:block">
-            <SearchBar />
-          </div>
+          <div className="hidden lg:block">{/* <SearchBar /> */}</div>
           <Link href="/apply-jobs">
             <Button
               size="large"
