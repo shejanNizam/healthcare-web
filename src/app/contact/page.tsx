@@ -58,6 +58,10 @@ export default function Shejan() {
           <h1 className="text-3xl sm:text-4xl font-bold">Contact Us</h1>
           <p className="mt-2 sm:mt-4 text-base sm:text-lg">
             We would love to hear from you!
+            <br />
+            ‘Operations active in California and Tennessee.’
+            <br />
+            We’ll add the local office or mailing address once I finalize it.”
           </p>
         </div>
 

@@ -30,9 +30,31 @@ const item = {
 export default function About() {
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* <IntBanner
+        title={"Empowering Healthcare Careers, One Connection at a Time"}
+        description={`We are a dedicated platform for treatment-related job opportunities, connecting healthcare providers with skilled professionals like nurses and caregivers. Our mission is to support compassionate care by making it easier to find, apply, and hire for essential healthcare roles across the globe.
+          
+<br />
+          “C.E.N.M. Healthcare is a veteran-led, multi-state healthcare staffing agency providing trusted clinical professionals to facilities across California and Tennessee — with expansion into Ohio underway.”          
+          `}
+      /> */}
+
       <IntBanner
         title={"Empowering Healthcare Careers, One Connection at a Time"}
-        description={`We are a dedicated platform for treatment-related job opportunities, connecting healthcare providers with skilled professionals like nurses and caregivers. Our mission is to support compassionate care by making it easier to find, apply, and hire for essential healthcare roles across the globe.`}
+        description={
+          <>
+            We are a dedicated platform for treatment-related job opportunities,
+            connecting healthcare providers with skilled professionals like
+            nurses and caregivers. Our mission is to support compassionate care
+            by making it easier to find, apply, and hire for essential
+            healthcare roles across the globe.
+            <br />
+            “C.E.N.M. Healthcare is a veteran-led, multi-state healthcare
+            staffing agency providing trusted clinical professionals to
+            facilities across California and Tennessee — with expansion into
+            Ohio underway.”
+          </>
+        }
       />
 
       <div className="max-w-7xl mx-auto py-16 px-6 sm:px-8 lg:px-12">

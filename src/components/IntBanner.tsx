@@ -3,7 +3,7 @@ import bannerRightImage from "../assets/banner/int_banner_right_side.png";
 
 interface IntBannerProps {
   title: string;
-  description: string;
+  description: string | React.ReactNode;
 }
 
 export default function IntBanner({ title, description }: IntBannerProps) {

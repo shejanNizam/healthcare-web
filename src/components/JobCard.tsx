@@ -27,14 +27,14 @@ export default function JobCard({ job }: { job: Job }) {
     router.push(`/all-jobs/${job._id}`);
   };
 
-  const formattedDeadline = new Date(job.deadline).toLocaleDateString(
-    undefined,
-    {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }
-  );
+  // const formattedDeadline = new Date(job.deadline).toLocaleDateString(
+  //   undefined,
+  //   {
+  //     year: "numeric",
+  //     month: "long",
+  //     day: "numeric",
+  //   }
+  // );
 
   // console.log(job);
 
@@ -91,9 +91,9 @@ export default function JobCard({ job }: { job: Job }) {
         <span className="text-primary font-medium whitespace-nowrap">
           Monthly: ${job.salary}
         </span>
-        <span className="text-xs text-primary whitespace-nowrap">
+        {/* <span className="text-xs text-primary whitespace-nowrap">
           Deadline: {formattedDeadline}
-        </span>
+        </span> */}
         <span className="px-2 py-0.5 bg-blue-100 text-primary text-xs font-medium rounded-full whitespace-nowrap">
           {job.jobType}
         </span>

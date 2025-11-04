@@ -61,6 +61,9 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
     if (!job?._id) return;
     router.push(`/apply-jobs?jobId=${job._id}`);
   };
+  const handleApplyJobInternationaly = () => {
+    router.push(`/international?international=international`);
+  };
 
   if (isLoading)
     return (
@@ -317,12 +320,18 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
                 </div> */}
               </div>
 
-              <div className="p-6">
+              <div className="p-6 flex flex-col gap-4">
                 <button
                   onClick={handleApplyJob}
                   className="w-full bg-primary hover:bg-primary-dark text-white py-3 px-4 rounded-lg font-medium transition-colors cursor-pointer"
                 >
                   Apply Now
+                </button>
+                <button
+                  onClick={handleApplyJobInternationaly}
+                  className="w-full bg-primary hover:bg-primary-dark text-white py-3 px-4 rounded-lg font-medium transition-colors cursor-pointer"
+                >
+                  Apply International
                 </button>
               </div>
             </div>

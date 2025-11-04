@@ -63,10 +63,10 @@ export default function Navbar() {
     { href: "/", label: "Home" },
     // { href: "#", label: "Job Seekers", hasDropdown: true },
     { href: "/all-jobs", label: "All Jobs" },
-    {
-      href: "/international?international=international",
-      label: "International",
-    },
+    // {
+    //   href: "/international?international=international",
+    //   label: "International",
+    // },
     { href: "/blogs", label: "Blogs" },
     {
       href: "*",

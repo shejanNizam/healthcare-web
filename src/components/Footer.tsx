@@ -35,6 +35,9 @@ const Footer = () => (
               Empowering job seekers with resources, guidance, and opportunities
               to connect with top employers. Find your perfect career match and
               take the next step toward your future success.
+              <br />
+              Now serving healthcare facilities in California and Tennessee.
+              Ohio coming soon.
             </p>
 
             <div className="flex gap-4">
