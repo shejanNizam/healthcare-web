@@ -290,9 +290,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex-1 flex flex-col p-4 space-y-2">
-            <div className="mb-4">
-              <SearchBar />
-            </div>
+            <div className="mb-4">{/* <SearchBar /> */}</div>
 
             {navLinks.map((link) => (
               <div key={link.href}>
