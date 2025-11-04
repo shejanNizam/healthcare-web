@@ -95,6 +95,14 @@ const Footer = () => (
                     Contact Us
                   </Link>
                 </li>
+                <li className="mb-1">
+                  <Link
+                    href="/international?international=international"
+                    className="text-sm hover:text-primary"
+                  >
+                    International
+                  </Link>
+                </li>
               </ul>
             </div>
 
