@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { TiArrowSortedDown } from "react-icons/ti";
 import main_logo from "../assets/healthcare_main_logo.svg";
-import SearchBar from "./SearchBar";
 
 interface JobCategory {
   _id: string;
