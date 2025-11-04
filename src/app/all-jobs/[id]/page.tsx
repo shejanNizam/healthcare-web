@@ -7,14 +7,14 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { use } from "react";
 import {
-  FaCalendarAlt,
   FaClock,
   FaHospital,
   FaMapMarkerAlt,
   FaMoneyBillWave,
-  FaUser,
 } from "react-icons/fa";
 import { FiBookmark, FiChevronLeft } from "react-icons/fi";
+import { MdTitle } from "react-icons/md";
+import { PiAddressBookTabsFill } from "react-icons/pi";
 const baseImageUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
 
 type Params = {
@@ -131,10 +131,10 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
                   )}
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold">{job.hospitalName}</h2>
+                  <h2 className="text-xl font-bold">{job.address}</h2>
                   <p className="text-gray-500 flex items-center">
                     <FaMapMarkerAlt className="mr-1" />
-                    {job.address}
+                    {job.hospitalName} {/* This is now location  */}
                   </p>
                 </div>
               </div>
@@ -193,14 +193,14 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
               </div>
 
               {/* Summary */}
-              {job.summary && (
+              {/* {job.summary && (
                 <div className="mb-6">
                   <p
                     className="no-tailwind text-gray-700"
                     dangerouslySetInnerHTML={{ __html: job.summary }}
                   />
                 </div>
-              )}
+              )} */}
             </div>
           </div>
 
@@ -212,7 +212,7 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
               </div>
 
               <div className="p-6 space-y-4">
-                <div className="flex items-start">
+                {/* <div className="flex items-start">
                   <FaMapMarkerAlt className="text-primary mt-1 mr-3 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-medium text-gray-500">Address</p>
@@ -246,16 +246,63 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
                     <p className="text-sm font-medium text-gray-500">Vacancy</p>
                     <p className="text-gray-700">{job.vacancy}</p>
                   </div>
+                </div> */}
+
+                <div className="flex items-start">
+                  <MdTitle className="text-primary mt-1 mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">
+                      Job Title
+                    </p>
+                    <p className="text-gray-700">{job.title}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <PiAddressBookTabsFill className="text-primary mt-1 mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">Address</p>
+                    <p className="text-gray-700">{job.address}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <FaMapMarkerAlt className="text-primary mt-1 mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">
+                      Location
+                    </p>
+                    <p className="text-gray-700">{job.hospitalName}</p>
+                  </div>
                 </div>
 
                 <div className="flex items-start">
                   <FaClock className="text-primary mt-1 mr-3 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-medium text-gray-500">
+                      {/* Hours per week */}
+                      Schedule
+                    </p>
+                    <p className="text-gray-700">{job.hoursPerWeek}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <FaMoneyBillWave className="text-primary mt-1 mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">
+                      Pay Rate
+                    </p>
+                    <p className="text-gray-700">{job?.salary}</p>
+                  </div>
+                </div>
+                {/* <div className="flex items-start">
+                  <FaClock className="text-primary mt-1 mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">
                       Hours per week
                     </p>
                     <p className="text-gray-700">{job.hoursPerWeek}</p>
-                    {/* // */}
                   </div>
                 </div>
 
@@ -267,7 +314,7 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
                     </p>
                     <p className="text-gray-700">${job?.salary}</p>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="p-6">

@@ -89,7 +89,7 @@ export default function JobCard({ job }: { job: Job }) {
 
       <div className="flex flex-wrap justify-between items-center gap-2 mt-3">
         <span className="text-primary font-medium whitespace-nowrap">
-          Monthly: {job.salary}
+          Monthly: ${job.salary}
         </span>
         <span className="text-xs text-primary whitespace-nowrap">
           Deadline: {formattedDeadline}
