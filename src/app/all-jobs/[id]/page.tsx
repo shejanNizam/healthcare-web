@@ -43,15 +43,15 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
   };
 
   // Format ISO date strings to readable format
-  const formatDate = (isoDate?: string) => {
-    if (!isoDate) return "";
-    const options: Intl.DateTimeFormatOptions = {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    };
-    return new Date(isoDate).toLocaleDateString(undefined, options);
-  };
+  // const formatDate = (isoDate?: string) => {
+  //   if (!isoDate) return "";
+  //   const options: Intl.DateTimeFormatOptions = {
+  //     day: "numeric",
+  //     month: "long",
+  //     year: "numeric",
+  //   };
+  //   return new Date(isoDate).toLocaleDateString(undefined, options);
+  // };
 
   const handleBack = () => {
     window.history.back();
