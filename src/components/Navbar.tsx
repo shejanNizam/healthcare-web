@@ -61,8 +61,12 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "#", label: "Job Seekers", hasDropdown: true },
+    // { href: "#", label: "Job Seekers", hasDropdown: true },
     { href: "/all-jobs", label: "All Jobs" },
+    {
+      href: "/international?international=international",
+      label: "International",
+    },
     { href: "/blogs", label: "Blogs" },
     {
       href: "*",
