@@ -137,6 +137,7 @@ export default async function StaffingSolutions() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <IntBanner
+        type={singleStuffDetails?.type}
         title={singleStuffDetails?.bannerTitle}
         description={singleStuffDetails?.bannerSubTitle}
       />

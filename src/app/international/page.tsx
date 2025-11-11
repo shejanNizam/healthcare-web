@@ -17,7 +17,7 @@ export default function International() {
   return (
     <div className="min-h-screen">
       <IntBanner
-        title={" International "}
+        title={"International"}
         description={`International nurses, take the next step in your career! Apply
             for healthcare jobs in the USA, access visa support, and join a
             rewarding healthcare system. Start your application today`}

@@ -1,17 +1,23 @@
 import CustomButton from "./CustomButton";
 
 interface IntBannerProps {
+  type?: string;
   title: string;
   description: string | React.ReactNode;
 }
 
-export default function IntBanner({ title, description }: IntBannerProps) {
+export default function IntBanner({
+  type,
+  title,
+  description,
+}: IntBannerProps) {
+  // console.log(type);
   return (
     <div className="bg-gradient-to-r from-primary to-primary/30 w-full">
       <div
         className="bg-primary-light flex flex-col-reverse md:flex-row items-center justify-center 
-                   px-4 sm:px-8 md:px-8 lg:px-10 xl:px-20 2xl:px-24 
-                    text-center w-full"
+                   px-4 sm:px-8 md:px-8 lg:px-10 xl:px-20 2xl:px-24
+                   text-center w-full"
       >
         <div
           className="w-full md:w-[80%] lg:w-[60%] flex flex-col gap-3 sm:gap-4 md:gap-6 
@@ -30,8 +36,19 @@ export default function IntBanner({ title, description }: IntBannerProps) {
               {description}
             </p>
           )}
-
-          <CustomButton text="Request Your Personalized Nursing Staffing Solution" />
+          {type && (
+            <>
+              {/* <Link href={`/contact`}> */}
+              <CustomButton
+                text={
+                  type === "statting_solutions"
+                    ? "Request Your Personalized Nursing Staffing Solution"
+                    : "Schedule Your Workforce Consultation"
+                }
+              />
+              {/* </Link> */}
+            </>
+          )}
         </div>
       </div>
     </div>
