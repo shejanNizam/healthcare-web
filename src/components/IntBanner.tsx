@@ -1,3 +1,5 @@
+import CustomButton from "./CustomButton";
+
 interface IntBannerProps {
   title: string;
   description: string | React.ReactNode;
@@ -28,6 +30,8 @@ export default function IntBanner({ title, description }: IntBannerProps) {
               {description}
             </p>
           )}
+
+          <CustomButton text="Request Your Personalized Nursing Staffing Solution" />
         </div>
       </div>
     </div>
