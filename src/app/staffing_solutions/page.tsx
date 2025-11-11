@@ -131,13 +131,14 @@ export default async function StaffingSolutions() {
   const singleStuffDetails = stuffDetails[0];
   const FAQ = stuffDetails && singleStuffDetails ? singleStuffDetails?.FAQ : [];
   const faqData = FAQ.length > 0 ? FAQ : [];
+  console.log(singleStuffDetails);
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <IntBanner
-        title={singleStuffDetails?.bannerHeading}
-        description={singleStuffDetails?.tagline}
+        title={singleStuffDetails?.bannerTitle}
+        description={singleStuffDetails?.bannerSubTitle}
       />
 
       {/* sub banner */}
