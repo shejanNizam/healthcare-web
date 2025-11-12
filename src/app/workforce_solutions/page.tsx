@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import FAQSection from "@/components/FAQSection";
 import IntBanner from "@/components/IntBanner";
+import PatientCareDescription from "@/components/PatientCareDescription";
 import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
 import { getStuffData } from "@/utils/getStuffData";
@@ -78,6 +79,11 @@ export default async function WorkforceManagement() {
         <SpecialityDescription
           type={singleStuffDetails?.type}
           specialityDescription={singleStuffDetails?.specialityDescription}
+        />
+
+        {/* Automated Employee Scheduling for Healthcare to Improve Patient Care */}
+        <PatientCareDescription
+          patientCareDescription={singleStuffDetails?.patientCareDescription}
         />
 
         {/* sub banner */}
