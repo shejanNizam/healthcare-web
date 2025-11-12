@@ -10,6 +10,7 @@ import {
 
 import FAQSection from "@/components/FAQSection";
 import IntBanner from "@/components/IntBanner";
+import StandsDescription from "@/components/StandsDescription";
 import { getStuffData } from "@/utils/getStuffData";
 import { Metadata } from "next";
 import chooseUsImage from "../../assets/staff/choose_us.svg";
@@ -140,6 +141,16 @@ export default async function StaffingSolutions() {
         type={singleStuffDetails?.type}
         title={singleStuffDetails?.bannerTitle}
         description={singleStuffDetails?.bannerSubTitle}
+      />
+
+      {/* 
+      Why C.E.N.M. Stands Apart / 
+      Why C.E.N.M. Leads in Healthcare Workforce Management 
+      */}
+
+      <StandsDescription
+        type={singleStuffDetails?.type}
+        standsDescription={singleStuffDetails?.standsDescription}
       />
 
       {/* sub banner */}
