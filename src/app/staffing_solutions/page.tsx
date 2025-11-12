@@ -12,6 +12,7 @@ import CustomButton from "@/components/CustomButton";
 import FAQSection from "@/components/FAQSection";
 import GuaranteesDescription from "@/components/GuaranteesDescription";
 import IntBanner from "@/components/IntBanner";
+import ServiceSuccessDescription from "@/components/ServiceSuccessDescription";
 import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
 import { getStuffData } from "@/utils/getStuffData";
@@ -168,6 +169,14 @@ export default async function StaffingSolutions() {
       <GuaranteesDescription
         type={singleStuffDetails?.type}
         guaranteesDescription={singleStuffDetails?.guaranteesDescription}
+      />
+
+      {/* Service Area & Compliance Standards / Success Story: Healthcare Staffing Optimization in Action */}
+      <ServiceSuccessDescription
+        type={singleStuffDetails?.type}
+        serviceSuccessDescription={
+          singleStuffDetails?.serviceSuccessDescription
+        }
       />
 
       {/* sub banner */}

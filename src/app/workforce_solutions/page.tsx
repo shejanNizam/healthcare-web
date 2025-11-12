@@ -5,6 +5,7 @@ import FAQSection from "@/components/FAQSection";
 import GuaranteesDescription from "@/components/GuaranteesDescription";
 import IntBanner from "@/components/IntBanner";
 import PatientCareDescription from "@/components/PatientCareDescription";
+import ServiceSuccessDescription from "@/components/ServiceSuccessDescription";
 import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
 import { getStuffData } from "@/utils/getStuffData";
@@ -98,6 +99,14 @@ export default async function WorkforceManagement() {
         <GuaranteesDescription
           type={singleStuffDetails?.type}
           guaranteesDescription={singleStuffDetails?.guaranteesDescription}
+        />
+
+        {/* Service Area & Compliance Standards / Success Story: Healthcare Staffing Optimization in Action */}
+        <ServiceSuccessDescription
+          type={singleStuffDetails?.type}
+          serviceSuccessDescription={
+            singleStuffDetails?.serviceSuccessDescription
+          }
         />
 
         {/* sub banner */}

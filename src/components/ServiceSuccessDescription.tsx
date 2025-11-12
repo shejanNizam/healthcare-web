@@ -1,7 +1,34 @@
-export default function ServiceSuccessDescription() {
+import CustomHeading from "./CustomHeading";
+
+interface ServiceSuccessDescriptionProps {
+  type?: string;
+  serviceSuccessDescription: string[];
+}
+
+export default function ServiceSuccessDescription({
+  type,
+  serviceSuccessDescription,
+}: ServiceSuccessDescriptionProps) {
   return (
     <div>
-      <h3>ServiceSuccessDescription</h3>
+      <CustomHeading
+        text={
+          type === "statting_solutions"
+            ? "Service Area & Compliance Standards"
+            : "Success Story: Healthcare Staffing Optimization in Action"
+        }
+      />
+
+      <div className="max-w-7xl mx-auto px-4">
+        {serviceSuccessDescription?.map((item: string, index: number) => (
+          <div key={index} className=" p-4">
+            <div
+              className="no-tailwind text-center md:text-lg opacity-90 px-4"
+              dangerouslySetInnerHTML={{ __html: item }}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
