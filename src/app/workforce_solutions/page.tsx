@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import FAQSection from "@/components/FAQSection";
 import IntBanner from "@/components/IntBanner";
+import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
 import { getStuffData } from "@/utils/getStuffData";
 import { Metadata } from "next";
@@ -67,13 +68,16 @@ export default async function WorkforceManagement() {
           description={singleStuffDetails?.bannerSubTitle}
         />
 
-        {/* 
-        Why C.E.N.M. Stands Apart / 
-        Why C.E.N.M. Leads in Healthcare Workforce Management 
-        */}
+        {/*  Why C.E.N.M. Stands Apart / Why C.E.N.M. Leads in Healthcare Workforce Management */}
         <StandsDescription
           type={singleStuffDetails?.type}
           standsDescription={singleStuffDetails?.standsDescription}
+        />
+
+        {/* Our Staffing Specialties / SaaS-Based Automation Solutions for Healthcare Compliance */}
+        <SpecialityDescription
+          type={singleStuffDetails?.type}
+          specialityDescription={singleStuffDetails?.specialityDescription}
         />
 
         {/* sub banner */}

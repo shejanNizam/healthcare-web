@@ -1,5 +1,4 @@
 import Image from "next/image";
-import "react-quill/dist/quill.snow.css";
 import image from "../assets/banner/apply_int_img.png";
 import CustomHeading from "./CustomHeading";
 
