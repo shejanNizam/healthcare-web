@@ -1,6 +1,8 @@
 import Image from "next/image";
 
+import CustomButton from "@/components/CustomButton";
 import FAQSection from "@/components/FAQSection";
+import GuaranteesDescription from "@/components/GuaranteesDescription";
 import IntBanner from "@/components/IntBanner";
 import PatientCareDescription from "@/components/PatientCareDescription";
 import SpecialityDescription from "@/components/SpecialityDescription";
@@ -84,6 +86,18 @@ export default async function WorkforceManagement() {
         {/* Automated Employee Scheduling for Healthcare to Improve Patient Care */}
         <PatientCareDescription
           patientCareDescription={singleStuffDetails?.patientCareDescription}
+        />
+
+        <div className="text-center my-8 bg-primary py-12">
+          {/* <Link href={`/contact`}> */}
+          <CustomButton text="Schedule Your Workforce Consultation" />
+          {/* </Link> */}
+        </div>
+
+        {/* Outcome-Based Guarantees / Predictive Staffing Healthcare Guarantees Results */}
+        <GuaranteesDescription
+          type={singleStuffDetails?.type}
+          guaranteesDescription={singleStuffDetails?.guaranteesDescription}
         />
 
         {/* sub banner */}

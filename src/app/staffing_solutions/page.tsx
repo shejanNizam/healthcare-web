@@ -8,7 +8,9 @@ import {
   FaUsers,
 } from "react-icons/fa";
 
+import CustomButton from "@/components/CustomButton";
 import FAQSection from "@/components/FAQSection";
+import GuaranteesDescription from "@/components/GuaranteesDescription";
 import IntBanner from "@/components/IntBanner";
 import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
@@ -154,6 +156,18 @@ export default async function StaffingSolutions() {
       <SpecialityDescription
         type={singleStuffDetails?.type}
         specialityDescription={singleStuffDetails?.specialityDescription}
+      />
+
+      <div className="text-center my-8 bg-primary py-12">
+        {/* <Link href={`/contact`}> */}
+        <CustomButton text="Request Your Personalized Nursing Staffing Solution" />
+        {/* </Link> */}
+      </div>
+
+      {/* Outcome-Based Guarantees / Predictive Staffing Healthcare Guarantees Results */}
+      <GuaranteesDescription
+        type={singleStuffDetails?.type}
+        guaranteesDescription={singleStuffDetails?.guaranteesDescription}
       />
 
       {/* sub banner */}
