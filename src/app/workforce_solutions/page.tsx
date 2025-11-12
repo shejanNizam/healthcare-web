@@ -55,7 +55,7 @@ export default async function WorkforceManagement() {
   const stuffDetails = await getStuffData();
 
   const singleStuffDetails = await stuffDetails[1];
-  console.log(singleStuffDetails);
+  // console.log(singleStuffDetails);
 
   const FAQ = stuffDetails && singleStuffDetails ? singleStuffDetails?.FAQ : [];
   const whatWeDo =

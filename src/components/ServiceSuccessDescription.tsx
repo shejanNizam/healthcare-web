@@ -21,7 +21,7 @@ export default function ServiceSuccessDescription({
 
       <div className="max-w-7xl mx-auto px-4">
         {serviceSuccessDescription?.map((item: string, index: number) => (
-          <div key={index} className=" p-4">
+          <div key={index}>
             <div
               className="no-tailwind text-center md:text-lg opacity-90 px-4"
               dangerouslySetInnerHTML={{ __html: item }}

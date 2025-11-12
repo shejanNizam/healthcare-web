@@ -136,7 +136,7 @@ export default async function StaffingSolutions() {
   const singleStuffDetails = stuffDetails[0];
   const FAQ = stuffDetails && singleStuffDetails ? singleStuffDetails?.FAQ : [];
   const faqData = FAQ.length > 0 ? FAQ : [];
-  console.log(singleStuffDetails);
+  // console.log(singleStuffDetails);
 
   return (
     <div className="min-h-screen bg-gray-50">
