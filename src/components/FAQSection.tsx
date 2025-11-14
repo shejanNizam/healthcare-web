@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import CustomHeading from "./CustomHeading";
@@ -13,10 +12,9 @@ interface FAQ {
 
 interface FAQSectionProps {
   faqData: FAQ[];
-  faqImage: string;
 }
 
-export default function FAQSection({ faqData, faqImage }: FAQSectionProps) {
+export default function FAQSection({ faqData }: FAQSectionProps) {
   const [openFAQ, setOpenFAQ] = useState<string | null>(null);
 
   const toggleFAQ = (id: string) => {
@@ -31,44 +29,30 @@ export default function FAQSection({ faqData, faqImage }: FAQSectionProps) {
           <p className="text-gray-600">Common questions, clear answers.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          <div className="text-center">
-            <Image
-              src={faqImage}
-              alt="FAQ illustration"
-              width={400}
-              height={300}
-              className="mx-auto"
-            />
-          </div>
-
-          <div className="space-y-4">
-            {faqData.map((faq) => (
-              <div
-                key={faq._id}
-                className="border border-gray-200 rounded-lg overflow-hidden"
+        <div className="space-y-4">
+          {faqData.map((faq) => (
+            <div
+              key={faq._id}
+              className="border border-gray-200 rounded-lg overflow-hidden"
+            >
+              <button
+                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                onClick={() => toggleFAQ(faq._id)}
               >
-                <button
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
-                  onClick={() => toggleFAQ(faq._id)}
-                >
-                  <h3 className="font-semibold text-gray-800">
-                    {faq.question}
-                  </h3>
-                  {openFAQ === faq._id ? (
-                    <FaChevronUp className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  ) : (
-                    <FaChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                  )}
-                </button>
-                {openFAQ === faq._id && (
-                  <div className="px-6 pb-4 border-t border-gray-100">
-                    <p className=" pt-3 text-xs">{faq.ans}</p>
-                  </div>
+                <h3 className="font-semibold text-gray-800">{faq.question}</h3>
+                {openFAQ === faq._id ? (
+                  <FaChevronUp className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                ) : (
+                  <FaChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
                 )}
-              </div>
-            ))}
-          </div>
+              </button>
+              {openFAQ === faq._id && (
+                <div className="px-6 pb-4 border-t border-gray-100">
+                  <p className=" pt-3 text-xs">{faq.ans}</p>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>

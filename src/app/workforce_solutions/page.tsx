@@ -9,7 +9,6 @@ import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
 import { getStuffData } from "@/utils/getStuffData";
 import { Metadata } from "next";
-import faqImage from "../../assets/staff/faq.svg";
 
 // const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
@@ -118,7 +117,7 @@ export default async function WorkforceManagement() {
         </div>
 
         {/* FAQ Section - Now using Client Component */}
-        <FAQSection faqData={faqData} faqImage={faqImage} />
+        <FAQSection faqData={faqData} />
       </div>
     </>
   );
