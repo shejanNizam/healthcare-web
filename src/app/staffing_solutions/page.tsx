@@ -43,6 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Define the ID for the Contact section
 const CONTACT_SECTION_ID = "contact-us-section";
 
 export default async function StaffingSolutions() {
