@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import CustomButton from "./CustomButton";
 
@@ -5,6 +6,7 @@ interface IntBannerProps {
   type?: string;
   title: string;
   description: string | React.ReactNode;
+  CONTACT_SECTION_ID?: string;
 }
 
 const getBackgroundStyles = (type?: string) => {
@@ -39,6 +41,7 @@ export default function IntBanner({
   type,
   title,
   description,
+  CONTACT_SECTION_ID,
 }: IntBannerProps) {
   const { style, overlay, className } = getBackgroundStyles(type);
 
@@ -68,9 +71,15 @@ export default function IntBanner({
           )}
           {type && (
             <div className="mt-4">
-              <CustomButton
-                text={type === "statting_solutions" ? "Request " : "Schedule "}
-              />
+              <Link href={`#${CONTACT_SECTION_ID}`} className="block">
+                <CustomButton
+                  text={
+                    type === "statting_solutions"
+                      ? "Request Your Personalized Nursing Staffing Solution "
+                      : "Schedule Your Workforce Consultation Today"
+                  }
+                />
+              </Link>
             </div>
           )}
         </div>

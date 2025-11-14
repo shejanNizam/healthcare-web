@@ -9,8 +9,12 @@ import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
 import { getStuffData } from "@/utils/getStuffData";
 import { Metadata } from "next";
+import Link from "next/link";
+import Contact from "../contact/page";
 
 // const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_URL;
+
+const CONTACT_SECTION_ID = "contact-us-section";
 
 // Generate metadata for SEO
 export async function generateMetadata(): Promise<Metadata> {
@@ -60,6 +64,7 @@ export default async function WorkforceManagement() {
           type={singleStuffDetails?.type}
           title={singleStuffDetails?.bannerTitle}
           description={singleStuffDetails?.bannerSubTitle}
+          CONTACT_SECTION_ID={CONTACT_SECTION_ID}
         />
 
         {/*  Why C.E.N.M. Stands Apart / Why C.E.N.M. Leads in Healthcare Workforce Management */}
@@ -81,9 +86,11 @@ export default async function WorkforceManagement() {
 
         <div className="text-center my-8 bg-primary py-12">
           {/* <Link href={`/contact`}> */}
-          <div className="w-fit mx-auto">
-            <CustomButton text="Schedule Your Workforce Consultation" />
-          </div>
+          <Link href={`#${CONTACT_SECTION_ID}`}>
+            <div className="w-fit mx-auto">
+              <CustomButton text="Schedule Your Workforce Consultation" />
+            </div>
+          </Link>
           {/* </Link> */}
         </div>
 
@@ -111,13 +118,20 @@ export default async function WorkforceManagement() {
               </span>
             }
           />
-          <div className="w-fit mx-auto pb-12">
-            <CustomButton text="Request Your Personalized Nursing Staffing Solution" />
-          </div>
+          <Link href={`#${CONTACT_SECTION_ID}`} className="block text-center">
+            <div className="w-fit mx-auto pb-12">
+              <CustomButton text="Schedule Your Workforce Consultation Today" />
+            </div>
+          </Link>
         </div>
 
         {/* FAQ Section - Now using Client Component */}
         <FAQSection faqData={faqData} />
+
+        {/* contact us */}
+        <div id={CONTACT_SECTION_ID}>
+          <Contact />
+        </div>
       </div>
     </>
   );

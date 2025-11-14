@@ -22,7 +22,7 @@ export default function FAQSection({ faqData }: FAQSectionProps) {
   };
 
   return (
-    <section className="bg-white py-12">
+    <section className="bg-white pb-4">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-12">
           <CustomHeading text="Frequently Asked Questions" />

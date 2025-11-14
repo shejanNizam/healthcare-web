@@ -1,12 +1,3 @@
-import {
-  FaBrain,
-  FaHeart,
-  FaPills,
-  FaUserCheck,
-  FaUserMd,
-  FaUsers,
-} from "react-icons/fa";
-
 import CustomButton from "@/components/CustomButton";
 import CustomHeading from "@/components/CustomHeading";
 import FAQSection from "@/components/FAQSection";
@@ -17,6 +8,8 @@ import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
 import { getStuffData } from "@/utils/getStuffData";
 import { Metadata } from "next";
+import Link from "next/link"; // Import Link for navigation
+import Contact from "../contact/page";
 
 // const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
@@ -50,68 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const medicalServices = [
-  {
-    id: 1,
-    icon: <FaUserMd className="w-8 h-8 text-blue-600" />,
-    title: "Specialty",
-    description:
-      "Specialized medical professionals for critical care, emergency medicine, and specialized departments.",
-    bgColor: "bg-blue-50",
-    hoverBgColor: "bg-blue-100",
-    iconColor: "text-blue-600",
-  },
-  {
-    id: 2,
-    icon: <FaUserCheck className="w-8 h-8 text-blue-600" />,
-    title: "General Physicians",
-    description:
-      "Primary care physicians and general practitioners for routine care and comprehensive patient management.",
-    bgColor: "bg-blue-50",
-    hoverBgColor: "bg-blue-100",
-    iconColor: "text-blue-600",
-  },
-  {
-    id: 3,
-    icon: <FaBrain className="w-8 h-8 text-blue-600" />,
-    title: "Neuro Surgery",
-    description:
-      "Highly skilled neurosurgeons and specialized surgical staff for complex neurological procedures.",
-    bgColor: "bg-blue-50",
-    hoverBgColor: "bg-blue-100",
-    iconColor: "text-blue-600",
-  },
-  {
-    id: 4,
-    icon: <FaHeart className="w-8 h-8 text-blue-600" />,
-    title: "Cardiology",
-    description:
-      "Cardiovascular specialists and cardiac care teams for heart-related medical conditions and procedures.",
-    bgColor: "bg-blue-50",
-    hoverBgColor: "bg-blue-100",
-    iconColor: "text-blue-600",
-  },
-  {
-    id: 5,
-    icon: <FaPills className="w-8 h-8 text-blue-600" />,
-    title: "Pharmacy",
-    description:
-      "Licensed pharmacists and pharmacy technicians for medication management and patient counseling.",
-    bgColor: "bg-blue-50",
-    hoverBgColor: "bg-blue-100",
-    iconColor: "text-blue-600",
-  },
-  {
-    id: 6,
-    icon: <FaUsers className="w-8 h-8 text-blue-600" />,
-    title: "Trained Staff",
-    description:
-      "Certified nursing assistants, medical assistants, and support staff for comprehensive patient care.",
-    bgColor: "bg-blue-50",
-    hoverBgColor: "bg-blue-100",
-    iconColor: "text-blue-600",
-  },
-];
+const CONTACT_SECTION_ID = "contact-us-section";
 
 export default async function StaffingSolutions() {
   const stuffDetails = await getStuffData();
@@ -142,6 +74,7 @@ export default async function StaffingSolutions() {
         type={singleStuffDetails?.type}
         title={singleStuffDetails?.bannerTitle}
         description={singleStuffDetails?.bannerSubTitle}
+        CONTACT_SECTION_ID={CONTACT_SECTION_ID}
       />
 
       {/* Why C.E.N.M. Stands Apart / Why C.E.N.M. Leads in Healthcare Workforce Management */}
@@ -156,12 +89,11 @@ export default async function StaffingSolutions() {
         specialityDescription={singleStuffDetails?.specialityDescription}
       />
 
+      {/* Button 1: Scrolls to Contact */}
       <div className="text-center my-8 bg-primary py-12">
-        {/* <Link href={`/contact`}> */}
-        <div className="w-fit mx-auto">
+        <Link href={`#${CONTACT_SECTION_ID}`} className="w-fit mx-auto block">
           <CustomButton text="Request Your Personalized Nursing Staffing Solution" />
-        </div>
-        {/* </Link> */}
+        </Link>
       </div>
 
       {/* Outcome-Based Guarantees / Predictive Staffing Healthcare Guarantees Results */}
@@ -179,6 +111,7 @@ export default async function StaffingSolutions() {
       />
 
       {/* Ready to Elevate Your Care Team? / Ready to Transform Your Workforce? */}
+      {/* Button 2: Scrolls to Contact */}
       <div className="my-12 bg-primary">
         <CustomHeading
           text={
@@ -189,42 +122,20 @@ export default async function StaffingSolutions() {
           }
         />
         <div className="w-fit mx-auto pb-12">
-          <CustomButton text="Request Your Personalized Nursing Staffing Solution" />
+          <Link href={`#${CONTACT_SECTION_ID}`} className="block">
+            <CustomButton text="Request Your Personalized Nursing Staffing Solution" />
+          </Link>
         </div>
       </div>
 
-      {/* Our Specialty Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <CustomHeading text="Our Specialty" />
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {medicalServices.map((service) => (
-              <div
-                key={service.id}
-                className="text-center group hover:transform hover:scale-105 transition-all duration-300 border border-gray-100 rounded-lg shadow-sm p-4 hover:bg-primary hover:text-white"
-              >
-                <div
-                  className={`${service.bgColor} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:${service.hoverBgColor}`}
-                >
-                  {service.icon}
-                </div>
-                <h3
-                  className={`text-xl font-semibold mb-3 text-gray-800 group-hover:text-white`}
-                >
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed group-hover:text-white">
-                  {service.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* faqs */}
       <FAQSection faqData={faqData} />
+
+      {/* contact us */}
+      {/* Add the ID to the container of the Contact component */}
+      <div id={CONTACT_SECTION_ID}>
+        <Contact />
+      </div>
     </div>
   );
 }

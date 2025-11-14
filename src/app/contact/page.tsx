@@ -22,7 +22,7 @@ type ContactApiPayload = {
   phone: string;
 };
 
-export default function Shejan() {
+export default function Contact() {
   const [form] = Form.useForm<ContactFormValues>();
   const [contact, { isLoading }] = useContactMutation();
 
