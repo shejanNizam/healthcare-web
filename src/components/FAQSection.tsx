@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import CustomHeading from "./CustomHeading";
 
 interface FAQ {
   _id: string;
@@ -23,12 +24,10 @@ export default function FAQSection({ faqData, faqImage }: FAQSectionProps) {
   };
 
   return (
-    <section className="py-16 bg-white">
+    <section className="bg-white py-12">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-gray-800">
-            Frequently Asked Questions
-          </h2>
+          <CustomHeading text="Frequently Asked Questions" />
           <p className="text-gray-600">Common questions, clear answers.</p>
         </div>
 
@@ -64,7 +63,7 @@ export default function FAQSection({ faqData, faqImage }: FAQSectionProps) {
                 </button>
                 {openFAQ === faq._id && (
                   <div className="px-6 pb-4 border-t border-gray-100">
-                    <p className="text-gray-600 pt-3">{faq.ans}</p>
+                    <p className=" pt-3 text-xs">{faq.ans}</p>
                   </div>
                 )}
               </div>

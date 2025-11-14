@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   FaBrain,
   FaHeart,
@@ -9,6 +8,7 @@ import {
 } from "react-icons/fa";
 
 import CustomButton from "@/components/CustomButton";
+import CustomHeading from "@/components/CustomHeading";
 import FAQSection from "@/components/FAQSection";
 import GuaranteesDescription from "@/components/GuaranteesDescription";
 import IntBanner from "@/components/IntBanner";
@@ -17,9 +17,7 @@ import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
 import { getStuffData } from "@/utils/getStuffData";
 import { Metadata } from "next";
-import chooseUsImage from "../../assets/staff/choose_us.svg";
 import faqImage from "../../assets/staff/faq.svg";
-import subBannerImage from "../../assets/staff/sub_banner_img.svg";
 
 // const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
@@ -161,7 +159,9 @@ export default async function StaffingSolutions() {
 
       <div className="text-center my-8 bg-primary py-12">
         {/* <Link href={`/contact`}> */}
-        <CustomButton text="Request Your Personalized Nursing Staffing Solution" />
+        <div className="w-fit mx-auto">
+          <CustomButton text="Request Your Personalized Nursing Staffing Solution" />
+        </div>
         {/* </Link> */}
       </div>
 
@@ -179,30 +179,25 @@ export default async function StaffingSolutions() {
         }
       />
 
-      {/* sub banner */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          <div className="">
-            <Image src={subBannerImage} alt="sub_banner_image" />
-          </div>
-
-          <div>
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">
-              {singleStuffDetails?.title}
-            </h2>
-            <div className="space-y-6">
-              <p>{singleStuffDetails?.description}</p>
-            </div>
-          </div>
+      {/* Ready to Elevate Your Care Team? / Ready to Transform Your Workforce? */}
+      <div className="my-12 bg-primary">
+        <CustomHeading
+          text={
+            <span className="text-white mt-12">
+              {" "}
+              Ready to Elevate Your Care Team?{" "}
+            </span>
+          }
+        />
+        <div className="w-fit mx-auto pb-12">
+          <CustomButton text="Request Your Personalized Nursing Staffing Solution" />
         </div>
-      </section>
+      </div>
 
       {/* Our Specialty Section */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            Our Specialty
-          </h2>
+          <CustomHeading text="Our Specialty" />
 
           <div className="grid md:grid-cols-3 gap-8">
             {medicalServices.map((service) => (
@@ -225,24 +220,6 @@ export default async function StaffingSolutions() {
                 </p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          <div className="">
-            <Image src={chooseUsImage} alt="choose_us_image" />
-          </div>
-
-          <div>
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">
-              Why choose us?
-            </h2>
-            <div className="space-y-6">
-              <p>{singleStuffDetails?.why_choose}</p>
-            </div>
           </div>
         </div>
       </section>
