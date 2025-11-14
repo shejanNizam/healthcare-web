@@ -1,11 +1,10 @@
+import { FaArrowRight } from "react-icons/fa";
+
 export default function CustomButton({ text }: { text: string }) {
   return (
     <div>
-      <button
-        className="text-white font-bold bg-[#f54733] hover:bg-[#C23E2E] rounded-xl shadow-sm cursor-pointer w-fit mx-auto p-4 
-                   transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-102"
-      >
-        {text}
+      <button className="bg-[#E7F1F8] text-primary text-md font-semibold cursor-pointer rounded-t-lg px-4 py-2 border-b-2 border-b-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out flex items-center gap-2 w-fit">
+        {text} <FaArrowRight />
       </button>
     </div>
   );
