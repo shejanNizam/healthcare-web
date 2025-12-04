@@ -145,7 +145,7 @@ const Footer = () => (
                     className="flex items-center mb-2 justify-center md:justify-start text-sm hover:text-primary transition"
                   >
                     <FaMapMarkerAlt className="mr-2" />
-                    41877 Enterprise Circle North Temecula, CA-92590
+                    Tennessee Address 2952 KIRKWOOD RD. Clarksville, TN-37043
                   </a>
                 </div>
 
