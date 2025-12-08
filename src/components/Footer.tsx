@@ -138,15 +138,28 @@ const Footer = () => (
               <ul className="text-center md:text-left">
                 {/* Address with Google Maps Link */}
                 <div>
-                  <a
-                    href="https://www.google.com/maps/search/?api=1&query=41877+Enterprise+Circle+North+Temecula,+CA-92590"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center mb-2 justify-center md:justify-start text-sm hover:text-primary transition"
-                  >
-                    <FaMapMarkerAlt className="mr-2" />
-                    Tennessee Address 2952 KIRKWOOD RD. Clarksville, TN-37043
-                  </a>
+                  <div className="flex mb-2 justify-center md:justify-start text-sm hover:text-primary transition">
+                    <FaMapMarkerAlt className="mr-2 mt-1" />
+                    <p>
+                      {/* Tennessee Address 2952 KIRKWOOD RD. Clarksville, TN-37043 */}
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=41877+Enterprise+Circle+North+Temecula,+CA-92590"
+                        target="_blank"
+                        rel="noopenaer noreferrer"
+                      >
+                        Location 1 - 41877 Enterprise Cir N, Temecula, CA 92590,
+                        United States
+                      </a>
+                      <br />
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=41877+Enterprise+Circle+North+Temecula,+CA-92590"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Location 2 - 2952 KIRKWOOD RD., Clarksville, TN-37043
+                      </a>
+                    </p>
+                  </div>
                 </div>
 
                 {/* Email with mailto Link */}
