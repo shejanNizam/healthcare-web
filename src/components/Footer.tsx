@@ -147,7 +147,7 @@ const Footer = () => (
                         target="_blank"
                         rel="noopenaer noreferrer"
                       >
-                        Location 1 - 41877 Enterprise Cir N, Temecula, CA 92590,
+                       L1 - 41877 Enterprise Cir N, Temecula, CA 92590,
                         United States
                       </a>
                       <br />
@@ -156,7 +156,7 @@ const Footer = () => (
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Location 2 - 2952 KIRKWOOD RD., Clarksville, TN-37043
+                       L2 - 2952 KIRKWOOD RD., Clarksville, TN-37043
                       </a>
                     </p>
                   </div>
