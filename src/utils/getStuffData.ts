@@ -1,23 +1,25 @@
-import { BASE_URL } from "@/redux/api/baseApi/baseApi";
+// "use server"
 
-export async function getStuffData() {
-  try {
-    const res = await fetch(`${BASE_URL}/staffing/all`, {
-      method: "GET",
-      // cache: "no-store",
-      next: {
-        revalidate: 3600,
-      },
-    });
+// import { BASE_URL } from "@/redux/api/baseApi/baseApi";
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
-    }
+// export async function getStuffData() {
+//   try {
+//     const res = await fetch(`${BASE_URL}/staffing/all`, {
+//       method: "GET",
+//       // cache: "no-store",
+//       next: {
+//         revalidate: 3600,
+//       },
+//     });
 
-    const data = await res.json();
-    return data?.data;
-  } catch (error) {
-    console.error("Fetch error:", error);
-    return null;
-  }
-}
+//     if (!res.ok) {
+//       throw new Error("Failed to fetch data");
+//     }
+
+//     const data = await res.json();
+//     return data?.data;
+//   } catch (error) {
+//     console.error("Fetch error:", error);
+//     return null;
+//   }
+// }
