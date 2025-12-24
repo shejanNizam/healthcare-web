@@ -14,7 +14,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "antd": "^5.24.9",
     "framer-motion": "^12.19.1",
-    "next": "15.3.6",
+    "next": "15.3.8",
     "next-sitemap": "^4.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
