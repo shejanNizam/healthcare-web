@@ -50,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function WorkforceManagement() {
   const stuffDetails = await getStuffData();
 
-  const singleStuffDetails = stuffDetails?.data[1];
+  const singleStuffDetails = stuffDetails?.data?.[1];
   // console.log(singleStuffDetails);
 
   const FAQ = stuffDetails && singleStuffDetails ? singleStuffDetails?.FAQ : [];
