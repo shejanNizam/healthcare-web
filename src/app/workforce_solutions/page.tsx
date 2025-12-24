@@ -19,7 +19,7 @@ const CONTACT_SECTION_ID = "contact-us-section";
 // Generate metadata for SEO
 export async function generateMetadata(): Promise<Metadata> {
   const stuffDetails = await getStuffData();
-  const singleStuff = await stuffDetails?.data[1];
+  const singleStuff = await stuffDetails?.data?.[1];
   console.log(singleStuff);
 
   if (!singleStuff) {
