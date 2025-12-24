@@ -6,17 +6,17 @@ import IntBanner from "@/components/IntBanner";
 import ServiceSuccessDescription from "@/components/ServiceSuccessDescription";
 import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
+import { getStuffData } from "@/services";
 import { Metadata } from "next";
 import Link from "next/link"; // Import Link for navigation
 import Contact from "../contact/page";
-import { getStuffData } from "@/services";
 
 // const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
 export async function generateMetadata(): Promise<Metadata> {
   const stuffDetails = await getStuffData();
-  const singleStuff = await stuffDetails[0];
-  // console.log(singleStuff);
+  const singleStuff = await stuffDetails?.data[0];
+  console.log(stuffDetails);
 
   if (!singleStuff) {
     return {
@@ -63,7 +63,7 @@ export default async function StaffingSolutions() {
     );
   }
 
-  const singleStuffDetails = stuffDetails[0];
+  const singleStuffDetails = stuffDetails?.data[0];
   const FAQ = stuffDetails && singleStuffDetails ? singleStuffDetails?.FAQ : [];
   const faqData = FAQ.length > 0 ? FAQ : [];
   // console.log(singleStuffDetails);

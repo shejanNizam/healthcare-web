@@ -19,8 +19,8 @@ const CONTACT_SECTION_ID = "contact-us-section";
 // Generate metadata for SEO
 export async function generateMetadata(): Promise<Metadata> {
   const stuffDetails = await getStuffData();
-  const singleStuff = await stuffDetails[1];
-  // console.log(singleStuff);
+  const singleStuff = await stuffDetails?.data[1];
+  console.log(singleStuff);
 
   if (!singleStuff) {
     return {
@@ -50,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function WorkforceManagement() {
   const stuffDetails = await getStuffData();
 
-  const singleStuffDetails = await stuffDetails[1];
+  const singleStuffDetails = stuffDetails?.data[1];
   // console.log(singleStuffDetails);
 
   const FAQ = stuffDetails && singleStuffDetails ? singleStuffDetails?.FAQ : [];

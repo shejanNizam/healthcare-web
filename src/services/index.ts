@@ -16,11 +16,10 @@ export const getStuffData = async () => {
     }
     return await res.json();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error : any) {
+  } catch (error: any) {
     return Error(error);
   }
 };
-
 
 // export async function getStuffData() {
 //   try {
