@@ -7,10 +7,10 @@ import PatientCareDescription from "@/components/PatientCareDescription";
 import ServiceSuccessDescription from "@/components/ServiceSuccessDescription";
 import SpecialityDescription from "@/components/SpecialityDescription";
 import StandsDescription from "@/components/StandsDescription";
-import { getStuffData } from "@/utils/getStuffData";
 import { Metadata } from "next";
 import Link from "next/link";
 import Contact from "../contact/page";
+import { getStuffData } from "@/services";
 
 // const imageBaseURL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
