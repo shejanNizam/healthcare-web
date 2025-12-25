@@ -84,6 +84,7 @@ export default async function BlogDetails({
   const resolvedParams = await params;
   const { id } = resolvedParams;
   const singleBlog = await getBlogData(id);
+  console.log(singleBlog);
 
   if (!singleBlog) {
     return (
