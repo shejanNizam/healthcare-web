@@ -1,5 +1,5 @@
-import Image from "next/image";
-import image from "../assets/banner/apply_int_img.png";
+// import Image from "next/image";
+// import image from "../assets/banner/apply_int_img.png";
 import CustomHeading from "./CustomHeading";
 
 interface StandsDescriptionProps {
@@ -27,11 +27,11 @@ export default function StandsDescription({
             key={index}
             className="text-center border border-gray-200 shadow-sm rounded-lg p-4"
           >
-            <Image
+            {/* <Image
               className="rounded-full w-12 h-12 mx-auto"
               src={image}
               alt="stants_image"
-            />
+            /> */}
             <div
               className="no-tailwind md:text-lg opacity-90 text-center px-4"
               dangerouslySetInnerHTML={{ __html: item }}

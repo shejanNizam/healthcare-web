@@ -1,5 +1,5 @@
-import Image from "next/image";
-import image from "../assets/banner/apply_int_img.png";
+// import Image from "next/image";
+// import image from "../assets/banner/apply_int_img.png";
 import CustomHeading from "./CustomHeading";
 
 interface GuaranteesDescriptionProps {
@@ -27,11 +27,11 @@ export default function GuaranteesDescription({
             key={index}
             className="border border-gray-200 shadow-sm rounded-lg p-4 flex justify-center items-center gap-4"
           >
-            <Image
+            {/* <Image
               className="rounded-full w-12 h-12"
               src={image}
               alt="stants_image"
-            />
+            /> */}
             <div
               className="no-tailwind md:text-lg opacity-90"
               dangerouslySetInnerHTML={{ __html: item }}
