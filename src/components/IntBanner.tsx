@@ -55,13 +55,13 @@ export default function IntBanner({
           relative z-10 
         "
       >
-        <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 lg:py-20 flex flex-col gap-2 sm:gap-3 md:gap-4">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 lg:py-20 flex flex-col gap-2 sm:gap-3 md:gap-4">
           <h1 className="text-2xl sm:text-3xl lg:text-5xl text-white font-extrabold leading-tight md:max-w-[70%]">
             {title}
           </h1>
           {typeof description === "string" ? (
             <div
-              className="no-tailwind text-white text-base md:text-lg opacity-90 md:max-w-[60%]"
+              className="text-white text-base md:text-lg opacity-90 md:max-w-[60%]"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           ) : (

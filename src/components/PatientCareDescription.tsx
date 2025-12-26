@@ -19,7 +19,7 @@ export default function PatientCareDescription({
             className=" border border-gray-200 shadow-sm rounded-lg p-4"
           >
             <div
-              className="no-tailwind md:text-lg opacity-90 px-4"
+              className="md:text-md opacity-90 px-4"
               dangerouslySetInnerHTML={{ __html: item }}
             />
           </div>

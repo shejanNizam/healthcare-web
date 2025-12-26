@@ -33,7 +33,7 @@ export default function StandsDescription({
               alt="stants_image"
             /> */}
             <div
-              className="no-tailwind md:text-lg opacity-90 text-center px-4"
+              className="md:text-md opacity-90 text-center px-4"
               dangerouslySetInnerHTML={{ __html: item }}
             />
           </div>

@@ -15,8 +15,8 @@ import Contact from "../contact/page";
 
 export async function generateMetadata(): Promise<Metadata> {
   const stuffDetails = await getStuffData();
-  const singleStuff = await stuffDetails?.data?.[0];
-  console.log(stuffDetails);
+  const singleStuff = stuffDetails?.data?.[0];
+  console.log(singleStuff);
 
   if (!singleStuff) {
     return {
@@ -66,7 +66,7 @@ export default async function StaffingSolutions() {
   const singleStuffDetails = stuffDetails?.data?.[0];
   const FAQ = stuffDetails && singleStuffDetails ? singleStuffDetails?.FAQ : [];
   const faqData = FAQ.length > 0 ? FAQ : [];
-  // console.log(singleStuffDetails);
+  console.log("------------->", singleStuffDetails);
 
   return (
     <div className="min-h-screen bg-gray-50">

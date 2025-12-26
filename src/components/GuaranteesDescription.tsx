@@ -33,7 +33,7 @@ export default function GuaranteesDescription({
               alt="stants_image"
             /> */}
             <div
-              className="no-tailwind md:text-lg opacity-90"
+              className="md:text-md opacity-90"
               dangerouslySetInnerHTML={{ __html: item }}
             />
           </div>
