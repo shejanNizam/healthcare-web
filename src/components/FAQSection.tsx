@@ -36,19 +36,21 @@ export default function FAQSection({ faqData }: FAQSectionProps) {
               className="border border-gray-200 rounded-lg overflow-hidden"
             >
               <button
-                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                className="cursor-pointer w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
                 onClick={() => toggleFAQ(faq._id)}
               >
-                <h3 className="font-semibold text-gray-800">{faq.question}</h3>
+                <h3 className="font-semibold text-lg text-gray-800">
+                  {faq.question}
+                </h3>
                 {openFAQ === faq._id ? (
-                  <FaChevronUp className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  <FaChevronUp className="w-5 h-5 text-blue-600 shrink-0" />
                 ) : (
-                  <FaChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                  <FaChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
                 )}
               </button>
               {openFAQ === faq._id && (
                 <div className="px-6 pb-4 border-t border-gray-100">
-                  <p className=" pt-3 text-xs">{faq.ans}</p>
+                  <p className=" pt-3 text-md">{faq.ans}</p>
                 </div>
               )}
             </div>
