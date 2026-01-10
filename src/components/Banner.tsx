@@ -5,7 +5,8 @@ import bannerRightImage from "../assets/banner/banner_right_side.png";
 
 export default function Banner() {
   return (
-    <div className="bg-gradient-to-r from-primary to-primary/40 md:to-primary/20 h-auto">
+    // <div className="bg-gradient-to-r from-primary to-primary/40 md:to-primary/20 h-auto">
+    <div className="bg-linear-to-r from-primary to-primary/40 md:to-primary/20 h-auto">
       <div className="bg-primary-light  flex flex-col md:flex-row items-center justify-around px-4 md:px-24 xl:px-40 w-full">
         <div className="w-full md:w-[50%] flex flex-col gap-4 md:gap-6 my-4">
           <h1 className="text-2xl md:text-2xl xl:text-4xl text-white font-bold w-[90%]">
@@ -29,7 +30,9 @@ export default function Banner() {
               Request Staffing Now <FaArrowRight />
             </button>
           </Link>
-          <div className="w-full mb-8">{/* <SearchBar /> */}</div>
+          {/* <div className="w-full mb-8">
+            <SearchBar />
+          </div> */}
         </div>
         <div className="  w-full md:w-[40%] mt-8 md:mt-2 flex justify-center">
           <Image
@@ -37,7 +40,7 @@ export default function Banner() {
             height={1000}
             src={bannerRightImage}
             alt="banner_right_image"
-            className="w-full max-w-[500px] h-auto hidden md:block"
+            className="w-full max-w-125 h-auto hidden md:block"
             priority
           />
         </div>
