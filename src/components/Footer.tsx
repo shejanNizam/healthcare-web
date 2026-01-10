@@ -141,22 +141,26 @@ const Footer = () => (
                   <div className="flex mb-2 justify-center md:justify-start text-sm hover:text-primary transition">
                     <FaMapMarkerAlt className="mr-2 mt-1" />
                     <p>
-                      {/* Tennessee Address 2952 KIRKWOOD RD. Clarksville, TN-37043 */}
                       <a
                         href="https://www.google.com/maps/search/?api=1&query=41877+Enterprise+Circle+North+Temecula,+CA-92590"
                         target="_blank"
                         rel="noopenaer noreferrer"
                       >
-                        L1 - 41877 Enterprise Cir N, Temecula, CA 92590, United
-                        States
+                        Headquarters - 41877 Enterprise Cir N, Temecula, CA
+                        92590, United States
                       </a>
-                      <br />
+                    </p>
+                  </div>
+                  <div className="flex mb-2 justify-center md:justify-start text-sm hover:text-primary transition">
+                    <FaMapMarkerAlt className="mr-2 mt-1" />
+                    <p>
                       <a
                         href="https://www.google.com/maps/search/?api=1&query=2952+KIRKWOOD+RD.,+Clarksville,+TN-37043"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        L2 - 2952 KIRKWOOD RD., Clarksville, TN-37043
+                        Middle Tennessee - 2952 KIRKWOOD RD., Clarksville,
+                        TN-37043
                       </a>
                     </p>
                   </div>
