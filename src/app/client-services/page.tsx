@@ -139,7 +139,7 @@ export default function ClientServices() {
       {/*  */}
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl text-primary font-bold text-center mb-8">
+          <h2 className="text-2xl md:text-5xl text-primary font-bold text-center mb-8">
             Serving Southern California Healthcare Facilities
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
@@ -154,9 +154,42 @@ export default function ClientServices() {
               "Imperial",
             ].map((city) => (
               <div key={city} className="p-4 bg-white rounded-lg shadow">
-                <h3 className="font-semibold text-primary text-lg">
-                  {city} County
-                </h3>
+                <h3 className="font-semibold text-primary text-lg">{city}</h3>
+                <p className="text-sm mt-2">RNs • LVNs • CNAs • Allied Staff</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/*  */}
+
+      {/*  */}
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-xl md:text-5xl text-primary font-bold text-center mb-8">
+            We also serve Middle Tennessee.
+            <br />
+            Locations we are providing services in Middle Tennessee are,
+          </h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            {[
+              "CLARKSVILLE",
+              "GALLATIN",
+              "PARIS",
+              "LIVINGSTON",
+              "WAVERLY",
+              "NASHVILLE",
+              "COOKEVILLE",
+              "CENTERVILLE",
+              "MURFREESBORO",
+              "DECATURVILLE",
+              "SHELBYVILLE",
+              "McMINNVILLE",
+              "LAWRENCEBURG",
+            ].map((city) => (
+              <div key={city} className="p-4 bg-white rounded-lg shadow">
+                <h3 className="font-semibold text-primary text-lg">{city}</h3>
                 <p className="text-sm mt-2">RNs • LVNs • CNAs • Allied Staff</p>
               </div>
             ))}
