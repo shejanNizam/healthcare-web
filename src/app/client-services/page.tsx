@@ -210,17 +210,17 @@ export default function ClientServices() {
               {
                 title: "Acute Care Staffing",
                 desc: "RNs for ER, ICU, Med-Surg, OR, and other hospital departments",
-                keywords: ["hospital staffing", "acute care nurses"],
+                // keywords: ["hospital staffing", "acute care nurses"],
               },
               {
                 title: "Long-Term Care Staffing",
                 desc: "LVNs and CNAs for skilled nursing facilities and rehab centers",
-                keywords: ["SNF staffing", "long-term care nurses"],
+                // keywords: ["SNF staffing", "long-term care nurses"],
               },
               {
                 title: "Allied Health Staffing",
                 desc: "Medical assistants, techs, and therapists for clinics and specialty centers",
-                keywords: ["allied health staffing", "medical technicians"],
+                // keywords: ["allied health staffing", "medical technicians"],
               },
             ].map((service, i) => (
               <div key={i} className="p-6 border border-primary/20 rounded-lg">
@@ -228,9 +228,9 @@ export default function ClientServices() {
                   {service.title}
                 </h3>
                 <p className="mb-4">{service.desc}</p>
-                <div className="text-sm text-gray-600">
+                {/* <div className="text-sm text-gray-600">
                   Keywords: {service.keywords.join(", ")}
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
