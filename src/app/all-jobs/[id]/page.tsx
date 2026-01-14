@@ -294,7 +294,7 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
                   <FaMoneyBillWave className="text-primary mt-1 mr-3 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-medium text-gray-500">
-                      Pay Rate
+                      Pay Rate (Monthly)
                     </p>
                     <p className="text-gray-700">{job?.salary}</p>
                   </div>
