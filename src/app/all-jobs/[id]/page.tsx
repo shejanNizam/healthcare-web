@@ -14,7 +14,6 @@ import {
 } from "react-icons/fa";
 import { FiBookmark, FiChevronLeft } from "react-icons/fi";
 import { MdTitle } from "react-icons/md";
-import { PiAddressBookTabsFill } from "react-icons/pi";
 const baseImageUrl = process.env.NEXT_PUBLIC_IMAGE_URL;
 
 type Params = {
