@@ -261,13 +261,13 @@ export default function JobDetails({ params }: { params: Promise<Params> }) {
                   </div>
                 </div>
 
-                <div className="flex items-start">
+                {/* <div className="flex items-start">
                   <PiAddressBookTabsFill className="text-primary mt-1 mr-3 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-medium text-gray-500">Address</p>
                     <p className="text-gray-700">{job.address}</p>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="flex items-start">
                   <FaMapMarkerAlt className="text-primary mt-1 mr-3 flex-shrink-0" />
