@@ -96,7 +96,7 @@ export default function RootLayout({
             <AntdRegistry>
               <Suspense>
                 <Navbar />
-                <div className="  md:min-h-[calc(100vh-180px)]">{children}</div>
+                <div className="md:min-h-[calc(100vh-180px)]">{children}</div>
                 <Footer />
               </Suspense>
             </AntdRegistry>
